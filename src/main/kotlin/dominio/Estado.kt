@@ -1,8 +1,9 @@
-package es.prog2425.taskmanager.Modelo
+package es.prog2425.taskmanager.dominio
 
 enum class Estado(val descripcion: String) {
     ABIERTA ("Abierta"),
-    CERRADA ("Cerrada");
+    EN_PROGRESO ("En proceso"),
+    FINALIZADA ("Finalizada");
 
     override fun toString(): String {
         return descripcion

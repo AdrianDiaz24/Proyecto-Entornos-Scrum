@@ -1,6 +1,6 @@
 package es.prog2425.taskmanager.presentacion
 
-import es.prog2425.taskmanager.Servicios.ActividadService
+import es.prog2425.taskmanager.servicios.ActividadService
 import es.prog2425.taskmanager.Servicios.Evento
 import es.prog2425.taskmanager.Servicios.Tarea
 
@@ -24,7 +24,8 @@ class Consola() {
     fun mostrarMenu(){
         println("\n1. Crear Actividad")
         println("2. Listar Actividades")
-        println("3. Salir")
+        println("3. Cambiar estado de la Tarea")
+        println("4. Salir")
     }
 
     /**
@@ -54,7 +55,7 @@ class Consola() {
 
     fun menu(): Int {
         mostrarMenu()
-        return pedirNum(1, 3)
+        return pedirNum(1, 4)
     }
 
     /**
@@ -156,15 +157,21 @@ class Consola() {
         var salida = false
         while (!salida){
             val input = menu()
-            if (input == 3) {
+            if (input == 4) {
                 salida = true
             } else if (input == 2){
                 listarActividades()
+            } else  if (input == 3) {
+                cambiarEstado()
             } else {
-                val input = submenu()
-                crearActividad(input)
+                val input1 = submenu()
+                crearActividad(input1)
             }
         }
+    }
+
+    fun cambiarEstado(){
+
     }
 
 }
