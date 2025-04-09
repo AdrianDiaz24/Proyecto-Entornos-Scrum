@@ -143,7 +143,9 @@ class Consola() {
 
     fun listarActividades(){
         println("\n")
-        actividades.elementos.forEach { salida(it.obtenerDetalle()) }
+        if (actividades.elementos.isNotEmpty()) {
+            actividades.elementos.forEach { salida(it.obtenerDetalle()) }
+        } else salida("Aún no existen actividades.")
     }
 
     /**
