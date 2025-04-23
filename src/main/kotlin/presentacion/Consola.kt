@@ -239,6 +239,7 @@ class Consola() {
         }
     }
 
+
     private fun cambiarEstadoSubTarea(){
         listarActividades()
 
@@ -270,7 +271,13 @@ class Consola() {
             when (estado) {
                 1 -> actividad.estado = Estado.ABIERTA
                 2 -> actividad.estado = Estado.EN_PROGRESO
-                3 -> actividad.estado = Estado.FINALIZADA
+                3 -> {
+                    actividad.estado = Estado.FINALIZADA
+
+                    if (actividad.listaSubtareas.all { it.estado == Estado.FINALIZADA }) {
+                        tarea.estado = Estado.FINALIZADA
+                    }
+                }
             }
 
         } else {
