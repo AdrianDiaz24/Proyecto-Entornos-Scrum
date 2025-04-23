@@ -1,4 +1,4 @@
-package es.prog2425.taskmanager.Servicios
+package es.prog2425.taskmanager.dominio
 
 import es.prog2425.taskmanager.Modelo.Actividad
 

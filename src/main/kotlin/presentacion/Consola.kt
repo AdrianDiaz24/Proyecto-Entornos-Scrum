@@ -1,8 +1,7 @@
 package es.prog2425.taskmanager.presentacion
 
-import es.prog2425.taskmanager.servicios.ActividadService
-import es.prog2425.taskmanager.Servicios.Evento
-import es.prog2425.taskmanager.Servicios.Tarea
+import es.prog2425.taskmanager.servicios.*
+import es.prog2425.taskmanager.dominio.*
 
 class Consola() {
 
@@ -25,7 +24,8 @@ class Consola() {
         println("\n1. Crear Actividad")
         println("2. Listar Actividades")
         println("3. Cambiar estado de la Tarea")
-        println("4. Salir")
+        println("4. Cambiar estado de la SubTarea")
+        println("5. Salir")
     }
 
     /**
@@ -35,7 +35,8 @@ class Consola() {
     fun mostrarSubmenu(){
         println("\n1. Crear Tarea")
         println("2. Crear Evento")
-        println("3. Cancelar")
+        println("3. Crear Subtarea")
+        println("4. Cancelar")
     }
 
     /**
@@ -55,7 +56,7 @@ class Consola() {
 
     fun menu(): Int {
         mostrarMenu()
-        return pedirNum(1, 4)
+        return pedirNum(1, 5)
     }
 
     /**
@@ -65,7 +66,7 @@ class Consola() {
 
     fun submenu(): Int{
         mostrarSubmenu()
-        return pedirNum(1,3)
+        return pedirNum(1,4)
     }
 
     /**
@@ -134,7 +135,24 @@ class Consola() {
                     println("**ERROR** $e")
                 }
             }
-            3 -> println("Volviendo al menu principal")
+            3 -> { //ToDo Arreglar que cuando no hay tareas no te deje crear subtareas.
+                listarActividades()
+                println("\nElige una tarea")
+                val numActividad = pedirNum(1,actividades.elementos.size) - 1
+                val tarea = actividades.elementos[numActividad]
+
+                if (tarea is Tarea) {
+                    try {
+                        tarea.aniadirSubtarea(Tarea.creaTarea(pedirInfoTarea()))
+                    } catch (e: IllegalArgumentException) {
+                        println("**ERROR** $e")
+                    }
+                }
+                else{
+                    println("Tienes que elegir una Tarea!!")
+                }
+            }
+            4 -> println("Volviendo al menu principal")
         }
     }
 
@@ -145,8 +163,25 @@ class Consola() {
     fun listarActividades(){
         println("\n")
         if (actividades.elementos.isNotEmpty()) {
-            actividades.elementos.forEach { salida(it.obtenerDetalle()) }
+            var contador = 0
+            for (actividad in actividades.elementos){
+                contador++
+                println(contador.toString() + ". " + actividad.obtenerDetalle())
+                if (actividad is Tarea) {
+                    listarSubTareas(actividad, contador)
+                }
+            }
         } else salida("Aún no existen actividades.")
+    }
+
+    fun listarSubTareas(tarea: Tarea, contador: Int){
+        if (tarea.listaSubtareas.isNotEmpty()){
+            var contador1 = 0
+            for (subtarea in tarea.listaSubtareas){
+                contador1++
+                println("\t$contador.${contador1}. ${subtarea.obtenerDetalle()}")
+            }
+        }
     }
 
     /**
@@ -157,12 +192,14 @@ class Consola() {
         var salida = false
         while (!salida){
             val input = menu()
-            if (input == 4) {
+            if (input == 5) {
                 salida = true
             } else if (input == 2){
                 listarActividades()
             } else  if (input == 3) {
                 cambiarEstado()
+            } else if (input == 4){
+                cambiarEstadoSubTarea()
             } else {
                 val input1 = submenu()
                 crearActividad(input1)
@@ -170,8 +207,74 @@ class Consola() {
         }
     }
 
-    fun cambiarEstado(){
+    private fun cambiarEstado(){
+        listarActividades()
 
+        println("\nElige una tarea")
+        val numActividad = pedirNum(1,actividades.elementos.size) - 1
+
+        println("\n¿Que estado quieres ponerle a la tarea?")
+        println("1. Abierta")
+        println("2. En proceso")
+        println("3. Finalizada")
+
+        val estado = pedirNum(1,3)
+
+        val actividad = actividades.elementos[numActividad]
+
+        if(actividad is Tarea) {
+            when (estado) {
+                1 -> actividad.estado = Estado.ABIERTA
+                2 -> actividad.estado = Estado.EN_PROGRESO
+                3 -> {
+                    if (actividad.listaSubtareas.isEmpty()){
+                        actividad.estado = Estado.FINALIZADA
+                    } else {
+                        if (actividad.listaSubtareas.all { it.estado == Estado.FINALIZADA }) {
+                            actividad.estado = Estado.FINALIZADA
+                        } else println("ERROR: Todas las subtareas tienen que estar marcadas como 'FINALIZADA' antes de finalizar la tarea.")
+                    }
+                }
+            }
+        }
     }
 
+    private fun cambiarEstadoSubTarea(){
+        listarActividades()
+
+        println("\nElige una tarea")
+        val numActividad = pedirNum(1,actividades.elementos.size) - 1
+        val tarea = actividades.elementos[numActividad] as Tarea
+
+        if (tarea.listaSubtareas.isNotEmpty()) {
+
+            println(tarea.obtenerDetalle())
+            var contador = 0
+            for (subtarea in tarea.listaSubtareas) {
+                contador++
+                println("\t$contador. " + subtarea.obtenerDetalle())
+            }
+
+
+            println("\nElige una Subtarea")
+            val numSubTarea = pedirNum(1, tarea.listaSubtareas.size) - 1
+
+            println("\n¿Que estado quieres ponerle a la Subtarea?")
+            println("1. Abierta")
+            println("2. En proceso")
+            println("3. Finalizada")
+
+            val estado = pedirNum(1, 3)
+
+            val actividad = tarea.listaSubtareas[numSubTarea]
+            when (estado) {
+                1 -> actividad.estado = Estado.ABIERTA
+                2 -> actividad.estado = Estado.EN_PROGRESO
+                3 -> actividad.estado = Estado.FINALIZADA
+            }
+
+        } else {
+            println("Esta tarea no tiene subtareas.")
+        }
+    }
 }

@@ -1,10 +1,10 @@
-package es.prog2425.taskmanager.Servicios
+package es.prog2425.taskmanager.dominio
 
 import es.prog2425.taskmanager.Modelo.Actividad
-import es.prog2425.taskmanager.dominio.Estado
 
 class Tarea(descripcion: String, var estado: Estado = Estado.ABIERTA): Actividad(descripcion) {
 
+    val listaSubtareas = mutableListOf<Tarea>()
 
     companion object{
 
@@ -26,6 +26,10 @@ class Tarea(descripcion: String, var estado: Estado = Estado.ABIERTA): Actividad
 
     override fun obtenerDetalle(): String {
         return "Tarea " + super.obtenerDetalle() + " Estado: $estado"
+    }
+
+    fun aniadirSubtarea(tarea : Tarea){
+        listaSubtareas.add(tarea)
     }
 
 }
