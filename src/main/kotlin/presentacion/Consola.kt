@@ -1,11 +1,13 @@
 package es.prog2425.taskmanager.presentacion
 
+import es.prog2425.taskmanager.Modelo.Actividad
 import es.prog2425.taskmanager.servicios.*
 import es.prog2425.taskmanager.dominio.*
 
 class Consola() {
 
     val actividades = ActividadService()
+    val usuarios = UsuarioService(UsuarioRepository())
 
     /**
      * Funcion que pinta por patalla el mensaje que recibe
@@ -25,7 +27,11 @@ class Consola() {
         println("2. Listar Actividades")
         println("3. Cambiar estado de la Tarea")
         println("4. Cambiar estado de la SubTarea")
-        println("5. Salir")
+        println("5. Crear usuario")
+        println("6. Listar usuarios")
+        println("7. Asignar tarea a usuario")
+        println("8. Mostrar tareas asignadas a un usuario")
+        println("9. Salir")
     }
 
     /**
@@ -56,7 +62,7 @@ class Consola() {
 
     fun menu(): Int {
         mostrarMenu()
-        return pedirNum(1, 5)
+        return pedirNum(1, 9)
     }
 
     /**
@@ -188,11 +194,50 @@ class Consola() {
      * Funcion que realiza la ejecucion general del programa
      */
 
-    fun ejecutarPrograma(){
+    fun ejecutarPrograma() {
         var salida = false
-        while (!salida){
+        while (!salida) {
             val input = menu()
-            if (input == 5) {
+
+            when (input) {
+                1 -> {
+                    crearActividad(submenu())
+                }
+
+                2 -> {
+                    listarActividades()
+                }
+
+                3 -> {
+                    cambiarEstado()
+                }
+
+                4 -> {
+                    cambiarEstadoSubTarea()
+                }
+
+                5 -> {
+                    crearUsuario()
+                }
+
+                6 -> {
+                    listarUsuarios()
+                }
+
+                7 -> {
+                    asignarTarea()
+                }
+
+                8 -> {
+                    mostrarTareasAsignadasUsuario()
+                }
+
+                9 -> {
+                    salida = true
+                }
+            }
+
+            /*            if (input == 5) {
                 salida = true
             } else if (input == 2){
                 listarActividades()
@@ -200,10 +245,74 @@ class Consola() {
                 cambiarEstado()
             } else if (input == 4){
                 cambiarEstadoSubTarea()
-            } else {
-                val input1 = submenu()
-                crearActividad(input1)
+            } else
+                crearActividad(submenu())
+            }*/
+        }
+    }
+
+    private fun crearUsuario():  Boolean {
+        val nombreUsuario: String = pedirNombreUsuario()
+        usuarios.crearUsuario(nombreUsuario)
+        return true
+    }
+
+    private fun listarUsuarios() {
+        println("\n")
+        if (usuarios.obtenerTodos().isNotEmpty()) {
+            usuarios.mostrarTodos()
+        } else salida("Aún no existen usuarios creados")
+    }
+
+    private fun pedirNombreUsuario(): String {
+        var nombre: String = ""
+
+        while (nombre == null || nombre.isBlank()) {
+            print("Introduce el nombre del usuario: ")
+            nombre = readln()
+            if (nombre == null || nombre.isBlank()) {
+                println("ERROR: Introduce un nombre válido.")
             }
+        }
+        return nombre
+    }
+
+    private fun asignarTarea() {
+
+
+        if (actividades.elementos.size == 0) salida("Aún no existen tareas creadas")
+        else if (usuarios.obtenerTodos().isEmpty()) salida("Aún no existen usuarios creados")
+        else {
+            print("Elije una tarea: ")
+            listarActividades()
+
+            val numActividad = pedirNum(1,actividades.elementos.size) - 1
+            val tarea: Actividad = actividades.elementos[numActividad]
+
+            print("Elije un usuario: ")
+            listarUsuarios()
+            val numUsuario = pedirNum(1, usuarios.obtenerTodos().size) - 1
+            val usuario = usuarios.obtenerTodos()[numUsuario]
+
+            usuarios.asignarTarea(usuario, tarea)
+        }
+    }
+
+    private fun mostrarTareasAsignadasUsuario() {
+
+        if (usuarios.obtenerTodos().isEmpty()) salida("Aún no existen usuarios creados")
+        else {
+            println("\nElige un usuario: ")
+            listarUsuarios()
+
+            val numUsuario = pedirNum(1, usuarios.obtenerTodos().size) - 1
+            val usuario = usuarios.obtenerTodos()[numUsuario]
+
+            if(usuario.listaTareas.isNotEmpty()) {
+                println("Mostrando tareas del usuario #ID# ${usuario.obtenerDetalle()}")
+                usuario.listaTareas.forEach { actividad: Actividad -> println("\t" + actividad.obtenerDetalle()) }
+                println("\n")
+            } else salida("El usuario no tiene tareas asignadas.")
         }
     }
 
