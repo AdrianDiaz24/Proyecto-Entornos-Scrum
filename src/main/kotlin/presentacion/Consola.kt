@@ -169,9 +169,9 @@ class Consola() {
      * Lista las actividades almacenadas
      */
 
-    fun listarActividades(){
+    fun listarActividades(): Boolean{
         println("\n")
-        if (actividades.elementos.isNotEmpty()) {
+        return if (actividades.elementos.isNotEmpty()) {
             var contador = 0
             for (actividad in actividades.elementos){
                 contador++
@@ -180,7 +180,11 @@ class Consola() {
                     listarSubTareas(actividad, contador)
                 }
             }
-        } else salida("Aún no existen actividades.")
+            true
+        } else {
+            salida("Aún no existen actividades.")
+            false
+        }
     }
 
     fun listarSubTareas(tarea: Tarea, contador: Int){
@@ -402,13 +406,16 @@ class Consola() {
     }
 
     private fun aniadirEtiquetasActividad(){
-        listarActividades()
-        println("\nElige una actividad")
-        val numActividad = pedirNum(1,actividades.elementos.size) - 1
+        val hayActividades = listarActividades()
 
-        print("\nIntroduce etiquetas (separadas por ;) -> ")
-        val etiquetas = readln()
+        if (hayActividades){
+            println("\nElige una actividad")
+            val numActividad = pedirNum(1,actividades.elementos.size) - 1
 
-        actividades.elementos[numActividad].aniadirEtiquetas(etiquetas)
+            print("\nIntroduce etiquetas (separadas por ;) -> ")
+            val etiquetas = readln()
+
+            actividades.elementos[numActividad].aniadirEtiquetas(etiquetas)
+        }
     }
 }
