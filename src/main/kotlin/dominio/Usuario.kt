@@ -9,7 +9,7 @@ class Usuario private constructor(val id: Int, val nombre: String) {
     companion object {
         var contID = 1
 
-        fun instanciarUsusario(nombre: String) = Usuario(contID, nombre)
+        fun instanciarUsusario(nombre: String) = Usuario(contID++, nombre)
     }
 
     open fun obtenerDetalle(): String{

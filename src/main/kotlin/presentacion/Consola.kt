@@ -4,10 +4,7 @@ import es.prog2425.taskmanager.Modelo.Actividad
 import es.prog2425.taskmanager.servicios.*
 import es.prog2425.taskmanager.dominio.*
 
-class Consola() {
-
-    val actividades = ActividadService()
-    val usuarios = UsuarioService(UsuarioRepository())
+class Consola(val historial: HistorialRepository = HistorialRepository(), val actividades: ActividadService = ActividadService(), val usuarios: UsuarioService = UsuarioService(UsuarioRepository())) {
 
     /**
      * Funcion que pinta por patalla el mensaje que recibe
@@ -32,7 +29,8 @@ class Consola() {
         println("7. Listar usuarios")
         println("8. Asignar tarea a usuario")
         println("9. Mostrar tareas asignadas a un usuario")
-        println("10. Salir")
+        println("10. Listar historial de cambios")
+        println("11. Salir")
     }
 
     /**
@@ -63,7 +61,7 @@ class Consola() {
 
     fun menu(): Int {
         mostrarMenu()
-        return pedirNum(1, 10)
+        return pedirNum(1, 11)
     }
 
     /**
@@ -240,6 +238,10 @@ class Consola() {
                 }
 
                 10 -> {
+                    historial.listarHistorial()
+                }
+
+                11 -> {
                     salida = true
                 }
             }
@@ -294,7 +296,7 @@ class Consola() {
             listarActividades()
 
             val numActividad = pedirNum(1,actividades.elementos.size) - 1
-            val tarea: Actividad = actividades.elementos[numActividad]
+            val tarea: Tarea = actividades.elementos[numActividad] as Tarea
 
             print("Elije un usuario: ")
             listarUsuarios()
@@ -302,6 +304,7 @@ class Consola() {
             val usuario = usuarios.obtenerTodos()[numUsuario]
 
             usuarios.asignarTarea(usuario, tarea)
+            historial.añadirModificacionAsignacion(usuario, tarea, numActividad + 1)
         }
     }
 
@@ -340,13 +343,21 @@ class Consola() {
 
         if(actividad is Tarea) {
             when (estado) {
-                1 -> actividad.estado = Estado.ABIERTA
-                2 -> actividad.estado = Estado.EN_PROGRESO
+                1 -> {
+                    historial.añadirModificacionEstado(Estado.ABIERTA, actividad, numActividad + 1)
+                    actividad.estado = Estado.ABIERTA
+                }
+                2 -> {
+                    historial.añadirModificacionEstado(Estado.EN_PROGRESO, actividad, numActividad + 1)
+                    actividad.estado = Estado.EN_PROGRESO
+                }
                 3 -> {
                     if (actividad.listaSubtareas.isEmpty()){
+                        historial.añadirModificacionEstado(Estado.FINALIZADA, actividad, numActividad + 1)
                         actividad.estado = Estado.FINALIZADA
                     } else {
                         if (actividad.listaSubtareas.all { it.estado == Estado.FINALIZADA }) {
+                            historial.añadirModificacionEstado(Estado.FINALIZADA, actividad, numActividad + 1)
                             actividad.estado = Estado.FINALIZADA
                         } else println("ERROR: Todas las subtareas tienen que estar marcadas como 'FINALIZADA' antes de finalizar la tarea.")
                     }
@@ -385,12 +396,20 @@ class Consola() {
 
             val actividad = tarea.listaSubtareas[numSubTarea]
             when (estado) {
-                1 -> actividad.estado = Estado.ABIERTA
-                2 -> actividad.estado = Estado.EN_PROGRESO
+                1 -> {
+                    historial.añadirModificacionEstado(Estado.ABIERTA, actividad, numActividad + 1, numSubTarea + 1)
+                    actividad.estado = Estado.ABIERTA
+                }
+                2 -> {
+                    historial.añadirModificacionEstado(Estado.EN_PROGRESO, actividad, numActividad + 1, numSubTarea + 1)
+                    actividad.estado = Estado.EN_PROGRESO
+                }
                 3 -> {
+                    historial.añadirModificacionEstado(Estado.FINALIZADA, actividad, numActividad + 1, numSubTarea + 1)
                     actividad.estado = Estado.FINALIZADA
 
                     if (actividad.listaSubtareas.all { it.estado == Estado.FINALIZADA }) {
+                        historial.añadirModificacionEstado(Estado.FINALIZADA, tarea, numActividad + 1)
                         tarea.estado = Estado.FINALIZADA
                     }
                 }
