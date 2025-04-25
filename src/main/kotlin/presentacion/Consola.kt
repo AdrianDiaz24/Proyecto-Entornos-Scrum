@@ -3,6 +3,7 @@ package es.prog2425.taskmanager.presentacion
 import es.prog2425.taskmanager.Modelo.Actividad
 import es.prog2425.taskmanager.servicios.*
 import es.prog2425.taskmanager.dominio.*
+import kotlin.enums.EnumEntries
 
 class Consola() {
 
@@ -32,7 +33,8 @@ class Consola() {
         println("7. Listar usuarios")
         println("8. Asignar tarea a usuario")
         println("9. Mostrar tareas asignadas a un usuario")
-        println("10. Salir")
+        println("10. Panel de Control")
+        println("11. Salir")
     }
 
     /**
@@ -244,6 +246,10 @@ class Consola() {
                 }
 
                 10 -> {
+                    paneldeControl()
+                }
+
+                11 -> {
                     salida = true
                 }
             }
@@ -417,5 +423,62 @@ class Consola() {
 
             actividades.elementos[numActividad].aniadirEtiquetas(etiquetas)
         }
+    }
+
+    private fun paneldeControl(){
+        println("\n--- Panel de Control ---")
+
+        mostrarEstadisticasTareas()
+        mostrarEventosProgramados()
+
+        println("\n--------------------------")
+    }
+
+    private fun mostrarEstadisticasTareas() {
+
+        val listaTareas = mutableListOf<Tarea>()
+
+        for (actividad in actividades.elementos){
+            if (actividad is Tarea){
+                listaTareas.add(actividad)
+            }
+        }
+
+        val totalTareas = listaTareas.size
+        var totalSubtareas = 0
+
+        for (tarea in listaTareas){
+            totalSubtareas += tarea.listaSubtareas.size
+        }
+
+        println("\n--- Estadísticas de Tareas ---")
+        println("Total de tareas principales: $totalTareas")
+        println("Total de subtareas: $totalSubtareas")
+
+
+        println("\nDistribución por estado:")
+
+        for (estadoActual in Estado.entries) {
+            var contadorTareas = 0
+            var contadorSubtareas = 0
+
+            for (tarea in listaTareas) {
+                if (tarea.estado == estadoActual) {
+                    contadorTareas++
+                }
+
+                for (subtarea in tarea.listaSubtareas) {
+                    if (subtarea.estado == estadoActual) {
+                        contadorSubtareas++
+                    }
+                }
+            }
+
+            println("${estadoActual.descripcion}: $contadorTareas tareas principales, $contadorSubtareas subtareas")
+        }
+    }
+
+    private fun mostrarEventosProgramados() {
+
     }
 }
