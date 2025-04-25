@@ -3,7 +3,8 @@ package es.prog2425.taskmanager.presentacion
 import es.prog2425.taskmanager.Modelo.Actividad
 import es.prog2425.taskmanager.servicios.*
 import es.prog2425.taskmanager.dominio.*
-import kotlin.enums.EnumEntries
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 class Consola(val historial: HistorialRepository = HistorialRepository(), val actividades: ActividadService = ActividadService(), val usuarios: UsuarioService = UsuarioService(UsuarioRepository())) {
 
@@ -21,15 +22,15 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
      */
 
     fun mostrarMenu(){
-        println("\n1. Crear Actividad")
-        println("2. Listar Actividades")
-        println("3. Cambiar estado de la Tarea")
-        println("4. Cambiar estado de la SubTarea")
-        println("5. Añadir Etiquetas a una Actividad")
-        println("6. Crear usuario")
-        println("7. Listar usuarios")
-        println("8. Asignar tarea a usuario")
-        println("9. Mostrar tareas asignadas a un usuario")
+        println("\n1.  Crear Actividad")
+        println("2.  Listar Actividades")
+        println("3.  Cambiar estado de la Tarea")
+        println("4.  Cambiar estado de la SubTarea")
+        println("5.  Añadir Etiquetas a una Actividad")
+        println("6.  Crear usuario")
+        println("7.  Listar usuarios")
+        println("8.  Asignar tarea a usuario")
+        println("9.  Mostrar tareas asignadas a un usuario")
         println("10. Buscar con filtro")
         println("11. Listar historial de cambios")
         println("12. Panel de Control")
@@ -299,7 +300,7 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
             listarActividades()
 
             val numActividad = pedirNum(1,actividades.elementos.size) - 1
-            val tarea: Actividad = actividades.elementos[numActividad]
+            val tarea: Tarea = actividades.elementos[numActividad] as Tarea
 
             print("Elije un usuario: ")
             listarUsuarios()
@@ -307,6 +308,7 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
             val usuario = usuarios.obtenerTodos()[numUsuario]
 
             usuarios.asignarTarea(usuario, tarea)
+            historial.añadirModificacionAsignacion(usuario, tarea, numActividad + 1)
         }
     }
 
@@ -596,11 +598,11 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
         }
 
         println("\n--- Estadísticas de Tareas ---")
-        println("Total de tareas principales: $totalTareas")
-        println("Total de subtareas: $totalSubtareas")
+        println(" - Total de tareas principales: $totalTareas")
+        println(" - Total de subtareas: $totalSubtareas")
 
 
-        println("\nDistribución por estado:")
+        println("\n--- Distribución por estado ---")
 
         for (estadoActual in Estado.entries) {
             var contadorTareas = 0
@@ -618,12 +620,47 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
                 }
             }
 
-            println("${estadoActual.descripcion}: $contadorTareas tareas principales, $contadorSubtareas subtareas")
+            println(" - ${estadoActual.descripcion}: $contadorTareas tareas principales, $contadorSubtareas subtareas")
         }
     }
 
     private fun mostrarEventosProgramados() {
 
+        val eventos = mutableListOf<Evento>()
+
+        for (actividad in actividades.elementos){
+            if (actividad is Evento) {
+                eventos.add(actividad)
+            }
+        }
+
+        val formato = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+        val hoy = LocalDate.now()
+        val mañana = LocalDate.now().plusDays(1)
+        val semana = LocalDate.now().plusWeeks(1)
+        val mes = LocalDate.now().plusMonths(1)
+
+        var contadorEventosHoy = 0
+        var contadorEventosMañana = 0
+        var contadorEventosEstaSemana = 0
+        var contadorEventosEsteMes = 0
+
+        for (evento in eventos){
+            if (LocalDate.parse(evento.fecha, formato) in hoy..mes){
+                contadorEventosEsteMes++
+            }
+            if (LocalDate.parse(evento.fecha, formato) in hoy..semana){
+                contadorEventosEstaSemana++
+            }
+            if (LocalDate.parse(evento.fecha, formato) == mañana){
+                contadorEventosMañana++
+            }
+            if (LocalDate.parse(evento.fecha, formato) == hoy){
+                contadorEventosHoy++
+            }
+        }
+
+        println("\n--- Estadisticas de Eventos --- \n - Eventos hoy: $contadorEventosHoy\n - Eventos mañana: $contadorEventosMañana \n - Eventos esta semana: $contadorEventosEstaSemana \n - Eventos este mes: $contadorEventosEsteMes")
 
     }
 }
