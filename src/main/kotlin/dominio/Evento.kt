@@ -18,19 +18,22 @@ class Evento(descripcion: String, val fecha: String, val ubicacion: String): Act
          * @param ubicacion Ubiaccion donded trascurre el evento
          */
 
-        fun creaEvento(descripcion: String, fecha: String, ubicacion: String): Evento = Evento(descripcion, fecha, ubicacion)
-
+        fun creaEvento(descripcion: String, fecha: String, ubicacion: String, etiquetas: String = ""): Evento {
+            val evento = Evento(descripcion, fecha, ubicacion)
+            if (etiquetas.isNotBlank()) {
+                evento.aniadirEtiquetas(etiquetas)
+            }
+            return evento
+        }
 
         val patronFecha = "^([0-2][0-9]|3[0-1])(\\/|-)(0[1-9]|1[0-2])\\2(\\d{4})\$"
-
     }
 
     /**
      * @return Devuelve un String con todos los parametros del Evento
      */
-
     override fun obtenerDetalle(): String {
-        return "Evento " + super.obtenerDetalle() + " Fecha: $fecha, Ubicacion: $ubicacion"
+        return "Evento " + super.obtenerDetalle() + " - Fecha: $fecha - Ubicacion: $ubicacion"
     }
 
 }

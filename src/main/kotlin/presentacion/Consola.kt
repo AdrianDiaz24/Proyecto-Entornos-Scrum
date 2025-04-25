@@ -27,11 +27,12 @@ class Consola() {
         println("2. Listar Actividades")
         println("3. Cambiar estado de la Tarea")
         println("4. Cambiar estado de la SubTarea")
-        println("5. Crear usuario")
-        println("6. Listar usuarios")
-        println("7. Asignar tarea a usuario")
-        println("8. Mostrar tareas asignadas a un usuario")
-        println("9. Salir")
+        println("5. Añadir Etiquetas a una Actividad")
+        println("6. Crear usuario")
+        println("7. Listar usuarios")
+        println("8. Asignar tarea a usuario")
+        println("9. Mostrar tareas asignadas a un usuario")
+        println("10. Salir")
     }
 
     /**
@@ -50,8 +51,8 @@ class Consola() {
      * @return Devuelve un String con la descripcion de la tarea
      */
 
-    fun pedirInfoTarea(): String{
-        print("\nIntroduce la descripcion de la tarea: ")
+    fun pedirInfoTarea(msg: String): String{
+        print("\n${msg}")
         return readln()
     }
 
@@ -62,7 +63,7 @@ class Consola() {
 
     fun menu(): Int {
         mostrarMenu()
-        return pedirNum(1, 9)
+        return pedirNum(1, 10)
     }
 
     /**
@@ -106,19 +107,21 @@ class Consola() {
      * @return Devuelve un triple co los 3 datos propocionados por consola
      */
 
-    fun pedirInfoEvento(): Triple<String, String, String>{
+    fun pedirInfoEvento(): MutableList<String>{
         var descripcion = ""
         var fecha = ""
         var ubicacion = ""
+        var etiquetas = ""
         print("\nIntroduce la descripcion del Evento: ")
         descripcion = readln()
         print("\nIntroduce la fecha del evento: ")
         fecha = readln()
         print("\nIntroduce la ubicacion del evento: ")
         ubicacion = readln()
-        val salida = Triple(descripcion, fecha, ubicacion)
+        print("\nIntroduce etiquetas (separadas por ;) -> ")
+        etiquetas = readln()
+        val salida = mutableListOf<String>(descripcion,fecha,ubicacion,etiquetas)
         return salida
-
     }
 
     /**
@@ -129,14 +132,14 @@ class Consola() {
     fun crearActividad(input: Int){
         when (input){
             1 -> try {
-                actividades.agregarElemento(Tarea.creaTarea(pedirInfoTarea()))
+                actividades.agregarElemento(Tarea.creaTarea(pedirInfoTarea("Introduce la descripcion de la tarea: "), etiquetas = pedirInfoTarea("Introduce etiquetas (separadas por ;)")))
             } catch (e: IllegalArgumentException) {
                 println("**ERROR** $e")
             }
             2 -> {
-                val (descripcion, fecha, ubicacion) = pedirInfoEvento()
+                val (descripcion, fecha, ubicacion, etiquetas) = pedirInfoEvento()
                 try {
-                    actividades.agregarElemento(Evento.creaEvento(descripcion, fecha, ubicacion))
+                    actividades.agregarElemento(Evento.creaEvento(descripcion, fecha, ubicacion, etiquetas))
                 } catch (e: IllegalArgumentException) {
                     println("**ERROR** $e")
                 }
@@ -149,7 +152,7 @@ class Consola() {
 
                 if (tarea is Tarea) {
                     try {
-                        tarea.aniadirSubtarea(Tarea.creaTarea(pedirInfoTarea()))
+                        tarea.aniadirSubtarea(Tarea.creaTarea(pedirInfoTarea("Introduce la descripcion de la tarea: "), etiquetas = pedirInfoTarea("Introduce etiquetas (separadas por ;)")))
                     } catch (e: IllegalArgumentException) {
                         println("**ERROR** $e")
                     }
@@ -217,22 +220,26 @@ class Consola() {
                 }
 
                 5 -> {
-                    crearUsuario()
+                    aniadirEtiquetasActividad()
                 }
 
                 6 -> {
-                    listarUsuarios()
+                    crearUsuario()
                 }
 
                 7 -> {
-                    asignarTarea()
+                    listarUsuarios()
                 }
 
                 8 -> {
-                    mostrarTareasAsignadasUsuario()
+                    asignarTarea()
                 }
 
                 9 -> {
+                    mostrarTareasAsignadasUsuario()
+                }
+
+                10 -> {
                     salida = true
                 }
             }
@@ -392,5 +399,16 @@ class Consola() {
         } else {
             println("Esta tarea no tiene subtareas.")
         }
+    }
+
+    private fun aniadirEtiquetasActividad(){
+        listarActividades()
+        println("\nElige una actividad")
+        val numActividad = pedirNum(1,actividades.elementos.size) - 1
+
+        print("\nIntroduce etiquetas (separadas por ;) -> ")
+        val etiquetas = readln()
+
+        actividades.elementos[numActividad].aniadirEtiquetas(etiquetas)
     }
 }

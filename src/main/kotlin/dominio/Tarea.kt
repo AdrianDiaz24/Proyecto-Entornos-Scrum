@@ -14,8 +14,13 @@ class Tarea(descripcion: String, var estado: Estado = Estado.ABIERTA): Actividad
          * @param estado Estado de la Tarea Abierta o Cerrada, Default esta Abierta
          */
 
-        fun creaTarea(descripcion: String, estado: Estado = Estado.ABIERTA): Tarea = Tarea(descripcion, estado)
-
+        fun creaTarea(descripcion: String, estado: Estado = Estado.ABIERTA,etiquetas: String = ""): Tarea {
+            val tarea = Tarea(descripcion, estado)
+            if (etiquetas.isNotBlank()) {
+                tarea.aniadirEtiquetas(etiquetas)
+            }
+            return tarea
+        }
     }
 
     // Devuelve un String con la descripcion general de la tarea
@@ -25,7 +30,7 @@ class Tarea(descripcion: String, var estado: Estado = Estado.ABIERTA): Actividad
      */
 
     override fun obtenerDetalle(): String {
-        return "Tarea " + super.obtenerDetalle() + " Estado: $estado"
+        return "Tarea " + super.obtenerDetalle() + " - Estado: $estado"
     }
 
     fun aniadirSubtarea(tarea : Tarea){
