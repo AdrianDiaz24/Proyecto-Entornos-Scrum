@@ -20,15 +20,15 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
      */
 
     fun mostrarMenu(){
-        println("\n1. Crear Actividad")
-        println("2. Listar Actividades")
-        println("3. Cambiar estado de la Tarea")
-        println("4. Cambiar estado de la SubTarea")
-        println("5. Añadir Etiquetas a una Actividad")
-        println("6. Crear usuario")
-        println("7. Listar usuarios")
-        println("8. Asignar tarea a usuario")
-        println("9. Mostrar tareas asignadas a un usuario")
+        println("\n1.  Crear Actividad")
+        println("2.  Listar Actividades")
+        println("3.  Cambiar estado de la Tarea")
+        println("4.  Cambiar estado de la SubTarea")
+        println("5.  Añadir Etiquetas a una Actividad")
+        println("6.  Crear usuario")
+        println("7.  Listar usuarios")
+        println("8.  Asignar tarea a usuario")
+        println("9.  Mostrar tareas asignadas a un usuario")
         println("10. Listar historial de cambios")
         println("11. Salir")
     }
