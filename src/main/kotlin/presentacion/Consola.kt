@@ -624,5 +624,6 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
 
     private fun mostrarEventosProgramados() {
 
+
     }
 }
