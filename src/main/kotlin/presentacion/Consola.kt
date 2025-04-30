@@ -92,13 +92,13 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
             print(">> ")
             try {
                 input = readln().toInt()
+                if (input in min..max){
+                    valorValido = true
+                } else {
+                    println("Introduce un Nº entre $min y $max")
+                }
             } catch (e: IllegalArgumentException){
                 println("Introduce un Nº")
-            }
-            if (input in min..max){
-                valorValido = true
-            } else {
-                println("Introduce un Nº entre $min y $max")
             }
         }
         return input
