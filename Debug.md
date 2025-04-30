@@ -64,15 +64,6 @@ if (!encontrada) salida("ERROR: No se encontró ninguna etiqueta.")
 
 De esta manera, se declara una variable 'encontrada' que se inicializa con un valor 'false'. Tras esto, se busca entre todas las tareas la que tiene la etiqueta que se usa como filtro y, si la encuentra, obtiene el detalle de esta y lo imprime.  Con este cambio en el código, el problema queda solucionado.
 
-### ERROR FRAN #2
-
-**ERROR INDA:**
-
-**ERROR ALEJANDRO:**
-
-**ERROR ADRIÁN:**
-
-
 ---
 
 ## **ERROR INDA:**
