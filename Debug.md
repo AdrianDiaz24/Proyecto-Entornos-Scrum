@@ -94,8 +94,21 @@ Como en todos los puntos, utilizamos los breakpoints para poder buscar solución
 
 **ERROR ADRIÁN:**
 
----
+### Descripcion del fallo
+- En la funcion de pedirNum que se usa para elegir las acciones de los menus hay un fallo que si introduce algo que no sea un Nº te salta tanto el mensaje de error de que introoduzca un numero y que introduzca un numero entre X e Y
 
+![Captura de pantalla 2025-04-30 170102](https://github.com/user-attachments/assets/5b3167a9-eb77-4667-bf9a-5bfd2ccafd5d)
+
+- Tras la depuracion vemos que al introducir algo que no sea un Nº se mandaba el mensaje en el catch del try catch pero despues tambien se hacia la comprobacion del Nº introducido siendo este siempre como minimo 1 ya que se usa para los menus y como el num default es 0 te mostraba el 2º mensaje de error.
+
+- Para corregirlo metemos la 2º comprabacion dentro del try catch para que sino se cumple la primera comprobacion nunca haga la segunda y solo mande el mensaje que toca en cada momento, como se puede ver en la imagen de abajo
+
+![image](https://github.com/user-attachments/assets/655c05b9-9390-4bd6-99a2-1a4c4ad822bd)
+
+- Para la depuracion hemos usado breakpoints lo que nos permite comprobar exactamente la parte que nosotros necesitamos
+
+- Gracias a este error hemos visto la importancia de depurar para comprobar exactamente el funcionamiento de la logica del programa y evitar posibles errores en un futuro
+  
 ## **ERROR ALEJANDRO:**
 Planteamos el problema de nuestro código con la siguente imagen:
 
