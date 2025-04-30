@@ -1,12 +1,12 @@
-##**ERROR FRAN:**
+## **ERROR FRAN:**
 
 ---
 
-##**ERROR INDA:**
+## **ERROR INDA:**
 
 ---
 
-##**ERROR ALEJANDRO:**
+## **ERROR ALEJANDRO:**
 
 ![image](https://github.com/user-attachments/assets/bb387c53-d404-4f1c-8ded-f97621f352ae)
 Aqui tenemos un error sin solucionar que hace que el programa funcione de una manera indebida a la que deberia.
@@ -22,5 +22,5 @@ Ahora lo solucionamos dandole una variable al valor que devuelve la funcion y po
 
 ---
 
-##**ERROR ADRIÁN:**
+## **ERROR ADRIÁN:**
 
