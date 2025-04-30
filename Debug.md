@@ -1,4 +1,4 @@
-## ERROR FRAN #1: Uso incorrecto de `forEach`
+## ERROR FRAN  Uso incorrecto de `forEach`
 
 ### Descripción del fallo
 Al filtrar por etiquetas, cuando una tarea tiene una etiqueta coincidente, se imprime toda la lista de tareas, no solo la coincidencia actual. El código que provoca esta situación es:
@@ -64,17 +64,25 @@ if (!encontrada) salida("ERROR: No se encontró ninguna etiqueta.")
 
 De esta manera, se declara una variable 'encontrada' que se inicializa con un valor 'false'. Tras esto, se busca entre todas las tareas la que tiene la etiqueta que se usa como filtro y, si la encuentra, obtiene el detalle de esta y lo imprime.  Con este cambio en el código, el problema queda solucionado.
 
-### ERROR FRAN #2
 
-**ERROR INDA:**
+
+## **ERROR INDA:**
+Planteamos nuestro problema en la siguiente captura de pantalla.
 
 ![image](https://github.com/user-attachments/assets/88acae97-c785-431b-b757-64506e8defa9)
 
+Para poder listar actividades necesitamos de la función que guarde primero la información que nos diga si existen o no las  actividades, 
+Como en todos los puntos, utilizamos los breakpoints para poder buscar solución a nuestro problema.
+
 ![image](https://github.com/user-attachments/assets/beeb19e7-caab-4d93-82ac-9c6f391d1e33)
 
+Incluimos el existen actividades y lo = listarActividad.
 ![image](https://github.com/user-attachments/assets/b0d93132-b445-4d4f-96a6-31d6f7d5fdbb)
 
+Ahora como parte final nuestro código ahora si puede listar actividad SÍ primeramente, existe y entra en el rango de numActividad.
 ![image](https://github.com/user-attachments/assets/39c7fd29-0639-45ab-a52a-6ff31bc25215)
+
+Para próximos trabajos, vamos a analizar más de detenidamente el código y planificar mejor el trabajo
 
 **ERROR ADRIÁN:**
 
