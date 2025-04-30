@@ -64,9 +64,19 @@ if (!encontrada) salida("ERROR: No se encontró ninguna etiqueta.")
 
 De esta manera, se declara una variable 'encontrada' que se inicializa con un valor 'false'. Tras esto, se busca entre todas las tareas la que tiene la etiqueta que se usa como filtro y, si la encuentra, obtiene el detalle de esta y lo imprime.  Con este cambio en el código, el problema queda solucionado.
 
----
+### ERROR FRAN #2
 
-## **ERROR INDA:**
+**ERROR INDA:**
+
+![image](https://github.com/user-attachments/assets/88acae97-c785-431b-b757-64506e8defa9)
+
+![image](https://github.com/user-attachments/assets/beeb19e7-caab-4d93-82ac-9c6f391d1e33)
+
+![image](https://github.com/user-attachments/assets/b0d93132-b445-4d4f-96a6-31d6f7d5fdbb)
+
+![image](https://github.com/user-attachments/assets/39c7fd29-0639-45ab-a52a-6ff31bc25215)
+
+**ERROR ADRIÁN:**
 
 ---
 
@@ -91,8 +101,3 @@ Ahora lo solucionamos dandole una variable al valor que devuelve la funcion y po
 - Como se puede apreciar en la primera captura de pantalla, hacemos uso de ToDo. Este se añadió cuando se empezó a programar el código y ahora en la fase de debug gracias a él podemos entender directamente el error sin necesidad de tener que intrepretar de nuevo el código.
 
 - Como resultado de este error, ahora usamos con mucha más frecuencia herramientas que nos ayuden a poder corregir nuestros fallos y agilicen nuestro trabajo.
-
----
-
-## **ERROR ADRIÁN:**
-
