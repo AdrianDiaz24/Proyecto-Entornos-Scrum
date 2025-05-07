@@ -146,21 +146,23 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
                     println("**ERROR** $e")
                 }
             }
-            3 -> { //ToDo Arreglar que cuando no hay tareas no te deje crear subtareas.
-                listarActividades()
-                println("\nElige una tarea")
-                val numActividad = pedirNum(1,actividades.elementos.size) - 1
-                val tarea = actividades.elementos[numActividad]
+            3 -> {
+                val hayActividades = listarActividades()
+                if (hayActividades){
+                    println("\nElige una tarea")
+                    val numActividad = pedirNum(1,actividades.elementos.size) - 1
+                    val tarea = actividades.elementos[numActividad]
 
-                if (tarea is Tarea) {
-                    try {
-                        tarea.aniadirSubtarea(Tarea.creaTarea(pedirInfoTarea("Introduce la descripcion de la tarea: "), etiquetas = pedirInfoTarea("Introduce etiquetas (separadas por ;)")))
-                    } catch (e: IllegalArgumentException) {
-                        println("**ERROR** $e")
+                    if (tarea is Tarea) {
+                        try {
+                            tarea.aniadirSubtarea(Tarea.creaTarea(pedirInfoTarea("Introduce la descripcion de la tarea: "), etiquetas = pedirInfoTarea("Introduce etiquetas (separadas por ;)")))
+                        } catch (e: IllegalArgumentException) {
+                            println("**ERROR** $e")
+                        }
                     }
-                }
-                else{
-                    println("Tienes que elegir una Tarea!!")
+                    else{
+                        println("Tienes que elegir una Tarea!!")
+                    }
                 }
             }
             4 -> println("Volviendo al menu principal")
@@ -331,39 +333,44 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
     }
 
     private fun cambiarEstado(){
-        listarActividades()
 
-        println("\nElige una tarea")
-        val numActividad = pedirNum(1,actividades.elementos.size) - 1
+        val existenActividades = listarActividades()
 
-        println("\n¿Que estado quieres ponerle a la tarea?")
-        println("1. Abierta")
-        println("2. En proceso")
-        println("3. Finalizada")
+        if (existenActividades){
+            println("\nElige una tarea")
+            val numActividad = pedirNum(1, actividades.elementos.size) - 1
 
-        val estado = pedirNum(1,3)
+            println("\n¿Que estado quieres ponerle a la tarea?")
+            println("1. Abierta")
+            println("2. En proceso")
+            println("3. Finalizada")
 
-        val actividad = actividades.elementos[numActividad]
+            val estado = pedirNum(1, 3)
 
-        if(actividad is Tarea) {
-            when (estado) {
-                1 -> {
-                    historial.añadirModificacionEstado(Estado.ABIERTA, actividad, numActividad + 1)
-                    actividad.estado = Estado.ABIERTA
-                }
-                2 -> {
-                    historial.añadirModificacionEstado(Estado.EN_PROGRESO, actividad, numActividad + 1)
-                    actividad.estado = Estado.EN_PROGRESO
-                }
-                3 -> {
-                    if (actividad.listaSubtareas.isEmpty()){
-                        historial.añadirModificacionEstado(Estado.FINALIZADA, actividad, numActividad + 1)
-                        actividad.estado = Estado.FINALIZADA
-                    } else {
-                        if (actividad.listaSubtareas.all { it.estado == Estado.FINALIZADA }) {
+            val actividad = actividades.elementos[numActividad]
+
+            if (actividad is Tarea) {
+                when (estado) {
+                    1 -> {
+                        historial.añadirModificacionEstado(Estado.ABIERTA, actividad, numActividad + 1)
+                        actividad.estado = Estado.ABIERTA
+                    }
+
+                    2 -> {
+                        historial.añadirModificacionEstado(Estado.EN_PROGRESO, actividad, numActividad + 1)
+                        actividad.estado = Estado.EN_PROGRESO
+                    }
+
+                    3 -> {
+                        if (actividad.listaSubtareas.isEmpty()) {
                             historial.añadirModificacionEstado(Estado.FINALIZADA, actividad, numActividad + 1)
                             actividad.estado = Estado.FINALIZADA
-                        } else println("ERROR: Todas las subtareas tienen que estar marcadas como 'FINALIZADA' antes de finalizar la tarea.")
+                        } else {
+                            if (actividad.listaSubtareas.all { it.estado == Estado.FINALIZADA }) {
+                                historial.añadirModificacionEstado(Estado.FINALIZADA, actividad, numActividad + 1)
+                                actividad.estado = Estado.FINALIZADA
+                            } else println("ERROR: Todas las subtareas tienen que estar marcadas como 'FINALIZADA' antes de finalizar la tarea.")
+                        }
                     }
                 }
             }
@@ -371,55 +378,58 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
     }
 
     private fun cambiarEstadoSubTarea(){
-        listarActividades()
+        val existenActividades = listarActividades()
 
-        println("\nElige una tarea")
-        val numActividad = pedirNum(1,actividades.elementos.size) - 1
-        val tarea = actividades.elementos[numActividad] as Tarea
+        if (existenActividades){
 
-        if (tarea.listaSubtareas.isNotEmpty()) {
+            println("\nElige una tarea")
+            val numActividad = pedirNum(1,actividades.elementos.size) - 1
+            val tarea = actividades.elementos[numActividad] as Tarea
 
-            println(tarea.obtenerDetalle())
-            var contador = 0
-            for (subtarea in tarea.listaSubtareas) {
-                contador++
-                println("\t$contador. " + subtarea.obtenerDetalle())
-            }
+            if (tarea.listaSubtareas.isNotEmpty()) {
 
-
-            println("\nElige una Subtarea")
-            val numSubTarea = pedirNum(1, tarea.listaSubtareas.size) - 1
-
-            println("\n¿Que estado quieres ponerle a la Subtarea?")
-            println("1. Abierta")
-            println("2. En proceso")
-            println("3. Finalizada")
-
-            val estado = pedirNum(1, 3)
-
-            val actividad = tarea.listaSubtareas[numSubTarea]
-            when (estado) {
-                1 -> {
-                    historial.añadirModificacionEstado(Estado.ABIERTA, actividad, numActividad + 1, numSubTarea + 1)
-                    actividad.estado = Estado.ABIERTA
+                println(tarea.obtenerDetalle())
+                var contador = 0
+                for (subtarea in tarea.listaSubtareas) {
+                    contador++
+                    println("\t$contador. " + subtarea.obtenerDetalle())
                 }
-                2 -> {
-                    historial.añadirModificacionEstado(Estado.EN_PROGRESO, actividad, numActividad + 1, numSubTarea + 1)
-                    actividad.estado = Estado.EN_PROGRESO
-                }
-                3 -> {
-                    historial.añadirModificacionEstado(Estado.FINALIZADA, actividad, numActividad + 1, numSubTarea + 1)
-                    actividad.estado = Estado.FINALIZADA
 
-                    if (actividad.listaSubtareas.all { it.estado == Estado.FINALIZADA }) {
-                        historial.añadirModificacionEstado(Estado.FINALIZADA, tarea, numActividad + 1)
-                        tarea.estado = Estado.FINALIZADA
+
+                println("\nElige una Subtarea")
+                val numSubTarea = pedirNum(1, tarea.listaSubtareas.size) - 1
+
+                println("\n¿Que estado quieres ponerle a la Subtarea?")
+                println("1. Abierta")
+                println("2. En proceso")
+                println("3. Finalizada")
+
+                val estado = pedirNum(1, 3)
+
+                val actividad = tarea.listaSubtareas[numSubTarea]
+                when (estado) {
+                    1 -> {
+                        historial.añadirModificacionEstado(Estado.ABIERTA, actividad, numActividad + 1, numSubTarea + 1)
+                        actividad.estado = Estado.ABIERTA
+                    }
+                    2 -> {
+                        historial.añadirModificacionEstado(Estado.EN_PROGRESO, actividad, numActividad + 1, numSubTarea + 1)
+                        actividad.estado = Estado.EN_PROGRESO
+                    }
+                    3 -> {
+                        historial.añadirModificacionEstado(Estado.FINALIZADA, actividad, numActividad + 1, numSubTarea + 1)
+                        actividad.estado = Estado.FINALIZADA
+
+                        if (actividad.listaSubtareas.all { it.estado == Estado.FINALIZADA }) {
+                            historial.añadirModificacionEstado(Estado.FINALIZADA, tarea, numActividad + 1)
+                            tarea.estado = Estado.FINALIZADA
+                        }
                     }
                 }
-            }
 
-        } else {
-            println("Esta tarea no tiene subtareas.")
+            } else {
+                println("Esta tarea no tiene subtareas.")
+            }
         }
     }
 
@@ -661,6 +671,5 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
         }
 
         println("\n--- Estadisticas de Eventos --- \n - Eventos hoy: $contadorEventosHoy\n - Eventos mañana: $contadorEventosMañana \n - Eventos esta semana: $contadorEventosEstaSemana \n - Eventos este mes: $contadorEventosEsteMes")
-
     }
 }
