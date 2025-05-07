@@ -92,13 +92,13 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
             print(">> ")
             try {
                 input = readln().toInt()
+                if (input in min..max){
+                    valorValido = true
+                } else {
+                    println("Introduce un Nº entre $min y $max")
+                }
             } catch (e: IllegalArgumentException){
                 println("Introduce un Nº")
-            }
-            if (input in min..max){
-                valorValido = true
-            } else {
-                println("Introduce un Nº entre $min y $max")
             }
         }
         return input
@@ -536,11 +536,16 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
                         print("Introduce la etiqueta: ")
                         val filtro = readln().lowercase()
 
-                        for(elemento in actividades.elementos) {
+                        var encontrada = false
+                        for (elemento in actividades.elementos) {
                             if (elemento is Tarea && elemento.adquirirEtiquetas().any { it.lowercase() == filtro }) {
-                                tareas.forEach { salida(it.obtenerDetalle()) }
-                            } else salida("ERROR: No se encontró ninguna etiqueta.")
+                                salida(elemento.obtenerDetalle())
+                                encontrada = true
+                            }
                         }
+
+                        if (!encontrada) salida("ERROR: No se encontró ninguna etiqueta.")
+
                     } else salida("No existen tareas creadas.")
                 }
 
