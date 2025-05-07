@@ -30,6 +30,4 @@ class UsuarioRepository : IUsuarioRepository {
         usuario.listaTareas.add(tarea)
         return true
     }
-
-
 }
