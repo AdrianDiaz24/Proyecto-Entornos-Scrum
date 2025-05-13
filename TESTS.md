@@ -1,8 +1,10 @@
-### Documentación de pruebas unitarias - UsuarioService
+### Documentación de pruebas unitarias - UsuarioService - Francisco Alba
 
 **Servicio probado:** `UsuarioService`
 
 **Repositorio mockeado:** `UsuarioRepository` (inyectado vía constructor)
+
+**Src:** [UsuarioServiceTest.kt](https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/blob/PruebaUnitaria_FranAlbaMu%C3%B1oz/src/test/kotlin/UsuarioServiceTest.kt)
 
 ---
 
