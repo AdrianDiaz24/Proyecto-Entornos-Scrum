@@ -22,6 +22,15 @@ class UsuarioServiceTest : DescribeSpec({
                 verify { mockRepositorio.crearUsuario("Juan") }
                 resultado shouldBe true
             }
+
+            it("debe devolver false si no se puede crear el usuario") {
+                every { mockRepositorio.crearUsuario("Juan") } returns false
+
+                val resultado = servicio.crearUsuario("Juan")
+
+                verify { mockRepositorio.crearUsuario("Juan") }
+                resultado shouldBe false
+            }
         }
 
         describe("eliminarUsuarioPorNombre") {
@@ -33,20 +42,41 @@ class UsuarioServiceTest : DescribeSpec({
                 verify { mockRepositorio.eliminarUsuarioPorNombre("Ana") }
                 resultado shouldBe true
             }
+
+            it("debe devolver false si no se puede eliminar el usuario") {
+                every { mockRepositorio.eliminarUsuarioPorNombre("Ana") } returns false
+
+                val resultado = servicio.eliminarUsuarioPorNombre("Ana")
+
+                verify { mockRepositorio.eliminarUsuarioPorNombre("Ana") }
+                resultado shouldBe false
+            }
         }
 
         describe("mostrarTodos") {
-            it("debe imprimir los detalles de todos los usuarios") {
-                val usuarioMock = mockk<Usuario>()
-                every { usuarioMock.obtenerDetalle() } returns "Detalle del usuario"
-                every { mockRepositorio.obtenerTodos() } returns listOf(usuarioMock)
+            it("debe llamar a obtenerDetalle de todos los usuarios") {
+                val usuario1 = mockk<Usuario>()
+                val usuario2 = mockk<Usuario>()
+
+                every { usuario1.obtenerDetalle() } returns "Usuario 1"
+                every { usuario2.obtenerDetalle() } returns "Usuario 2"
+                every { mockRepositorio.obtenerTodos() } returns listOf(usuario1, usuario2)
+
+                servicio.mostrarTodos()
+
+                verify { usuario1.obtenerDetalle() }
+                verify { usuario2.obtenerDetalle() }
+            }
+
+            it("no debe imprimir nada si no hay usuarios") {
+                every { mockRepositorio.obtenerTodos() } returns emptyList()
 
                 mockkStatic(::println)
                 every { println(any()) } just Runs
 
                 servicio.mostrarTodos()
 
-                verify { println("Detalle del usuario") }
+                verify(exactly = 0) { println(any()) }
             }
         }
 
@@ -58,6 +88,14 @@ class UsuarioServiceTest : DescribeSpec({
                 val resultado = servicio.obtenerTodos()
 
                 resultado shouldBe usuarios
+            }
+
+            it("debe devolver una lista vacía si no hay usuarios") {
+                every { mockRepositorio.obtenerTodos() } returns emptyList()
+
+                val resultado = servicio.obtenerTodos()
+
+                resultado shouldBe emptyList()
             }
         }
 
@@ -73,7 +111,18 @@ class UsuarioServiceTest : DescribeSpec({
                 verify { mockRepositorio.asignarTarea(usuario, tarea) }
                 resultado shouldBe true
             }
-        }
 
+            it("debe devolver false si no se puede asignar la tarea") {
+                val usuario = mockk<Usuario>()
+                val tarea = mockk<Actividad>()
+
+                every { mockRepositorio.asignarTarea(usuario, tarea) } returns false
+
+                val resultado = servicio.asignarTarea(usuario, tarea)
+
+                verify { mockRepositorio.asignarTarea(usuario, tarea) }
+                resultado shouldBe false
+            }
+        }
     }
 })
