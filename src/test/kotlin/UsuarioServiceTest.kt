@@ -1,3 +1,4 @@
+package es.prog2425.taskmanager
 import es.prog2425.taskmanager.Modelo.Actividad
 import es.prog2425.taskmanager.dominio.Usuario
 import es.prog2425.taskmanager.servicios.UsuarioRepository
