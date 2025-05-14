@@ -1,7 +1,8 @@
 package es.prog2425.taskmanager
+
 import es.prog2425.taskmanager.Modelo.Actividad
+import es.prog2425.taskmanager.datos.IUsuarioRepository
 import es.prog2425.taskmanager.dominio.Usuario
-import es.prog2425.taskmanager.servicios.UsuarioRepository
 import es.prog2425.taskmanager.servicios.UsuarioService
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
@@ -9,7 +10,7 @@ import io.mockk.*
 
 class UsuarioServiceTest : DescribeSpec({
 
-    val mockRepositorio = mockk<UsuarioRepository>(relaxed = true)
+    val mockRepositorio = mockk<IUsuarioRepository>(relaxed = true)
     val servicio = UsuarioService(mockRepositorio)
 
     describe("UsuarioService") {
@@ -74,14 +75,14 @@ class UsuarioServiceTest : DescribeSpec({
 
                 servicio.mostrarTodos()
 
-                // No se espera ninguna excepción ni llamadas a obtenerDetalle
-                verify(exactly = 0) { mockRepositorio.obtenerTodos().firstOrNull()?.obtenerDetalle() }
+                // No se espera ninguna llamada a obtenerDetalle
+                verify(exactly = 0) { any<Usuario>().obtenerDetalle() }
             }
         }
 
         describe("obtenerTodos") {
             it("debería devolver una lista con los usuarios actuales") {
-                val usuarios = listOf<Usuario>(mockk(), mockk())
+                val usuarios = listOf(mockk<Usuario>(), mockk<Usuario>())
                 every { mockRepositorio.obtenerTodos() } returns usuarios
 
                 val resultado = servicio.obtenerTodos()
