@@ -36,13 +36,17 @@
 ---
 
 ### Ejecución de tests
-'En este apartado no puedo verificar que los test pasen ya que el error de IJ no me permite poder realizar las pruebas, pero debería de verse de la siguiente manera:
+En este apartado no puedo verificar que los test pasen ya que el error de IJ no me permite poder realizar las pruebas, pero debería de verse de la siguiente manera:
 
-**Total de tests:** 10
-**Pasaron:** 10
-**Fallaron:** 0
-**Tiempo de ejecución:** \tiempo en segundos.
-'En este apartado no puedo verificar que los test pasen ya que el error de IJ no me permite poder realizar las pruebas.
+- **Total de tests:** 10
+
+- **Pasaron:** 10
+
+- **Fallaron:** 0
+
+- **Tiempo de ejecución:** \tiempo en segundos.
+
+
 ---
 
 ### Conclusiones
