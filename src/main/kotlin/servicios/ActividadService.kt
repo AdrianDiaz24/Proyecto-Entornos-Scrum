@@ -1,7 +1,7 @@
 package es.prog2425.taskmanager.servicios
 
-import es.prog2425.taskmanager.Modelo.Actividad
 import es.prog2425.taskmanager.datos.IActividadRepository
+import es.prog2425.taskmanager.dominio.Actividad
 
 class ActividadService: IActividadRepository<Actividad> {
 

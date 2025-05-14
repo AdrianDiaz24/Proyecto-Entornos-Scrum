@@ -1,7 +1,5 @@
 package es.prog2425.taskmanager.dominio
 
-import es.prog2425.taskmanager.Modelo.Actividad
-
 class Tarea(descripcion: String, var estado: Estado = Estado.ABIERTA): Actividad(descripcion) {
 
     val listaSubtareas = mutableListOf<Tarea>()

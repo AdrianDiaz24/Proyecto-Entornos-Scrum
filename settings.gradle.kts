@@ -2,6 +2,11 @@ pluginManagement {
     plugins {
         kotlin("jvm") version "2.1.20"
     }
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
 }
 
 plugins {

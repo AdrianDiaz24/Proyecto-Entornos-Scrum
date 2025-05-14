@@ -1,8 +1,7 @@
 package es.prog2425.taskmanager.servicios
 
-import es.prog2425.taskmanager.Modelo.Actividad
 import es.prog2425.taskmanager.datos.IUsuarioRepository
-import es.prog2425.taskmanager.dominio.Tarea
+import es.prog2425.taskmanager.dominio.Actividad
 import es.prog2425.taskmanager.dominio.Usuario
 
 class UsuarioRepository : IUsuarioRepository {

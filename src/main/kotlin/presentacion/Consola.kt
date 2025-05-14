@@ -1,6 +1,5 @@
 package es.prog2425.taskmanager.presentacion
 
-import es.prog2425.taskmanager.Modelo.Actividad
 import es.prog2425.taskmanager.servicios.*
 import es.prog2425.taskmanager.dominio.*
 import java.time.LocalDate

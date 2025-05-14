@@ -1,7 +1,5 @@
 package es.prog2425.taskmanager.dominio
 
-import es.prog2425.taskmanager.Modelo.Actividad
-
 class Usuario private constructor(val id: Int, val nombre: String) {
 
     val listaTareas: MutableList<Actividad> = mutableListOf()
