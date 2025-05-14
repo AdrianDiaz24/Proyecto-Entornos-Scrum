@@ -51,10 +51,10 @@ En este apartado no puedo verificar que los test pasen ya que el error de IJ no 
 
 ### Conclusiones
 
-* Todos los métodos del servicio están cubiertos.
-* Se han probado tanto los casos esperados como escenarios alternativos.
-* El uso de `MockK` ha permitido aislar completamente el servicio del repositorio.
-* El estilo `DescribeSpec` de Kotest ha facilitado la organización clara y legible de los tests.
+* Gracias a MockK, el servicio fue evaluado de forma aislada sin depender del repositorio real.
+* Se organizaron las pruebas de forma clara y comprensible utilizando la sintaxis DescribeSpec de Kotest.
+* Los tests contemplan tanto los comportamientos esperados como situaciones en las que algo puede fallar.
+* Cada función del servicio ha sido verificada mediante pruebas unitarias específicas.
 
 ---
 
