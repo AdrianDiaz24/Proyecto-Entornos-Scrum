@@ -103,7 +103,7 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
                     println("Introduce un Nº entre $min y $max")
                 }
             } catch (e: IllegalArgumentException){
-                println("Introduce un Nº")
+                println("**ERROR** $e Introduce un Nº")
             }
         }
         return input
