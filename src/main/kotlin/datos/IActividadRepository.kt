@@ -1,4 +1,4 @@
-package es.prog2425.taskmanager.datos
+package es.prog2425.taskmanager.datos // Como se puede ver el package espieza por es.prog2425.taskmanager que es el del Main.kt y despues se le añade el .datos que es en la carpeta que se encuentra no hay error
 
 interface IActividadRepository<T> {
 

@@ -77,7 +77,7 @@ tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
 - Despues: https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/blob/81c01000e4d0d5b273c558232a7cf53b402a5fa8/src/main/kotlin/presentacion/Consola.kt
 4. SwallowedException
 - Antes: https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/blob/78b18f0d9a5ccf4fe05ae550b0e892332dc8be21/src/main/kotlin/presentacion/Consola.kt
-- Despues
+- Despues: https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/blob/ad6706ba455c9708a9e597ec51b68faf092174f7/src/main/kotlin/presentacion/Consola.kt
 5. InvalidPackageDeclaration
 - Antes: https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/blob/78b18f0d9a5ccf4fe05ae550b0e892332dc8be21/src/main/kotlin/datos/IActividadRepository.kt
-- Despues
+- Despues: 
