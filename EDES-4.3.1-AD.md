@@ -68,7 +68,7 @@ tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
 
 1. FunctionNaming
 - Antes: https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/blob/78b18f0d9a5ccf4fe05ae550b0e892332dc8be21/src/main/kotlin/datos/IHistorialRepository.kt
-- Despues 
+- Despues: https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/blob/ac958edc04c91cc1342e99c6e7d5f7be7f524cbb/src/main/kotlin/datos/IHistorialRepository.kt 
 2. NewLineAtEndOfFile
 - Antes: https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/blob/78b18f0d9a5ccf4fe05ae550b0e892332dc8be21/src/main/kotlin/datos/IActividadRepository.kt
 - Despues

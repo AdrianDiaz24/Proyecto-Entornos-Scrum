@@ -29,4 +29,3 @@ class UsuarioService(private val usuarios: IUsuarioRepository) {
     }
 
 }
-
