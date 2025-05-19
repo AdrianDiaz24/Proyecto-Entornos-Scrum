@@ -63,3 +63,21 @@ tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
 
 - El error dice que el package esta mal puesto segun la ubicacion del archivo
 - Ya esta solucionado es un falso positivo ya que el package del Main.kt es package es.prog2425.taskmanager y la de IActividadRepository es package es.prog2425.taskmanager.datos que es la carpeta (datos) que se encuentra 
+
+## Enlaces a commits relevantes
+
+1. FunctionNaming
+- Antes: 
+- Despues 
+2. NewLineAtEndOfFile
+- Antes:
+- Despues
+3. WildcardImport
+- Antes:
+- Despues
+4. SwallowedException
+- Antes:
+- Despues
+5. InvalidPackageDeclaration
+- Antes:
+- Despues
