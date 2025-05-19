@@ -32,7 +32,7 @@ Para instalar Detekt hay que añadir al Build.Gradle en la zona de los plugins l
 
 El proyecto esta realizado con la JDK 21 y Detekt solo reconoce hasta la 19 por eso le forzamos con el siguiente comando en e Build.Gradle que para esto use la JDK 17 y serie este: 
 
-```
+``` kts
 tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
   jvmTarget = "17"
 }
@@ -63,6 +63,63 @@ tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
 
 - El error dice que el package esta mal puesto segun la ubicacion del archivo
 - Ya esta solucionado es un falso positivo ya que el package del Main.kt es package es.prog2425.taskmanager y la de IActividadRepository es package es.prog2425.taskmanager.datos que es la carpeta (datos) que se encuentra 
+
+## Cambiar la configuracion
+
+Para cambiar la configuracion de Detekt primero hay que crear el archivo de la configuracion eso se hace con "./gradlew detektGenerateConfig" una vez ejecutado este comando se crea una carpeta config y dentro de esta la de detekt.yml donde esta la configuracion predeterminada.
+
+La configuracion que he cambiado ha sido la del error de FunctionNaming que saltaba cuando una funcion no se escribia con lowerCamelCase para que siga funcionando igual pero añadiendo la Ñ para que no salte el error al escribir funciones en español
+
+Antes: 
+``` yml
+FunctionNaming:
+active: true
+excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/androidUnitTest/**', '**/androidInstrumentedTest/**', '**/jsTest/**', '**/iosTest/**']
+functionPattern: '[a-z][a-zA-Z0-9]*'
+excludeClassPattern: '$^'
+```
+Despues:
+``` yml
+FunctionNaming:
+active: true
+excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/androidUnitTest/**', '**/androidInstrumentedTest/**', '**/jsTest/**', '**/iosTest/**']
+functionPattern: '[a-zñ][a-zA-Z0-9ñ]*'
+excludeClassPattern: '$^'
+```
+
+Recordar añadir al Build.Gradle en la parte de Detekt la linea de codigo con lo siguiente "config.from(files("config/detekt/detekt.yml"))" cambiando lo de dentro de files por la ruta a la configuracion
+
+###  respuestas a las preguntas y conclusiones.
+
+- 1
+  - 1.a ¿Que herramienta has usado y para que sirve?
+    - He uasdo Detekt que es un analizador de codigo estatico y sirve para analizar un codigo y detectar posibles errores, malas practicas, entres otros posibles errores
+  - 1.b ¿Cuales son sus características principales?
+    - Analiza el codigo sin compilarlo
+    - Detecta problemas como funciones muy largas y otras malas practicas
+    - Puede usar una configuracion personalizada
+    - Se puede implementar desde el Build.Gradle.kts
+  - 1.c ¿Qué beneficios obtengo al utilizar dicha herramienta?
+    - Mejora la calidad del codigo
+    - Evitar esos errores a futuro 
+    - Ahorra tiempo comparado con la revision manual
+- 2
+  - 2.a De los errores/problemas que la herramienta ha detectado y te ha ayudado a solucionar, ¿cual es el que te ha parecido que ha mejorado más tu código?
+    - El de SwallowedException ya que asi controlo mejor el error y lo se para la siguiente
+  - 2.b ¿La solución que se le ha dado al error/problema la has entendido y te ha parecido correcta?
+    - Si
+  - 2.c ¿Por qué se ha producido ese error/problema?
+    - Porque tenia un try catch que realizaba un print pero este no mostraba el error
+- 3
+  - 3.a ¿Que posibilidades de configuración tiene la herramienta?
+    - Puedes configurar todos los errores que te saltan
+  - 3.b De esas posibilidades de configuración, ¿cuál has configurado para que sea distinta a la que viene por defecto?
+    - Añadir a la expresion regular la Ñ para que no salte el error con nombre en español
+  - 3.c Pon un ejemplo de como ha impactado en tu código, enlazando al código anterior al cambio, y al posterior al cambio,
+    - No ha impactado mucho excepto que antes saltaba error con las funciones añadirX y ya no
+- 4
+  - 4 ¿Qué conclusiones sacas después del uso de estas herramientas?
+    - Es una herramienta util para controlar el tamaño de funciones y su complejidad sin tener que revisarlo manualmente, tambien te puede ayudar con posbles errores en nombre de funciones o varibles entre otras cosas, principalmente te permite revisar posibles errores rapidamente sin tener que mirar todo el codigo
 
 ## Enlaces a commits relevantes
 

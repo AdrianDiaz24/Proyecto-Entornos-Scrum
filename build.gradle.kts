@@ -25,6 +25,7 @@ kotlin {
 }
 
 detekt {
+    config.from(files("config/detekt/detekt.yml"))
     buildUponDefaultConfig = true
 }
 
