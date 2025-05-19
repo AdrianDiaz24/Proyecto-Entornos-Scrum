@@ -1,6 +1,6 @@
 package es.prog2425.taskmanager.datos
 
-import es.prog2425.taskmanager.Modelo.Actividad
+import es.prog2425.taskmanager.servicios.Actividad
 import es.prog2425.taskmanager.dominio.Tarea
 import es.prog2425.taskmanager.dominio.Usuario
 

@@ -1,8 +1,13 @@
 package es.prog2425.taskmanager.presentacion
 
-import es.prog2425.taskmanager.Modelo.Actividad
-import es.prog2425.taskmanager.servicios.*
-import es.prog2425.taskmanager.dominio.*
+import es.prog2425.taskmanager.servicios.ActividadService
+import es.prog2425.taskmanager.servicios.HistorialRepository
+import es.prog2425.taskmanager.servicios.UsuarioService
+import es.prog2425.taskmanager.servicios.UsuarioRepository
+import es.prog2425.taskmanager.servicios.Actividad
+import es.prog2425.taskmanager.dominio.Estado
+import es.prog2425.taskmanager.dominio.Evento
+import es.prog2425.taskmanager.dominio.Tarea
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 

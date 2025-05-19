@@ -1,6 +1,6 @@
 package es.prog2425.taskmanager.dominio
 
-import es.prog2425.taskmanager.Modelo.Actividad
+import es.prog2425.taskmanager.servicios.Actividad
 
 class Usuario private constructor(val id: Int, val nombre: String) {
 

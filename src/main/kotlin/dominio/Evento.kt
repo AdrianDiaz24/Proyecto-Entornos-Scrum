@@ -1,6 +1,6 @@
 package es.prog2425.taskmanager.dominio
 
-import es.prog2425.taskmanager.Modelo.Actividad
+import es.prog2425.taskmanager.servicios.Actividad
 
 class Evento(descripcion: String, val fecha: String, val ubicacion: String): Actividad(descripcion) {
 
