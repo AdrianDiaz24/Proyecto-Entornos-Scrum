@@ -30,9 +30,9 @@ kotlin {
 
 ### Capturas recomendadas:
 
-* Captura del archivo `build.gradle.kts` con los plugins añadidos.
-* Captura de terminal con instalación y sincronización exitosa de Gradle.
-* Captura de la estructura del proyecto (`src/main/kotlin/...`).
+![build.gradle.kts con plugins añadidos](docs/build-gradle-plugins.png)
+![terminal con instalación y sincronización exitosa de Gradle](docs/build-gradle-plugins.png)
+![estructura del proyecto](docs/build-gradle-plugins.png)
 
 ---
 
