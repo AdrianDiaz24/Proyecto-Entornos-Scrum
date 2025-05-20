@@ -33,7 +33,6 @@ class Tarea(descripcion: String, var estado: Estado = Estado.ABIERTA): Actividad
         }
     }
 
-
     /**
      * Devuelve los detalles completos de la tarea.
      * @return String con formato: "Tarea [descripción] - Estado: [estado]".
@@ -49,5 +48,4 @@ class Tarea(descripcion: String, var estado: Estado = Estado.ABIERTA): Actividad
     fun aniadirSubtarea(tarea : Tarea){
         listaSubtareas.add(tarea)
     }
-
 }
