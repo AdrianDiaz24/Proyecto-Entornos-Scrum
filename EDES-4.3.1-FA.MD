@@ -785,7 +785,7 @@ Obliga a reformatear código largo en varias líneas, mejorando la legibilidad.
 ### Entregahttps://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/tree/Linting_FranAlbaMu%C3%B1oz
 
 * URL del repositorio: [enlace al repo](https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/tree/main)
-* Rama específica: [Linting_FranAlbaMuñoz](https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/edit/Linting_FranAlbaMuñoz/)
+* Rama específica: [Linting_FranAlbaMuñoz](https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/tree/Linting_FranAlbaMuñoz)
 * Archivo: `EDES-4.3.1-FR.md`
 
 ---
