@@ -14,6 +14,8 @@ Ambas herramientas se han integrado en el proyecto para ampliar el análisis est
 
 ### Instalación
 
+Para instalar ambos analizadores de código, añadí los plugins correspondientes en el archivo `build.gradle.kts`. Esto permite integrarlos de forma automática en el flujo de trabajo de Gradle.
+
 **build.gradle.kts:**
 
 ```kotlin
@@ -28,10 +30,15 @@ kotlin {
 }
 ```
 
-### Capturas recomendadas:
+### Capturas realizadas:
 
+**build.gradle.kts con plugins añadidos:**
 ![build.gradle.kts con plugins añadidos](docs/BuildGradleCaptura.png)
+
+**terminal con instalación y sincronización exitosa de Gradle:**
 ![terminal con instalación y sincronización exitosa de Gradle](docs/BuildGradleSincroCaptura.png)
+
+**estructura del proyecto:**
 ![estructura del proyecto](docs/EstructuraProyectoCaptura.png)
 
 ---
@@ -47,7 +54,131 @@ Desde la terminal del proyecto se han ejecutado los comandos:
 ./gradlew ktlintCheck
 ```
 
-### Capturas recomendadas:
+### Detekt
+
+Se detectaron **85 problemas ponderados** que indican errores y malas prácticas.
+
+Incluye problemas de complejidad, nombres incorrectos, funciones largas, imports no usados, falta de documentación y uso de números mágicos.
+
+Es importante revisar el informe generado para corregirlos y mejorar la calidad del código.
+
+```bash
+PS C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum> ./gradlew detekt
+
+> Task :detekt FAILED
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:450:17: The function buscarFiltro is too long (118). The maximum length is 60. [LongMethod]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:208:9: The function ejecutarPrograma appears to be too complex based on Cyclomatic Complexity (complexity: 15). Defined complexity threshold for methods is set to '15' [CyclomaticComplexMethod]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:450:17: The function buscarFiltro appears to be too complex based on Cyclomatic Complexity (complexity: 49). Defined complexity threshold for methods is set to '15' [CyclomaticComplexMethod]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:134:9: Function crearActividad is nested too deeply. [NestedBlockDepth]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:335:17: Function cambiarEstado is nested too deeply. [NestedBlockDepth]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:380:17: Function cambiarEstadoSubTarea is nested too deeply. [NestedBlockDepth]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:450:17: Function buscarFiltro is nested too deeply. [NestedBlockDepth]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:598:17: Function mostrarEstadisticasTareas is nested too deeply. [NestedBlockDepth]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:9:7: Class 'Consola' with '24' functions detected. Defined threshold inside classes is set to '11' [TooManyFunctions]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:100:22: The caught exception is swallowed. The original exception could be lost. [SwallowedException]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\datos\IActividadRepository.kt:1:1: The package declaration does not match the actual file location. [InvalidPackageDeclaration]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\datos\IHistorialRepository.kt:1:1: The package declaration does not match the actual file location. [InvalidPackageDeclaration]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\datos\IHistorialRepository.kt:9:9: Function names should match the pattern: [a-z][a-zA-Z0-9]* [FunctionNaming]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\datos\IHistorialRepository.kt:10:9: Function names should match the pattern: [a-z][a-zA-Z0-9]* [FunctionNaming]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\datos\IUsuarioRepository.kt:1:1: The package declaration does not match the actual file location. [InvalidPackageDeclaration]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\dominio\Estado.kt:1:1: The package declaration does not match the actual file location. [InvalidPackageDeclaration]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\dominio\Evento.kt:1:1: The package declaration does not match the actual file location. [InvalidPackageDeclaration]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\dominio\Tarea.kt:1:1: The package declaration does not match the actual file location. [InvalidPackageDeclaration]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\dominio\Usuario.kt:1:1: The package declaration does not match the actual file location. [InvalidPackageDeclaration]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\Main.kt:1:1: The package declaration does not match the actual file location. [InvalidPackageDeclaration]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:1:1: The package declaration does not match the actual file location. [InvalidPackageDeclaration]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:654:13: Variable names should match the pattern: [a-z][A-Za-z0-9]* [VariableNaming]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:659:13: Variable names should match the pattern: [a-z][A-Za-z0-9]* [VariableNaming]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\servicios\Actividad.kt:1:1: The package declaration does not match the actual file location. [InvalidPackageDeclaration]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\servicios\Actividad.kt:1:1: Package name should match the pattern: [a-z]+(\.[a-z][A-Za-z0-9]*)* [PackageNaming]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\servicios\ActividadService.kt:1:1: The package declaration does not match the actual file location. [InvalidPackageDeclaration]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\servicios\HistorialRepository.kt:1:1: The package declaration does not match the actual file location. [InvalidPackageDeclaration]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\servicios\UsuarioRepository.kt:1:1: The package declaration does not match the actual file location. [InvalidPackageDeclaration]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\servicios\UsuarioService.kt:1:1: The package declaration does not match the actual file location. [InvalidPackageDeclaration]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\datos\IActividadRepository.kt:18:2: The file C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\datos\IActividadRepository.kt is not ending with a new line. [NewLineAtEndOfFile]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\datos\IHistorialRepository.kt:12:2: The file C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\datos\IHistorialRepository.kt is not ending with a new line. [NewLineAtEndOfFile]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\datos\IUsuarioRepository.kt:12:2: The file C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\datos\IUsuarioRepository.kt is not ending with a new line. [NewLineAtEndOfFile]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\dominio\Estado.kt:11:2: The file C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\dominio\Estado.kt is not ending with a new line. [NewLineAtEndOfFile]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\dominio\Evento.kt:39:2: The file C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\dominio\Evento.kt is not ending with a new line. [NewLineAtEndOfFile]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\dominio\Evento.kt:8:1: Line detected, which is longer than the defined maximum line length in the code style. [MaxLineLength]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\dominio\Evento.kt:29:13: patronFecha can be a `const val`. [MayBeConst]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\dominio\Tarea.kt:40:2: The file C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\dominio\Tarea.kt is not ending with a new line. [NewLineAtEndOfFile]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\dominio\Usuario.kt:19:2: The file C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\dominio\Usuario.kt is not ending with a new line. [NewLineAtEndOfFile]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\Main.kt:7:2: The file C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\Main.kt is not ending with a new line. [NewLineAtEndOfFile]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:142:17: The destructuring declaration contains 4 but only 3 are allowed. [DestructuringDeclarationWithTooManyEntries]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:4:1: es.prog2425.taskmanager.servicios.* is a wildcard import. Replace it with fully qualified imports. [WildcardImport]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:5:1: es.prog2425.taskmanager.dominio.* is a wildcard import. Replace it with fully qualified imports. [WildcardImport]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:9:1: Line detected, which is longer than the defined maximum line length in the code style. [MaxLineLength]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:137:1: Line detected, which is longer than the defined maximum line length in the code style. [MaxLineLength]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:158:1: Line detected, which is longer than the defined maximum line length in the code style. [MaxLineLength]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:372:1: Line detected, which is longer than the defined maximum line length in the code style. [MaxLineLength]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:416:1: Line detected, which is longer than the defined maximum line length in the code style. [MaxLineLength]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:420:1: Line detected, which is longer than the defined maximum line length in the code style. [MaxLineLength]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:678:1: Line detected, which is longer than the defined maximum line length in the code style. [MaxLineLength]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:68:28: This expression contains a magic number. Consider defining it to a well named constant. [MagicNumber]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:78:27: This expression contains a magic number. Consider defining it to a well named constant. [MagicNumber]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:149:13: This expression contains a magic number. Consider defining it to a well named constant. [MagicNumber]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:168:13: This expression contains a magic number. Consider defining it to a well named constant. [MagicNumber]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:222:17: This expression contains a magic number. Consider defining it to a well named constant. [MagicNumber]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:226:17: This expression contains a magic number. Consider defining it to a well named constant. [MagicNumber]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:230:17: This expression contains a magic number. Consider defining it to a well named constant. [MagicNumber]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:234:17: This expression contains a magic number. Consider defining it to a well named constant. [MagicNumber]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:238:17: This expression contains a magic number. Consider defining it to a well named constant. [MagicNumber]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:242:17: This expression contains a magic number. Consider defining it to a well named constant. [MagicNumber]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:246:17: This expression contains a magic number. Consider defining it to a well named constant. [MagicNumber]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:250:17: This expression contains a magic number. Consider defining it to a well named constant. [MagicNumber]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:254:17: This expression contains a magic number. Consider defining it to a well named constant. [MagicNumber]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:258:17: This expression contains a magic number. Consider defining it to a well named constant. [MagicNumber]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:262:17: This expression contains a magic number. Consider defining it to a well named constant. [MagicNumber]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:348:38: This expression contains a magic number. Consider defining it to a well named constant. [MagicNumber]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:364:21: This expression contains a magic number. Consider defining it to a well named constant. [MagicNumber]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:407:42: This expression contains a magic number. Consider defining it to a well named constant. [MagicNumber]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:419:21: This expression contains a magic number. Consider defining it to a well named constant. [MagicNumber]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:454:41: This expression contains a magic number. Consider defining it to a well named constant. [MagicNumber]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:464:34: This expression contains a magic number. Consider defining it to a well named constant. [MagicNumber]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:504:50: This expression contains a magic number. Consider defining it to a well named constant. [MagicNumber]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:518:29: This expression contains a magic number. Consider defining it to a well named constant. [MagicNumber]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:527:17: This expression contains a magic number. Consider defining it to a well named constant. [MagicNumber]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:552:17: This expression contains a magic number. Consider defining it to a well named constant. [MagicNumber]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:568:17: This expression contains a magic number. Consider defining it to a well named constant. [MagicNumber]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\servicios\Actividad.kt:59:2: The file C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\servicios\Actividad.kt is not ending with a new line. [NewLineAtEndOfFile]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\servicios\Actividad.kt:8:1: Line detected, which is longer than the defined maximum line length in the code style. [MaxLineLength]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\servicios\ActividadService.kt:10:2: The file C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\servicios\ActividadService.kt is not ending with a new line. [NewLineAtEndOfFile]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\servicios\HistorialRepository.kt:38:2: The file C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\servicios\HistorialRepository.kt is not ending with a new line. [NewLineAtEndOfFile]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\servicios\HistorialRepository.kt:19:1: Line detected, which is longer than the defined maximum line length in the code style. [MaxLineLength]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\servicios\HistorialRepository.kt:21:1: Line detected, which is longer than the defined maximum line length in the code style. [MaxLineLength]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\servicios\HistorialRepository.kt:27:1: Line detected, which is longer than the defined maximum line length in the code style. [MaxLineLength]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\servicios\UsuarioRepository.kt:35:2: The file C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\servicios\UsuarioRepository.kt is not ending with a new line. [NewLineAtEndOfFile]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\test\kotlin\UsuarioServiceTest.kt:128:3: The file C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\test\kotlin\UsuarioServiceTest.kt is not ending with a new line. [NewLineAtEndOfFile]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\test\kotlin\UsuarioServiceTest.kt:7:1: io.mockk.* is a wildcard import. Replace it with fully qualified imports. [WildcardImport]
+
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':detekt'.
+> Analysis failed with 85 weighted issues.
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 3s
+1 actionable task: 1 executed
+```
+
+### Ktlint
+
+Se encontraron violaciones en el estilo de código:
+
+- Falta de salto de línea al final del archivo.
+- Líneas en blanco innecesarias.
+
+Estas violaciones provocaron fallos en la ejecución de ktlint.
+
+Ajustar el formato es necesario para pasar el control de calidad.
 
 * Resultado del análisis Detekt en terminal (muestra de errores).
 * Resultado del análisis Ktlint en terminal (muestra de errores).
@@ -58,50 +189,90 @@ Desde la terminal del proyecto se han ejecutado los comandos:
 
 Se han detectado los siguientes errores:
 
-### Error 1: Naming Convention
+---
 
-* **Descripción:** Uso de nombres en minúsculas para clases.
-* **Solución:** Cambiar de `class tarea {...}` a `class Tarea {...}`.
-* **Enlaces:**
+### Error 1: Método Demasiado Largo (LongMethod)
 
-  * Antes: \[commit link]
-  * Después: \[commit link]
+**Descripción:**  
+El método `buscarFiltro` tiene 118 líneas, excediendo el límite recomendado de 60.
 
-### Error 2: Long Method
+**Solución:**  
+Dividir el método en funciones más pequeñas y manejables.
 
-* **Descripción:** Método con demasiadas líneas.
-* **Solución:** Extraer funciones auxiliares.
-* **Enlaces:**
+**Ubicación:**  
+`Consola.kt` línea 450
 
-  * Antes: \[commit link]
-  * Después: \[commit link]
+**Enlaces:**  
+Antes: [commit link]  
+Después: [commit link]
 
-### Error 3: Unused Import
+---
 
-* **Descripción:** Importaciones no utilizadas.
-* **Solución:** Eliminar las líneas marcadas.
-* **Enlaces:**
+### Error 2: Complejidad Ciclomática Alta (CyclomaticComplexMethod)
 
-  * Antes: \[commit link]
-  * Después: \[commit link]
+**Descripción:**  
+El método `buscarFiltro` tiene una complejidad ciclomática de 49, mucho mayor que el límite recomendado de 15.
 
-### Error 4: Missing KDoc
+**Solución:**  
+Refactorizar el método para reducir la cantidad de caminos condicionales, extraer lógica compleja.
 
-* **Descripción:** Falta de documentación en clases públicas.
-* **Solución:** Añadir comentarios de documentación.
-* **Enlaces:**
+**Ubicación:**  
+`Consola.kt` línea 450
 
-  * Antes: \[commit link]
-  * Después: \[commit link]
+**Enlaces:**  
+Antes: [commit link]  
+Después: [commit link]
 
-### Error 5: Magic Numbers
+---
 
-* **Descripción:** Uso de números "mágicos" sin constantes.
-* **Solución:** Declarar constantes con nombre descriptivo.
-* **Enlaces:**
+### Error 3: Profundidad de Bloques Anidados Excesiva (NestedBlockDepth)
 
-  * Antes: \[commit link]
-  * Después: \[commit link]
+**Descripción:**  
+El método `buscarFiltro` presenta una profundidad de bloque anidado de 7, sobrepasando el máximo permitido de 4.
+
+**Solución:**  
+Simplificar el código dividiendo la lógica anidada en funciones auxiliares.
+
+**Ubicación:**  
+`Consola.kt` línea 450
+
+**Enlaces:**  
+Antes: [commit link]  
+Después: [commit link]
+
+---
+
+### Error 4: Demasiadas Funciones en la Clase (TooManyFunctions)
+
+**Descripción:**  
+La clase `Consola` tiene 24 funciones, excediendo el límite recomendado de 11.
+
+**Solución:**  
+Modularizar la clase, separando responsabilidades en clases o archivos diferentes.
+
+**Ubicación:**  
+`Consola.kt` línea 9
+
+**Enlaces:**  
+Antes: [commit link]  
+Después: [commit link]
+
+---
+
+### Error 5: Excepciones Capturadas y Silenciadas (SwallowedException)
+
+**Descripción:**  
+Captura de excepción `IllegalArgumentException` sin tratamiento, ocultando errores reales.
+
+**Solución:**  
+Manejar la excepción adecuadamente, añadiendo logging o re-lanzando la excepción.
+
+**Ubicación:**  
+`Consola.kt` línea 100
+
+**Enlaces:**  
+Antes: [commit link]  
+Después: [commit link]
 
 ### Capturas recomendadas:
 
