@@ -1,5 +1,6 @@
 plugins {
     kotlin("jvm") version "2.0.20"
+    id("org.jlleitschuh.gradle.ktlint") version "11.6.1"
 }
 
 group = "es.prog2425.taskmanager"
@@ -18,4 +19,8 @@ tasks.test {
 }
 kotlin {
     jvmToolchain(21)
+}
+
+ktlint{
+    version.set("1.0.1")
 }

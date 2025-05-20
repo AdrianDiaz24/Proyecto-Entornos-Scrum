@@ -2,14 +2,14 @@ package es.prog2425.taskmanager.dominio
 
 import es.prog2425.taskmanager.Modelo.Actividad
 
-class Evento(descripcion: String, val fecha: String, val ubicacion: String): Actividad(descripcion) {
+class Evento(descripcion: String, val fecha: String, val ubicacion: String) : Actividad(descripcion) {
 
     init {
-        require(fecha.matches(Regex(patronFecha))) { throw IllegalArgumentException("La fecha no cumple el formato DD/MM/AAAA")}
-        require(ubicacion.isNotBlank()) {throw IllegalArgumentException("La ubicacion no puede estar vacia")}
+        require(fecha.matches(Regex(patronFecha))) { throw IllegalArgumentException("La fecha no cumple el formato DD/MM/AAAA") }
+        require(ubicacion.isNotBlank()) { throw IllegalArgumentException("La ubicacion no puede estar vacia") }
     }
 
-    companion object{
+    companion object {
 
         /**
          * Crear una nueva istancia de un evento
@@ -35,5 +35,4 @@ class Evento(descripcion: String, val fecha: String, val ubicacion: String): Act
     override fun obtenerDetalle(): String {
         return "Evento " + super.obtenerDetalle() + " - Fecha: $fecha - Ubicacion: $ubicacion"
     }
-
 }

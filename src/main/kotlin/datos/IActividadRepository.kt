@@ -11,8 +11,7 @@ interface IActividadRepository<T> {
      * @param elemento Elemento que se va a añadir a la lista
      */
 
-    fun agregarElemento(elemento: T){
+    fun agregarElemento(elemento: T) {
         elementos.add(elemento)
     }
-
 }

@@ -12,8 +12,7 @@ class Usuario private constructor(val id: Int, val nombre: String) {
         fun instanciarUsusario(nombre: String) = Usuario(contID++, nombre)
     }
 
-    open fun obtenerDetalle(): String{
-        return  "$id - $nombre"
+    open fun obtenerDetalle(): String {
+        return "$id - $nombre"
     }
-
 }

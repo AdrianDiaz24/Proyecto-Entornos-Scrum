@@ -7,10 +7,9 @@ import es.prog2425.taskmanager.dominio.Usuario
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-
 class HistorialRepository(override val historial: MutableList<String> = mutableListOf()) : IHistorialRepository {
 
-    companion object{
+    companion object {
         val formato = DateTimeFormatter.ofPattern("dd/MM/yyyy - HH:MM:SS")
     }
 
@@ -30,7 +29,7 @@ class HistorialRepository(override val historial: MutableList<String> = mutableL
 
     override fun listarHistorial() {
         var contador = 0
-        for (modificacion in historial){
+        for (modificacion in historial) {
             contador++
             println("$contador. $modificacion")
         }

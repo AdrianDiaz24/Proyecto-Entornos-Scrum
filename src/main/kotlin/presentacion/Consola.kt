@@ -1,10 +1,14 @@
 package es.prog2425.taskmanager.presentacion
-
-import es.prog2425.taskmanager.Modelo.Actividad
-import es.prog2425.taskmanager.servicios.*
-import es.prog2425.taskmanager.dominio.*
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import es.prog2425.taskmanager.Modelo.Actividad
+import es.prog2425.taskmanager.dominio.Estado
+import es.prog2425.taskmanager.dominio.Evento
+import es.prog2425.taskmanager.dominio.Tarea
+import es.prog2425.taskmanager.servicios.ActividadService
+import es.prog2425.taskmanager.servicios.HistorialRepository
+import es.prog2425.taskmanager.servicios.UsuarioRepository
+import es.prog2425.taskmanager.servicios.UsuarioService
 
 class Consola(val historial: HistorialRepository = HistorialRepository(), val actividades: ActividadService = ActividadService(), val usuarios: UsuarioService = UsuarioService(UsuarioRepository())) {
 
@@ -13,7 +17,7 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
      * @param msj String con el mensaje que desea sacar por pantalla
      */
 
-    fun salida(msj: String){
+    fun salida(msj: String) {
         println(msj)
     }
 
@@ -21,7 +25,7 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
      * Muestra el menu principal
      */
 
-    fun mostrarMenu(){
+    fun mostrarMenu() {
         println("\n1.  Crear Actividad")
         println("2.  Listar Actividades")
         println("3.  Cambiar estado de la Tarea")
@@ -41,7 +45,7 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
      * Muestra el Submenu
      */
 
-    fun mostrarSubmenu(){
+    fun mostrarSubmenu() {
         println("\n1. Crear Tarea")
         println("2. Crear Evento")
         println("3. Crear Subtarea")
@@ -53,8 +57,8 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
      * @return Devuelve un String con la descripcion de la tarea
      */
 
-    fun pedirInfoTarea(msg: String): String{
-        print("\n${msg}")
+    fun pedirInfoTarea(msg: String): String {
+        print("\n$msg")
         return readln()
     }
 
@@ -73,9 +77,9 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
      * @return Devuelve un Nº con la eleccion seleccionada
      */
 
-    fun submenu(): Int{
+    fun submenu(): Int {
         mostrarSubmenu()
-        return pedirNum(1,4)
+        return pedirNum(1, 4)
     }
 
     /**
@@ -85,19 +89,19 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
      * @return Devuelve el Nº Introducido por el usuario si se encuentra dentro de los parametros
      */
 
-    fun pedirNum(min: Int, max: Int): Int{
+    fun pedirNum(min: Int, max: Int): Int {
         var valorValido = false
         var input = 0
-        while (!valorValido){
+        while (!valorValido) {
             print(">> ")
             try {
                 input = readln().toInt()
-                if (input in min..max){
+                if (input in min..max) {
                     valorValido = true
                 } else {
                     println("Introduce un Nº entre $min y $max")
                 }
-            } catch (e: IllegalArgumentException){
+            } catch (e: IllegalArgumentException) {
                 println("Introduce un Nº")
             }
         }
@@ -109,7 +113,7 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
      * @return Devuelve un triple co los 3 datos propocionados por consola
      */
 
-    fun pedirInfoEvento(): MutableList<String>{
+    fun pedirInfoEvento(): MutableList<String> {
         var descripcion = ""
         var fecha = ""
         var ubicacion = ""
@@ -122,7 +126,7 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
         ubicacion = readln()
         print("\nIntroduce etiquetas (separadas por ;) -> ")
         etiquetas = readln()
-        val salida = mutableListOf<String>(descripcion,fecha,ubicacion,etiquetas)
+        val salida = mutableListOf<String>(descripcion, fecha, ubicacion, etiquetas)
         return salida
     }
 
@@ -131,8 +135,8 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
      * @param input Nº que define que actividad crear 1 -> Tarea, 2 -> Evento
      */
 
-    fun crearActividad(input: Int){
-        when (input){
+    fun crearActividad(input: Int) {
+        when (input) {
             1 -> try {
                 actividades.agregarElemento(Tarea.creaTarea(pedirInfoTarea("Introduce la descripcion de la tarea: "), etiquetas = pedirInfoTarea("Introduce etiquetas (separadas por ;)")))
             } catch (e: IllegalArgumentException) {
@@ -148,9 +152,9 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
             }
             3 -> {
                 val hayActividades = listarActividades()
-                if (hayActividades){
+                if (hayActividades) {
                     println("\nElige una tarea")
-                    val numActividad = pedirNum(1,actividades.elementos.size) - 1
+                    val numActividad = pedirNum(1, actividades.elementos.size) - 1
                     val tarea = actividades.elementos[numActividad]
 
                     if (tarea is Tarea) {
@@ -159,8 +163,7 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
                         } catch (e: IllegalArgumentException) {
                             println("**ERROR** $e")
                         }
-                    }
-                    else{
+                    } else {
                         println("Tienes que elegir una Tarea!!")
                     }
                 }
@@ -173,11 +176,11 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
      * Lista las actividades almacenadas
      */
 
-    fun listarActividades(): Boolean{
+    fun listarActividades(): Boolean {
         println("\n")
         return if (actividades.elementos.isNotEmpty()) {
             var contador = 0
-            for (actividad in actividades.elementos){
+            for (actividad in actividades.elementos) {
                 contador++
                 println(contador.toString() + ". " + actividad.obtenerDetalle())
                 if (actividad is Tarea) {
@@ -191,12 +194,12 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
         }
     }
 
-    fun listarSubTareas(tarea: Tarea, contador: Int){
-        if (tarea.listaSubtareas.isNotEmpty()){
+    fun listarSubTareas(tarea: Tarea, contador: Int) {
+        if (tarea.listaSubtareas.isNotEmpty()) {
             var contador1 = 0
-            for (subtarea in tarea.listaSubtareas){
+            for (subtarea in tarea.listaSubtareas) {
                 contador1++
-                println("\t$contador.${contador1}. ${subtarea.obtenerDetalle()}")
+                println("\t$contador.$contador1. ${subtarea.obtenerDetalle()}")
             }
         }
     }
@@ -266,7 +269,7 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
         }
     }
 
-    private fun crearUsuario():  Boolean {
+    private fun crearUsuario(): Boolean {
         val nombreUsuario: String = pedirNombreUsuario()
         usuarios.crearUsuario(nombreUsuario)
         return true
@@ -276,16 +279,18 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
         println("\n")
         if (usuarios.obtenerTodos().isNotEmpty()) {
             usuarios.mostrarTodos()
-        } else salida("Aún no existen usuarios creados")
+        } else {
+            salida("Aún no existen usuarios creados")
+        }
     }
 
     private fun pedirNombreUsuario(): String {
         var nombre: String = ""
 
-        while (nombre == null || nombre.isBlank()) {
+        while (nombre.isBlank()) {
             print("Introduce el nombre del usuario: ")
             nombre = readln()
-            if (nombre == null || nombre.isBlank()) {
+            if (nombre.isBlank()) {
                 println("ERROR: Introduce un nombre válido.")
             }
         }
@@ -293,15 +298,15 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
     }
 
     private fun asignarTarea() {
-
-
-        if (actividades.elementos.size == 0) salida("Aún no existen tareas creadas")
-        else if (usuarios.obtenerTodos().isEmpty()) salida("Aún no existen usuarios creados")
-        else {
+        if (actividades.elementos.size == 0) {
+            salida("Aún no existen tareas creadas")
+        } else if (usuarios.obtenerTodos().isEmpty()) {
+            salida("Aún no existen usuarios creados")
+        } else {
             print("Elije una tarea: ")
             listarActividades()
 
-            val numActividad = pedirNum(1,actividades.elementos.size) - 1
+            val numActividad = pedirNum(1, actividades.elementos.size) - 1
             val tarea: Tarea = actividades.elementos[numActividad] as Tarea
 
             print("Elije un usuario: ")
@@ -315,28 +320,29 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
     }
 
     private fun mostrarTareasAsignadasUsuario() {
-
-        if (usuarios.obtenerTodos().isEmpty()) salida("Aún no existen usuarios creados")
-        else {
+        if (usuarios.obtenerTodos().isEmpty()) {
+            salida("Aún no existen usuarios creados")
+        } else {
             println("\nElige un usuario: ")
             listarUsuarios()
 
             val numUsuario = pedirNum(1, usuarios.obtenerTodos().size) - 1
             val usuario = usuarios.obtenerTodos()[numUsuario]
 
-            if(usuario.listaTareas.isNotEmpty()) {
+            if (usuario.listaTareas.isNotEmpty()) {
                 println("Mostrando tareas del usuario #ID# ${usuario.obtenerDetalle()}")
                 usuario.listaTareas.forEach { actividad: Actividad -> println("\t" + actividad.obtenerDetalle()) }
                 println("\n")
-            } else salida("El usuario no tiene tareas asignadas.")
+            } else {
+                salida("El usuario no tiene tareas asignadas.")
+            }
         }
     }
 
-    private fun cambiarEstado(){
-
+    private fun cambiarEstado() {
         val existenActividades = listarActividades()
 
-        if (existenActividades){
+        if (existenActividades) {
             println("\nElige una tarea")
             val numActividad = pedirNum(1, actividades.elementos.size) - 1
 
@@ -369,7 +375,9 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
                             if (actividad.listaSubtareas.all { it.estado == Estado.FINALIZADA }) {
                                 historial.añadirModificacionEstado(Estado.FINALIZADA, actividad, numActividad + 1)
                                 actividad.estado = Estado.FINALIZADA
-                            } else println("ERROR: Todas las subtareas tienen que estar marcadas como 'FINALIZADA' antes de finalizar la tarea.")
+                            } else {
+                                println("ERROR: Todas las subtareas tienen que estar marcadas como 'FINALIZADA' antes de finalizar la tarea.")
+                            }
                         }
                     }
                 }
@@ -377,24 +385,21 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
         }
     }
 
-    private fun cambiarEstadoSubTarea(){
+    private fun cambiarEstadoSubTarea() {
         val existenActividades = listarActividades()
 
-        if (existenActividades){
-
+        if (existenActividades) {
             println("\nElige una tarea")
-            val numActividad = pedirNum(1,actividades.elementos.size) - 1
+            val numActividad = pedirNum(1, actividades.elementos.size) - 1
             val tarea = actividades.elementos[numActividad] as Tarea
 
             if (tarea.listaSubtareas.isNotEmpty()) {
-
                 println(tarea.obtenerDetalle())
                 var contador = 0
                 for (subtarea in tarea.listaSubtareas) {
                     contador++
                     println("\t$contador. " + subtarea.obtenerDetalle())
                 }
-
 
                 println("\nElige una Subtarea")
                 val numSubTarea = pedirNum(1, tarea.listaSubtareas.size) - 1
@@ -426,19 +431,18 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
                         }
                     }
                 }
-
             } else {
                 println("Esta tarea no tiene subtareas.")
             }
         }
     }
 
-    private fun aniadirEtiquetasActividad(){
+    private fun aniadirEtiquetasActividad() {
         val hayActividades = listarActividades()
 
-        if (hayActividades){
+        if (hayActividades) {
             println("\nElige una actividad")
-            val numActividad = pedirNum(1,actividades.elementos.size) - 1
+            val numActividad = pedirNum(1, actividades.elementos.size) - 1
 
             print("\nIntroduce etiquetas (separadas por ;) -> ")
             val etiquetas = readln()
@@ -448,47 +452,55 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
     }
 
     private fun buscarFiltro() {
-
         var filtro = -1
 
-        while(filtro == -1 && filtro != 6) {
-            print("Introduce el filtro deseado: " +
+        while (filtro == -1 && filtro != 6) {
+            print(
+                "Introduce el filtro deseado: " +
                     "\n\t1. Tipo" +
                     "\n\t2. Estado" +
                     "\n\t3. Etiquetas" +
                     "\n\t4. Usuario" +
                     "\n\t5. Fecha" +
                     "\n\t6. Salir" +
-                    "\n")
+                    "\n"
+            )
 
             filtro = pedirNum(1, 6)
-            when(filtro) {
+            when (filtro) {
                 1 -> {
                     if (actividades.elementos.isNotEmpty()) {
-                        println("Tipo: " +
+                        println(
+                            "Tipo: " +
                                 "\n\t1. Tarea" +
-                                "\n\t2. Evento")
+                                "\n\t2. Evento"
+                        )
                         val tipo = pedirNum(1, 2)
-                        when(tipo) {
+                        when (tipo) {
                             1 -> {
-                                if(actividades.elementos.any { it is Tarea }) {
-                                    actividades.elementos.forEach { if(it is Tarea) println(it.obtenerDetalle()) }
-                                } else print("No existen tareas creadas.")
+                                if (actividades.elementos.any { it is Tarea }) {
+                                    actividades.elementos.forEach { if (it is Tarea) println(it.obtenerDetalle()) }
+                                } else {
+                                    print("No existen tareas creadas.")
+                                }
                             }
 
                             2 -> {
-                                if(actividades.elementos.any { it is Evento }) {
-                                    actividades.elementos.forEach { if(it is Evento) println(it.obtenerDetalle()) }
-                                } else print("No existen eventos creados.")
+                                if (actividades.elementos.any { it is Evento }) {
+                                    actividades.elementos.forEach { if (it is Evento) println(it.obtenerDetalle()) }
+                                } else {
+                                    print("No existen eventos creados.")
+                                }
                             }
                         }
-                    } else salida("Aún no existen actividades.")
+                    } else {
+                        salida("Aún no existen actividades.")
+                    }
                 }
 
                 2 -> {
-
                     val tareas = mutableListOf<Tarea>()
-                    for(elemento in actividades.elementos) {
+                    for (elemento in actividades.elementos) {
                         if (elemento is Tarea) {
                             tareas.add(elemento)
                         }
@@ -497,36 +509,44 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
                     if (actividades.elementos.isNotEmpty()) {
                         println(
                             "Estado: " +
-                                    "\n\t1. Abierta" +
-                                    "\n\t2. En progreso" +
-                                    "\n\t3. Finalizada"
+                                "\n\t1. Abierta" +
+                                "\n\t2. En progreso" +
+                                "\n\t3. Finalizada"
                         )
                         val estado = pedirNum(1, 3)
-                        when(estado) {
+                        when (estado) {
                             1 -> {
-                                if(tareas.any { it.estado == Estado.ABIERTA }) {
-                                    tareas.forEach { if(it.estado == Estado.ABIERTA) println(it.obtenerDetalle()) }
-                                } else salida("No existen tareas con estado 'abierto'.")
+                                if (tareas.any { it.estado == Estado.ABIERTA }) {
+                                    tareas.forEach { if (it.estado == Estado.ABIERTA) println(it.obtenerDetalle()) }
+                                } else {
+                                    salida("No existen tareas con estado 'abierto'.")
+                                }
                             }
 
                             2 -> {
-                                if(tareas.any { it.estado == Estado.EN_PROGRESO }) {
-                                    tareas.forEach { if(it.estado == Estado.EN_PROGRESO) println(it.obtenerDetalle()) }
-                                } else salida("No existen tareas con estado 'en progreso'.")
+                                if (tareas.any { it.estado == Estado.EN_PROGRESO }) {
+                                    tareas.forEach { if (it.estado == Estado.EN_PROGRESO) println(it.obtenerDetalle()) }
+                                } else {
+                                    salida("No existen tareas con estado 'en progreso'.")
+                                }
                             }
 
                             3 -> {
-                                if(tareas.any { it.estado == Estado.FINALIZADA }) {
-                                    tareas.forEach { if(it.estado == Estado.FINALIZADA) println(it.obtenerDetalle()) }
-                                } else salida("No existen tareas con estado 'finalizada'.")
+                                if (tareas.any { it.estado == Estado.FINALIZADA }) {
+                                    tareas.forEach { if (it.estado == Estado.FINALIZADA) println(it.obtenerDetalle()) }
+                                } else {
+                                    salida("No existen tareas con estado 'finalizada'.")
+                                }
                             }
                         }
-                    } else salida("No existen actividades creadas.")
+                    } else {
+                        salida("No existen actividades creadas.")
+                    }
                 }
 
                 3 -> {
                     val tareas = mutableListOf<Tarea>()
-                    for(elemento in actividades.elementos) {
+                    for (elemento in actividades.elementos) {
                         if (elemento is Tarea) {
                             tareas.add(elemento)
                         }
@@ -545,30 +565,33 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
                         }
 
                         if (!encontrada) salida("ERROR: No se encontró ninguna etiqueta.")
-
-                    } else salida("No existen tareas creadas.")
+                    } else {
+                        salida("No existen tareas creadas.")
+                    }
                 }
 
                 4 -> {
-
                     if (usuarios.obtenerTodos().isNotEmpty()) {
                         println("Introduce el ID del usuario: ")
                         val usuariosFiltro = pedirNum(1, usuarios.obtenerTodos().size)
 
-                        for(elemento in usuarios.obtenerTodos()) {
+                        for (elemento in usuarios.obtenerTodos()) {
                             if (elemento.id == usuariosFiltro) {
                                 for (actividad in elemento.listaTareas) {
                                     salida(actividad.obtenerDetalle())
                                 }
-                            } else salida("ERROR: No se encontró ninguna etiqueta.")
+                            } else {
+                                salida("ERROR: No se encontró ninguna etiqueta.")
+                            }
                         }
-                    } else salida("No existen usuarios aún.")
+                    } else {
+                        salida("No existen usuarios aún.")
+                    }
                 }
 
                 5 -> {
-
                     val eventos = mutableListOf<Evento>()
-                    for(elemento in actividades.elementos) {
+                    for (elemento in actividades.elementos) {
                         if (elemento is Evento) {
                             eventos.add(elemento)
                         }
@@ -579,14 +602,18 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
                         val filtro = readln()
                         if (eventos.any { it.fecha == filtro }) {
                             eventos.forEach { evento -> if (evento.fecha == filtro) salida(evento.obtenerDetalle()) }
-                        } else print("ERROR: No se encontró ningún elemento con la fecha indicada")
-                    } else salida("No existen eventos creados.")
+                        } else {
+                            print("ERROR: No se encontró ningún elemento con la fecha indicada")
+                        }
+                    } else {
+                        salida("No existen eventos creados.")
+                    }
                 }
             }
         }
     }
 
-    private fun paneldeControl(){
+    private fun paneldeControl() {
         println("\n--- Panel de Control ---")
 
         mostrarEstadisticasTareas()
@@ -596,11 +623,10 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
     }
 
     private fun mostrarEstadisticasTareas() {
-
         val listaTareas = mutableListOf<Tarea>()
 
-        for (actividad in actividades.elementos){
-            if (actividad is Tarea){
+        for (actividad in actividades.elementos) {
+            if (actividad is Tarea) {
                 listaTareas.add(actividad)
             }
         }
@@ -608,14 +634,13 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
         val totalTareas = listaTareas.size
         var totalSubtareas = 0
 
-        for (tarea in listaTareas){
+        for (tarea in listaTareas) {
             totalSubtareas += tarea.listaSubtareas.size
         }
 
         println("\n--- Estadísticas de Tareas ---")
         println(" - Total de tareas principales: $totalTareas")
         println(" - Total de subtareas: $totalSubtareas")
-
 
         println("\n--- Distribución por estado ---")
 
@@ -640,10 +665,9 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
     }
 
     private fun mostrarEventosProgramados() {
-
         val eventos = mutableListOf<Evento>()
 
-        for (actividad in actividades.elementos){
+        for (actividad in actividades.elementos) {
             if (actividad is Evento) {
                 eventos.add(actividad)
             }
@@ -660,17 +684,17 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
         var contadorEventosEstaSemana = 0
         var contadorEventosEsteMes = 0
 
-        for (evento in eventos){
-            if (LocalDate.parse(evento.fecha, formato) in hoy..mes){
+        for (evento in eventos) {
+            if (LocalDate.parse(evento.fecha, formato) in hoy..mes) {
                 contadorEventosEsteMes++
             }
-            if (LocalDate.parse(evento.fecha, formato) in hoy..semana){
+            if (LocalDate.parse(evento.fecha, formato) in hoy..semana) {
                 contadorEventosEstaSemana++
             }
-            if (LocalDate.parse(evento.fecha, formato) == mañana){
+            if (LocalDate.parse(evento.fecha, formato) == mañana) {
                 contadorEventosMañana++
             }
-            if (LocalDate.parse(evento.fecha, formato) == hoy){
+            if (LocalDate.parse(evento.fecha, formato) == hoy) {
                 contadorEventosHoy++
             }
         }

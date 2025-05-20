@@ -2,7 +2,6 @@ package es.prog2425.taskmanager.servicios
 
 import es.prog2425.taskmanager.Modelo.Actividad
 import es.prog2425.taskmanager.datos.IUsuarioRepository
-import es.prog2425.taskmanager.dominio.Tarea
 import es.prog2425.taskmanager.dominio.Usuario
 
 class UsuarioRepository : IUsuarioRepository {
@@ -16,10 +15,12 @@ class UsuarioRepository : IUsuarioRepository {
     override fun eliminarUsuarioPorNombre(nombre: String): Boolean {
         val usuarioEliminar: Usuario? = usuarios.find { it.nombre == nombre }
 
-        if (usuarioEliminar != null ) {
+        if (usuarioEliminar != null) {
             usuarios.remove(usuarioEliminar)
             return true
-        } else return false
+        } else {
+            return false
+        }
     }
 
     override fun obtenerTodos(): List<Usuario> {
@@ -30,6 +31,4 @@ class UsuarioRepository : IUsuarioRepository {
         usuario.listaTareas.add(tarea)
         return true
     }
-
-
 }
