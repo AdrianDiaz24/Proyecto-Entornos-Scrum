@@ -32,15 +32,15 @@ kotlin {
 
 ### Capturas realizadas:
 
-**build.gradle.kts con plugins añadidos:**
+**Build.gradle.kts con plugins añadidos:**
 
 ![build.gradle.kts con plugins añadidos](docs/BuildGradleCaptura.png)
 
-**terminal con instalación y sincronización exitosa de Gradle:**
+**Terminal con instalación y sincronización exitosa de Gradle:**
 
 ![terminal con instalación y sincronización exitosa de Gradle](docs/BuildGradleSincroCaptura.png)
 
-**estructura del proyecto:**
+**Estructura del proyecto:**
 
 ![estructura del proyecto](docs/EstructuraProyectoCaptura.png)
 
@@ -482,6 +482,7 @@ private fun buscarFiltro() {
 **Enlaces:**  
 
 Antes: [Commit 0cfb940](https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/tree/0cfb940a51bc057559f7157b58e4972704234124)
+
 Después: [Commit 779098a](https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/tree/779098a96cca789145b675a5d35e1a3fc4003c6a)
 
 ---
@@ -594,7 +595,9 @@ fun ejecutarPrograma() {
 ```
 
 **Enlaces:**  
+
 Antes: [Commit 0cfb940](https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/tree/0cfb940a51bc057559f7157b58e4972704234124)
+
 Después: [Commit 779098a](https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/tree/779098a96cca789145b675a5d35e1a3fc4003c6a)
 
 
@@ -610,7 +613,9 @@ Simplificar el código dividiendo la lógica anidada en funciones auxiliares. Es
 `Consola.kt` línea 450
 
 **Enlaces:**  
+
 Antes: [Commit 0cfb940](https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/tree/0cfb940a51bc057559f7157b58e4972704234124)
+
 Después: [Commit 779098a](https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/tree/779098a96cca789145b675a5d35e1a3fc4003c6a)
 
 ---
@@ -642,7 +647,9 @@ actividades.agregarElemento(Tarea.creaTarea(descripcion, etiquetas = etiquetas))
 ```
 
 **Enlaces:**  
+
 Antes: [Commit 0cfb940](https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/tree/0cfb940a51bc057559f7157b58e4972704234124)
+
 Después: [Commit 779098a](https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/tree/779098a96cca789145b675a5d35e1a3fc4003c6a)
 
 ---
@@ -706,7 +713,9 @@ fun pedirNum(min: Int, max: Int): Int {
 ```
 
 **Enlaces:**  
+
 Antes: [Commit 0cfb940](https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/tree/0cfb940a51bc057559f7157b58e4972704234124)
+
 Después: [Commit 779098a](https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/tree/779098a96cca789145b675a5d35e1a3fc4003c6a)
 
 ---
@@ -752,11 +761,7 @@ Obliga a reformatear código largo en varias líneas, mejorando la legibilidad.
 
 **3.a** ¿Que posibilidades de configuración tiene la herramienta?  Se puede configurar el estilo, longitud de línea, comentarios obligatorios, nombres, etc.
 **3.b** De esas posibilidades de configuración, ¿cuál has configurado para que sea distinta a la que viene por defecto? He configurado `maxLineLength`.
-**3.c** Pon un ejemplo de como ha impactado en tu código, enlazando al código anterior al cambio, y al posterior al cambio.
-
-[Antes](https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/blob/main/src/main/kotlin/presentacion/Consola.kt#L234)
-
-[Después](https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/blob/main/src/main/kotlin/presentacion/Consola.kt#L374).
+**3.c** Pon un ejemplo de como ha impactado en tu código, enlazando al código anterior al cambio, y al posterior al cambio. [Antes](https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/blob/main/src/main/kotlin/presentacion/Consola.kt#L234) [Después](https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/blob/main/src/main/kotlin/presentacion/Consola.kt#L374)
 
 ### \[4]
 
