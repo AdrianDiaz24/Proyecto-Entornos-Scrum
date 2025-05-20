@@ -748,20 +748,26 @@ Obliga a reformatear código largo en varias líneas, mejorando la legibilidad.
 ### \[1]
 
 **1.a** ¿Que herramienta has usado, y para que sirve? He usado Detekt y Ktlint. Sirven para analizar estáticamente el código Kotlin y asegurar buenas prácticas.
+
 **1.b** ¿Cuales son sus características principales? Revisión de estilo, convenciones de nombres, estructura, comentarios, etc.
+
 **1.c** ¿Qué beneficios obtengo al utilizar dicha herramienta? Beneficios: código más limpio, mantenible y menos propenso a errores.
 
 ### \[2]
 
 **2.a** De los errores/problemas que la herramienta ha detectado y te ha ayudado a solucionar, ¿cual es el que te ha parecido que ha mejorado más tu código? El que más ha mejorado mi código ha sido extraer funciones largas.
+
 **2.b** ¿La solución que se le ha dado al error/problema la has entendido y te ha parecido correcta? Sí, me ha parecido lógico y ha facilitado la comprensión.
+
 **2.c** ¿Por qué se ha producido ese error/problema? Se produce por acumulación de lógica sin modularizar.
 
 ### \[3]
 
 **3.a** ¿Que posibilidades de configuración tiene la herramienta?  Se puede configurar el estilo, longitud de línea, comentarios obligatorios, nombres, etc.
+
 **3.b** De esas posibilidades de configuración, ¿cuál has configurado para que sea distinta a la que viene por defecto? He configurado `maxLineLength`.
-**3.c** Pon un ejemplo de como ha impactado en tu código, enlazando al código anterior al cambio, y al posterior al cambio. [Antes](https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/blob/main/src/main/kotlin/presentacion/Consola.kt#L234) [Después](https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/blob/main/src/main/kotlin/presentacion/Consola.kt#L374)
+
+**3.c** Pon un ejemplo de como ha impactado en tu código, enlazando al código anterior al cambio, y al posterior al cambio. [Antes](https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/edit/Linting_FranAlbaMu%C3%B1oz/EDES-4.3.1-FA.MD#L234) y [Después](https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/edit/Linting_FranAlbaMu%C3%B1oz/EDES-4.3.1-FA.MD#L374)
 
 ### \[4]
 
