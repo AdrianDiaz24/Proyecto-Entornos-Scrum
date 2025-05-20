@@ -1,5 +1,6 @@
 plugins {
     kotlin("jvm") version "2.0.20"
+    id("org.jetbrains.dokka") version "1.9.10"
 }
 
 group = "es.prog2425.taskmanager"
@@ -18,4 +19,8 @@ tasks.test {
 }
 kotlin {
     jvmToolchain(21)
+}
+
+tasks.dokkaHtml {
+    outputDirectory.set(file("$buildDir/dokka"))
 }
