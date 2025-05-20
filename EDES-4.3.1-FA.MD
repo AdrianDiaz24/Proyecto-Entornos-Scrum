@@ -480,8 +480,9 @@ private fun buscarFiltro() {
 
 
 **Enlaces:**  
-Antes: [commit link]  
-Después: [commit link]
+
+Antes: [Commit 0cfb940](https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/tree/0cfb940a51bc057559f7157b58e4972704234124)
+Después: [Commit 779098a](https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/tree/779098a96cca789145b675a5d35e1a3fc4003c6a)
 
 ---
 
@@ -593,8 +594,8 @@ fun ejecutarPrograma() {
 ```
 
 **Enlaces:**  
-Antes: [commit link]  
-Después: [commit link]
+Antes: [Commit 0cfb940](https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/tree/0cfb940a51bc057559f7157b58e4972704234124)
+Después: [Commit 779098a](https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/tree/779098a96cca789145b675a5d35e1a3fc4003c6a)
 
 
 ### Error 3: Profundidad de Bloques Anidados Excesiva (NestedBlockDepth)
@@ -609,8 +610,8 @@ Simplificar el código dividiendo la lógica anidada en funciones auxiliares. Es
 `Consola.kt` línea 450
 
 **Enlaces:**  
-Antes: [commit link]  
-Después: [commit link]
+Antes: [Commit 0cfb940](https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/tree/0cfb940a51bc057559f7157b58e4972704234124)
+Después: [Commit 779098a](https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/tree/779098a96cca789145b675a5d35e1a3fc4003c6a)
 
 ---
 
@@ -641,8 +642,8 @@ actividades.agregarElemento(Tarea.creaTarea(descripcion, etiquetas = etiquetas))
 ```
 
 **Enlaces:**  
-Antes: [commit link]  
-Después: [commit link]
+Antes: [Commit 0cfb940](https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/tree/0cfb940a51bc057559f7157b58e4972704234124)
+Después: [Commit 779098a](https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/tree/779098a96cca789145b675a5d35e1a3fc4003c6a)
 
 ---
 
@@ -705,8 +706,8 @@ fun pedirNum(min: Int, max: Int): Int {
 ```
 
 **Enlaces:**  
-Antes: [commit link]  
-Después: [commit link]
+Antes: [Commit 0cfb940](https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/tree/0cfb940a51bc057559f7157b58e4972704234124)
+Después: [Commit 779098a](https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/tree/779098a96cca789145b675a5d35e1a3fc4003c6a)
 
 ---
 
@@ -727,41 +728,35 @@ style:
 
 Obliga a reformatear código largo en varias líneas, mejorando la legibilidad.
 
-### Enlaces:
+### Capturas:
 
-* Antes del cambio: \[commit link]
-* Después del cambio: \[commit link]
-
-### Capturas recomendadas:
-
-* Fragmento de archivo `detekt-config.yml` con el cambio.
-* Código afectado antes y después del cambio.
-
+![fragmento yaml](docs/YAML1.png)
+![estructura yaml](docs/YAML2.png)
 ---
 
 ## Paso 5: Respuestas a las Preguntas
 
 ### \[1]
 
-**1.a** He usado Detekt y Ktlint. Sirven para analizar estáticamente el código Kotlin y asegurar buenas prácticas.
-**1.b** Revisión de estilo, convenciones de nombres, estructura, comentarios, etc.
-**1.c** Beneficios: código más limpio, mantenible y menos propenso a errores.
+**1.a** ¿Que herramienta has usado, y para que sirve? He usado Detekt y Ktlint. Sirven para analizar estáticamente el código Kotlin y asegurar buenas prácticas.
+**1.b** ¿Cuales son sus características principales? Revisión de estilo, convenciones de nombres, estructura, comentarios, etc.
+**1.c** ¿Qué beneficios obtengo al utilizar dicha herramienta? Beneficios: código más limpio, mantenible y menos propenso a errores.
 
 ### \[2]
 
-**2.a** El que más ha mejorado mi código ha sido extraer funciones largas.
-**2.b** Sí, me ha parecido lógico y ha facilitado la comprensión.
-**2.c** Se produce por acumulación de lógica sin modularizar.
+**2.a** De los errores/problemas que la herramienta ha detectado y te ha ayudado a solucionar, ¿cual es el que te ha parecido que ha mejorado más tu código? El que más ha mejorado mi código ha sido extraer funciones largas.
+**2.b** ¿La solución que se le ha dado al error/problema la has entendido y te ha parecido correcta? Sí, me ha parecido lógico y ha facilitado la comprensión.
+**2.c** ¿Por qué se ha producido ese error/problema? Se produce por acumulación de lógica sin modularizar.
 
 ### \[3]
 
-**3.a** Se puede configurar el estilo, longitud de línea, comentarios obligatorios, nombres, etc.
-**3.b** He configurado `maxLineLength`.
-**3.c** Enlace antes: \[link], enlace después: \[link]. El código es ahora más legible.
+**3.a** ¿Que posibilidades de configuración tiene la herramienta?  Se puede configurar el estilo, longitud de línea, comentarios obligatorios, nombres, etc.
+**3.b** De esas posibilidades de configuración, ¿cuál has configurado para que sea distinta a la que viene por defecto? He configurado `maxLineLength`.
+**3.c** Pon un ejemplo de como ha impactado en tu código, enlazando al código anterior al cambio, y al posterior al cambio. Enlace antes: \[Antes](https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/blob/main/src/main/kotlin/presentacion/Consola.kt#L234), enlace después: \[Después](https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/blob/main/src/main/kotlin/presentacion/Consola.kt#L374). El código es ahora más legible.
 
 ### \[4]
 
-Estas herramientas ayudan a mantener el código profesional, homogéneo y preparado para trabajar en equipo o escalar el proyecto.
+**4** ¿Qué conclusiones sacas después del uso de estas herramientas? Estas herramientas ayudan a mantener el código profesional, homogéneo y preparado para trabajar en equipo o escalar el proyecto.
 
 ---
 
