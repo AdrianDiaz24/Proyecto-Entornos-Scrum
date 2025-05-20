@@ -752,7 +752,11 @@ Obliga a reformatear código largo en varias líneas, mejorando la legibilidad.
 
 **3.a** ¿Que posibilidades de configuración tiene la herramienta?  Se puede configurar el estilo, longitud de línea, comentarios obligatorios, nombres, etc.
 **3.b** De esas posibilidades de configuración, ¿cuál has configurado para que sea distinta a la que viene por defecto? He configurado `maxLineLength`.
-**3.c** Pon un ejemplo de como ha impactado en tu código, enlazando al código anterior al cambio, y al posterior al cambio. Enlace antes: \[Antes](https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/blob/main/src/main/kotlin/presentacion/Consola.kt#L234), enlace después: \[Después](https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/blob/main/src/main/kotlin/presentacion/Consola.kt#L374). El código es ahora más legible.
+**3.c** Pon un ejemplo de como ha impactado en tu código, enlazando al código anterior al cambio, y al posterior al cambio.
+
+[Antes](https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/blob/main/src/main/kotlin/presentacion/Consola.kt#L234)
+
+[Después](https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/blob/main/src/main/kotlin/presentacion/Consola.kt#L374).
 
 ### \[4]
 
