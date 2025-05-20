@@ -603,7 +603,7 @@ Después: [commit link]
 El método `buscarFiltro` presenta una profundidad de bloque anidado de 7, sobrepasando el máximo permitido de 4.
 
 **Solución:**  
-Simplificar el código dividiendo la lógica anidada en funciones auxiliares.
+Simplificar el código dividiendo la lógica anidada en funciones auxiliares. Esta complejidad se redujo al dividir el método en funciones auxiliares más pequeñas, como se hizo en la corrección del Error 1 (LongMethod). Al fragmentar el código en partes independientes, se evitó la anidación profunda y se mejoró la legibilidad y mantenibilidad.
 
 **Ubicación:**  
 `Consola.kt` línea 450
@@ -614,16 +614,31 @@ Después: [commit link]
 
 ---
 
-### Error 4: Demasiadas Funciones en la Clase (TooManyFunctions)
+### Error 4: Línea demasiado larga (MaxLineLength)
 
 **Descripción:**  
-La clase `Consola` tiene 24 funciones, excediendo el límite recomendado de 11.
+Se ha detectado una línea en el archivo `Consola.kt` que supera la longitud máxima permitida según el estilo de código configurado. Esto dificulta la lectura y el mantenimiento del código.
 
 **Solución:**  
-Modularizar la clase, separando responsabilidades en clases o archivos diferentes.
+Dividir la línea larga en varias líneas más cortas, respetando la indentación y la claridad del código.
 
 **Ubicación:**  
-`Consola.kt` línea 9
+Archivo: `src/main/kotlin/presentacion/Consola.kt`  
+Línea: 137
+
+**Código antes:**
+
+```kotlin
+actividades.agregarElemento(Tarea.creaTarea(pedirInfoTarea("Introduce la descripcion de la tarea: "), etiquetas = pedirInfoTarea("Introduce etiquetas (separadas por ;)")))
+```
+
+**Código después:**
+
+```kotlin
+val descripcion = pedirInfoTarea("Introduce la descripcion de la tarea: ")
+val etiquetas = pedirInfoTarea("Introduce etiquetas (separadas por ;)")
+actividades.agregarElemento(Tarea.creaTarea(descripcion, etiquetas = etiquetas))
+```
 
 **Enlaces:**  
 Antes: [commit link]  
@@ -634,7 +649,7 @@ Después: [commit link]
 ### Error 5: Excepciones Capturadas y Silenciadas (SwallowedException)
 
 **Descripción:**  
-Captura de excepción `IllegalArgumentException` sin tratamiento, ocultando errores reales.
+Captura de excepción `IllegalArgumentException` sin tratamiento, ocultando errores reales. En mi caso, he añadido e.printStackTrace()
 
 **Solución:**  
 Manejar la excepción adecuadamente, añadiendo logging o re-lanzando la excepción.
@@ -642,14 +657,56 @@ Manejar la excepción adecuadamente, añadiendo logging o re-lanzando la excepci
 **Ubicación:**  
 `Consola.kt` línea 100
 
+**Código antes:**
+
+```kotlin
+fun pedirNum(min: Int, max: Int): Int{
+        var valorValido = false
+        var input = 0
+        while (!valorValido){
+            print(">> ")
+            try {
+                input = readln().toInt()
+                if (input in min..max){
+                    valorValido = true
+                } else {
+                    println("Introduce un Nº entre $min y $max")
+                }
+            } catch (e: IllegalArgumentException){
+                println("Introduce un Nº")
+            }
+        }
+        return input
+    }
+```
+
+**Código después:**
+
+```kotlin
+fun pedirNum(min: Int, max: Int): Int {
+    var valorValido = false
+    var input = 0
+    while (!valorValido) {
+        print(">> ")
+        try {
+            input = readln().toInt()
+            if (input in min..max) {
+                valorValido = true
+            } else {
+                println("Introduce un Nº entre $min y $max")
+            }
+        } catch (e: IllegalArgumentException) {
+            println("Introduce un Nº válido")
+            e.printStackTrace()
+        }
+    }
+    return input
+}
+```
+
 **Enlaces:**  
 Antes: [commit link]  
 Después: [commit link]
-
-### Capturas recomendadas:
-
-* Informe de errores Detekt.
-* Código antes y después de aplicar soluciones (puedes mostrarlo en VSCode o IntelliJ con los cambios marcados).
 
 ---
 
