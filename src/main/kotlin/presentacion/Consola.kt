@@ -85,20 +85,21 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
      * @return Devuelve el Nº Introducido por el usuario si se encuentra dentro de los parametros
      */
 
-    fun pedirNum(min: Int, max: Int): Int{
+    fun pedirNum(min: Int, max: Int): Int {
         var valorValido = false
         var input = 0
-        while (!valorValido){
+        while (!valorValido) {
             print(">> ")
             try {
                 input = readln().toInt()
-                if (input in min..max){
+                if (input in min..max) {
                     valorValido = true
                 } else {
                     println("Introduce un Nº entre $min y $max")
                 }
-            } catch (e: IllegalArgumentException){
-                println("Introduce un Nº")
+            } catch (e: IllegalArgumentException) {
+                println("Introduce un Nº válido")
+                e.printStackTrace()
             }
         }
         return input
@@ -206,63 +207,29 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
      */
 
     fun ejecutarPrograma() {
-        var salida = false
-        while (!salida) {
-            val input = menu()
+        var opcion: Int
+        do {
+            opcion = menu()
+            procesarOpcion(opcion)
+        } while (opcion != 13)
+    }
 
-            when (input) {
-                1 -> {
-                    crearActividad(submenu())
-                }
-
-                2 -> {
-                    listarActividades()
-                }
-
-                3 -> {
-                    cambiarEstado()
-                }
-
-                4 -> {
-                    cambiarEstadoSubTarea()
-                }
-
-                5 -> {
-                    aniadirEtiquetasActividad()
-                }
-
-                6 -> {
-                    crearUsuario()
-                }
-
-                7 -> {
-                    listarUsuarios()
-                }
-
-                8 -> {
-                    asignarTarea()
-                }
-
-                9 -> {
-                    mostrarTareasAsignadasUsuario()
-                }
-
-                10 -> {
-                    buscarFiltro()
-                }
-
-                11 -> {
-                    historial.listarHistorial()
-                }
-
-                12 -> {
-                    paneldeControl()
-                }
-
-                13 -> {
-                    salida = true
-                }
-            }
+    fun procesarOpcion(opcion: Int) {
+        when (opcion) {
+            1 -> crearActividad(submenu())
+            2 -> listarActividades()
+            3 -> cambiarEstado()
+            4 -> cambiarEstadoSubTarea()
+            5 -> aniadirEtiquetasActividad()
+            6 -> crearUsuario()
+            7 -> listarUsuarios()
+            8 -> asignarTarea()
+            9 -> mostrarTareasAsignadasUsuario()
+            10 -> buscarFiltro()
+            11 -> historial.listarHistorial()
+            12 -> paneldeControl()
+            13 -> println("Saliendo...")
+            else -> println("Opción no válida")
         }
     }
 
@@ -448,142 +415,106 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
     }
 
     private fun buscarFiltro() {
-
         var filtro = -1
-
-        while(filtro == -1 && filtro != 6) {
-            print("Introduce el filtro deseado: " +
-                    "\n\t1. Tipo" +
-                    "\n\t2. Estado" +
-                    "\n\t3. Etiquetas" +
-                    "\n\t4. Usuario" +
-                    "\n\t5. Fecha" +
-                    "\n\t6. Salir" +
-                    "\n")
-
-            filtro = pedirNum(1, 6)
+        while (filtro == -1 && filtro != 6) {
+            filtro = pedirFiltro()
             when(filtro) {
-                1 -> {
-                    if (actividades.elementos.isNotEmpty()) {
-                        println("Tipo: " +
-                                "\n\t1. Tarea" +
-                                "\n\t2. Evento")
-                        val tipo = pedirNum(1, 2)
-                        when(tipo) {
-                            1 -> {
-                                if(actividades.elementos.any { it is Tarea }) {
-                                    actividades.elementos.forEach { if(it is Tarea) println(it.obtenerDetalle()) }
-                                } else print("No existen tareas creadas.")
-                            }
-
-                            2 -> {
-                                if(actividades.elementos.any { it is Evento }) {
-                                    actividades.elementos.forEach { if(it is Evento) println(it.obtenerDetalle()) }
-                                } else print("No existen eventos creados.")
-                            }
-                        }
-                    } else salida("Aún no existen actividades.")
-                }
-
-                2 -> {
-
-                    val tareas = mutableListOf<Tarea>()
-                    for(elemento in actividades.elementos) {
-                        if (elemento is Tarea) {
-                            tareas.add(elemento)
-                        }
-                    }
-
-                    if (actividades.elementos.isNotEmpty()) {
-                        println(
-                            "Estado: " +
-                                    "\n\t1. Abierta" +
-                                    "\n\t2. En progreso" +
-                                    "\n\t3. Finalizada"
-                        )
-                        val estado = pedirNum(1, 3)
-                        when(estado) {
-                            1 -> {
-                                if(tareas.any { it.estado == Estado.ABIERTA }) {
-                                    tareas.forEach { if(it.estado == Estado.ABIERTA) println(it.obtenerDetalle()) }
-                                } else salida("No existen tareas con estado 'abierto'.")
-                            }
-
-                            2 -> {
-                                if(tareas.any { it.estado == Estado.EN_PROGRESO }) {
-                                    tareas.forEach { if(it.estado == Estado.EN_PROGRESO) println(it.obtenerDetalle()) }
-                                } else salida("No existen tareas con estado 'en progreso'.")
-                            }
-
-                            3 -> {
-                                if(tareas.any { it.estado == Estado.FINALIZADA }) {
-                                    tareas.forEach { if(it.estado == Estado.FINALIZADA) println(it.obtenerDetalle()) }
-                                } else salida("No existen tareas con estado 'finalizada'.")
-                            }
-                        }
-                    } else salida("No existen actividades creadas.")
-                }
-
-                3 -> {
-                    val tareas = mutableListOf<Tarea>()
-                    for(elemento in actividades.elementos) {
-                        if (elemento is Tarea) {
-                            tareas.add(elemento)
-                        }
-                    }
-
-                    if (actividades.elementos.any { it is Tarea }) {
-                        print("Introduce la etiqueta: ")
-                        val filtro = readln().lowercase()
-
-                        var encontrada = false
-                        for (elemento in actividades.elementos) {
-                            if (elemento is Tarea && elemento.adquirirEtiquetas().any { it.lowercase() == filtro }) {
-                                salida(elemento.obtenerDetalle())
-                                encontrada = true
-                            }
-                        }
-
-                        if (!encontrada) salida("ERROR: No se encontró ninguna etiqueta.")
-
-                    } else salida("No existen tareas creadas.")
-                }
-
-                4 -> {
-
-                    if (usuarios.obtenerTodos().isNotEmpty()) {
-                        println("Introduce el ID del usuario: ")
-                        val usuariosFiltro = pedirNum(1, usuarios.obtenerTodos().size)
-
-                        for(elemento in usuarios.obtenerTodos()) {
-                            if (elemento.id == usuariosFiltro) {
-                                for (actividad in elemento.listaTareas) {
-                                    salida(actividad.obtenerDetalle())
-                                }
-                            } else salida("ERROR: No se encontró ninguna etiqueta.")
-                        }
-                    } else salida("No existen usuarios aún.")
-                }
-
-                5 -> {
-
-                    val eventos = mutableListOf<Evento>()
-                    for(elemento in actividades.elementos) {
-                        if (elemento is Evento) {
-                            eventos.add(elemento)
-                        }
-                    }
-
-                    if (eventos.isNotEmpty()) {
-                        print("Introduce la fecha: ")
-                        val filtro = readln()
-                        if (eventos.any { it.fecha == filtro }) {
-                            eventos.forEach { evento -> if (evento.fecha == filtro) salida(evento.obtenerDetalle()) }
-                        } else print("ERROR: No se encontró ningún elemento con la fecha indicada")
-                    } else salida("No existen eventos creados.")
-                }
+                1 -> filtrarPorTipo()
+                2 -> filtrarPorEstado()
+                3 -> filtrarPorEtiqueta()
+                4 -> filtrarPorUsuario()
+                5 -> filtrarPorFecha()
             }
         }
+    }
+
+    private fun pedirFiltro(): Int {
+        print("Introduce el filtro deseado: " +
+                "\n\t1. Tipo" +
+                "\n\t2. Estado" +
+                "\n\t3. Etiquetas" +
+                "\n\t4. Usuario" +
+                "\n\t5. Fecha" +
+                "\n\t6. Salir" +
+                "\n")
+        return pedirNum(1, 6)
+    }
+
+    private fun filtrarPorTipo() {
+        if (actividades.elementos.isNotEmpty()) {
+            println("Tipo: \n\t1. Tarea\n\t2. Evento")
+            when(pedirNum(1, 2)) {
+                1 -> mostrarElementosDeTipo<Tarea>("tareas")
+                2 -> mostrarElementosDeTipo<Evento>("eventos")
+            }
+        } else salida("Aún no existen actividades.")
+    }
+
+    private inline fun <reified T : Detallable> mostrarElementosDeTipo(tipoNombre: String) {
+        val elementosTipo = actividades.elementos.filterIsInstance<T>()
+        if (elementosTipo.isNotEmpty()) {
+            elementosTipo.forEach { println(it.obtenerDetalle()) }
+        } else print("No existen $tipoNombre creadas.")
+    }
+
+    private fun filtrarPorEstado() {
+        val tareas = actividades.elementos.filterIsInstance<Tarea>()
+        if (tareas.isNotEmpty()) {
+            println(
+                "Estado: " +
+                        "\n\t1. Abierta" +
+                        "\n\t2. En progreso" +
+                        "\n\t3. Finalizada"
+            )
+            when(pedirNum(1, 3)) {
+                1 -> mostrarTareasPorEstado(tareas, Estado.ABIERTA)
+                2 -> mostrarTareasPorEstado(tareas, Estado.EN_PROGRESO)
+                3 -> mostrarTareasPorEstado(tareas, Estado.FINALIZADA)
+            }
+        } else salida("No existen tareas creadas.")
+    }
+
+    private fun mostrarTareasPorEstado(tareas: List<Tarea>, estado: Estado) {
+        val filtradas = tareas.filter { it.estado == estado }
+        if (filtradas.isNotEmpty()) {
+            filtradas.forEach { println(it.obtenerDetalle()) }
+        } else salida("No existen tareas con estado '${estado.name.lowercase()}'.")
+    }
+
+    private fun filtrarPorEtiqueta() {
+        val tareas = actividades.elementos.filterIsInstance<Tarea>()
+        if (tareas.isNotEmpty()) {
+            print("Introduce la etiqueta: ")
+            val filtro = readln().lowercase()
+            val filtradas = tareas.filter { tarea -> tarea.adquirirEtiquetas().any { it.lowercase() == filtro } }
+            if (filtradas.isNotEmpty()) {
+                filtradas.forEach { salida(it.obtenerDetalle()) }
+            } else salida("ERROR: No se encontró ninguna etiqueta.")
+        } else salida("No existen tareas creadas.")
+    }
+
+    private fun filtrarPorUsuario() {
+        val todosUsuarios = usuarios.obtenerTodos()
+        if (todosUsuarios.isNotEmpty()) {
+            println("Introduce el ID del usuario: ")
+            val idUsuario = pedirNum(1, todosUsuarios.size)
+            val usuario = todosUsuarios.find { it.id == idUsuario }
+            if (usuario != null) {
+                usuario.listaTareas.forEach { salida(it.obtenerDetalle()) }
+            } else salida("ERROR: No se encontró el usuario.")
+        } else salida("No existen usuarios aún.")
+    }
+
+    private fun filtrarPorFecha() {
+        val eventos = actividades.elementos.filterIsInstance<Evento>()
+        if (eventos.isNotEmpty()) {
+            print("Introduce la fecha: ")
+            val filtro = readln()
+            val filtrados = eventos.filter { it.fecha == filtro }
+            if (filtrados.isNotEmpty()) {
+                filtrados.forEach { salida(it.obtenerDetalle()) }
+            } else print("ERROR: No se encontró ningún elemento con la fecha indicada")
+        } else salida("No existen eventos creados.")
     }
 
     private fun paneldeControl(){

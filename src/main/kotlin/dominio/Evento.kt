@@ -2,7 +2,7 @@ package es.prog2425.taskmanager.dominio
 
 import es.prog2425.taskmanager.Modelo.Actividad
 
-class Evento(descripcion: String, val fecha: String, val ubicacion: String): Actividad(descripcion) {
+class Evento(descripcion: String, val fecha: String, val ubicacion: String): Actividad(descripcion), Detallable {
 
     init {
         require(fecha.matches(Regex(patronFecha))) { throw IllegalArgumentException("La fecha no cumple el formato DD/MM/AAAA")}
