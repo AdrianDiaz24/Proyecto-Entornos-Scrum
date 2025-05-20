@@ -14,6 +14,8 @@ Ambas herramientas se han integrado en el proyecto para ampliar el análisis est
 
 ### Instalación
 
+Para instalar ambos analizadores de código, añadí los plugins correspondientes en el archivo `build.gradle.kts`. Esto permite integrarlos de forma automática en el flujo de trabajo de Gradle.
+
 **build.gradle.kts:**
 
 ```kotlin
@@ -28,11 +30,19 @@ kotlin {
 }
 ```
 
-### Capturas recomendadas:
+### Capturas realizadas:
 
-* Captura del archivo `build.gradle.kts` con los plugins añadidos.
-* Captura de terminal con instalación y sincronización exitosa de Gradle.
-* Captura de la estructura del proyecto (`src/main/kotlin/...`).
+**build.gradle.kts con plugins añadidos:**
+
+![build.gradle.kts con plugins añadidos](docs/BuildGradleCaptura.png)
+
+**terminal con instalación y sincronización exitosa de Gradle:**
+
+![terminal con instalación y sincronización exitosa de Gradle](docs/BuildGradleSincroCaptura.png)
+
+**estructura del proyecto:**
+
+![estructura del proyecto](docs/EstructuraProyectoCaptura.png)
 
 ---
 
@@ -47,10 +57,157 @@ Desde la terminal del proyecto se han ejecutado los comandos:
 ./gradlew ktlintCheck
 ```
 
-### Capturas recomendadas:
+### Detekt
 
-* Resultado del análisis Detekt en terminal (muestra de errores).
-* Resultado del análisis Ktlint en terminal (muestra de errores).
+Se detectaron **85 problemas ponderados** que indican errores y malas prácticas.
+
+Incluye problemas de complejidad, nombres incorrectos, funciones largas, imports no usados, falta de documentación y uso de números mágicos.
+
+Es importante revisar el informe generado para corregirlos y mejorar la calidad del código.
+
+```bash
+PS C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum> ./gradlew detekt
+
+> Task :detekt FAILED
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:450:17: The function buscarFiltro is too long (118). The maximum length is 60. [LongMethod]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:208:9: The function ejecutarPrograma appears to be too complex based on Cyclomatic Complexity (complexity: 15). Defined complexity threshold for methods is set to '15' [CyclomaticComplexMethod]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:450:17: The function buscarFiltro appears to be too complex based on Cyclomatic Complexity (complexity: 49). Defined complexity threshold for methods is set to '15' [CyclomaticComplexMethod]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:134:9: Function crearActividad is nested too deeply. [NestedBlockDepth]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:335:17: Function cambiarEstado is nested too deeply. [NestedBlockDepth]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:380:17: Function cambiarEstadoSubTarea is nested too deeply. [NestedBlockDepth]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:450:17: Function buscarFiltro is nested too deeply. [NestedBlockDepth]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:598:17: Function mostrarEstadisticasTareas is nested too deeply. [NestedBlockDepth]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:9:7: Class 'Consola' with '24' functions detected. Defined threshold inside classes is set to '11' [TooManyFunctions]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:100:22: The caught exception is swallowed. The original exception could be lost. [SwallowedException]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\datos\IActividadRepository.kt:1:1: The package declaration does not match the actual file location. [InvalidPackageDeclaration]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\datos\IHistorialRepository.kt:1:1: The package declaration does not match the actual file location. [InvalidPackageDeclaration]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\datos\IHistorialRepository.kt:9:9: Function names should match the pattern: [a-z][a-zA-Z0-9]* [FunctionNaming]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\datos\IHistorialRepository.kt:10:9: Function names should match the pattern: [a-z][a-zA-Z0-9]* [FunctionNaming]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\datos\IUsuarioRepository.kt:1:1: The package declaration does not match the actual file location. [InvalidPackageDeclaration]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\dominio\Estado.kt:1:1: The package declaration does not match the actual file location. [InvalidPackageDeclaration]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\dominio\Evento.kt:1:1: The package declaration does not match the actual file location. [InvalidPackageDeclaration]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\dominio\Tarea.kt:1:1: The package declaration does not match the actual file location. [InvalidPackageDeclaration]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\dominio\Usuario.kt:1:1: The package declaration does not match the actual file location. [InvalidPackageDeclaration]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\Main.kt:1:1: The package declaration does not match the actual file location. [InvalidPackageDeclaration]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:1:1: The package declaration does not match the actual file location. [InvalidPackageDeclaration]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:654:13: Variable names should match the pattern: [a-z][A-Za-z0-9]* [VariableNaming]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:659:13: Variable names should match the pattern: [a-z][A-Za-z0-9]* [VariableNaming]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\servicios\Actividad.kt:1:1: The package declaration does not match the actual file location. [InvalidPackageDeclaration]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\servicios\Actividad.kt:1:1: Package name should match the pattern: [a-z]+(\.[a-z][A-Za-z0-9]*)* [PackageNaming]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\servicios\ActividadService.kt:1:1: The package declaration does not match the actual file location. [InvalidPackageDeclaration]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\servicios\HistorialRepository.kt:1:1: The package declaration does not match the actual file location. [InvalidPackageDeclaration]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\servicios\UsuarioRepository.kt:1:1: The package declaration does not match the actual file location. [InvalidPackageDeclaration]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\servicios\UsuarioService.kt:1:1: The package declaration does not match the actual file location. [InvalidPackageDeclaration]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\datos\IActividadRepository.kt:18:2: The file C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\datos\IActividadRepository.kt is not ending with a new line. [NewLineAtEndOfFile]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\datos\IHistorialRepository.kt:12:2: The file C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\datos\IHistorialRepository.kt is not ending with a new line. [NewLineAtEndOfFile]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\datos\IUsuarioRepository.kt:12:2: The file C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\datos\IUsuarioRepository.kt is not ending with a new line. [NewLineAtEndOfFile]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\dominio\Estado.kt:11:2: The file C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\dominio\Estado.kt is not ending with a new line. [NewLineAtEndOfFile]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\dominio\Evento.kt:39:2: The file C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\dominio\Evento.kt is not ending with a new line. [NewLineAtEndOfFile]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\dominio\Evento.kt:8:1: Line detected, which is longer than the defined maximum line length in the code style. [MaxLineLength]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\dominio\Evento.kt:29:13: patronFecha can be a `const val`. [MayBeConst]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\dominio\Tarea.kt:40:2: The file C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\dominio\Tarea.kt is not ending with a new line. [NewLineAtEndOfFile]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\dominio\Usuario.kt:19:2: The file C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\dominio\Usuario.kt is not ending with a new line. [NewLineAtEndOfFile]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\Main.kt:7:2: The file C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\Main.kt is not ending with a new line. [NewLineAtEndOfFile]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:142:17: The destructuring declaration contains 4 but only 3 are allowed. [DestructuringDeclarationWithTooManyEntries]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:4:1: es.prog2425.taskmanager.servicios.* is a wildcard import. Replace it with fully qualified imports. [WildcardImport]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:5:1: es.prog2425.taskmanager.dominio.* is a wildcard import. Replace it with fully qualified imports. [WildcardImport]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:9:1: Line detected, which is longer than the defined maximum line length in the code style. [MaxLineLength]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:137:1: Line detected, which is longer than the defined maximum line length in the code style. [MaxLineLength]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:158:1: Line detected, which is longer than the defined maximum line length in the code style. [MaxLineLength]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:372:1: Line detected, which is longer than the defined maximum line length in the code style. [MaxLineLength]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:416:1: Line detected, which is longer than the defined maximum line length in the code style. [MaxLineLength]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:420:1: Line detected, which is longer than the defined maximum line length in the code style. [MaxLineLength]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:678:1: Line detected, which is longer than the defined maximum line length in the code style. [MaxLineLength]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:68:28: This expression contains a magic number. Consider defining it to a well named constant. [MagicNumber]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:78:27: This expression contains a magic number. Consider defining it to a well named constant. [MagicNumber]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:149:13: This expression contains a magic number. Consider defining it to a well named constant. [MagicNumber]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:168:13: This expression contains a magic number. Consider defining it to a well named constant. [MagicNumber]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:222:17: This expression contains a magic number. Consider defining it to a well named constant. [MagicNumber]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:226:17: This expression contains a magic number. Consider defining it to a well named constant. [MagicNumber]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:230:17: This expression contains a magic number. Consider defining it to a well named constant. [MagicNumber]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:234:17: This expression contains a magic number. Consider defining it to a well named constant. [MagicNumber]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:238:17: This expression contains a magic number. Consider defining it to a well named constant. [MagicNumber]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:242:17: This expression contains a magic number. Consider defining it to a well named constant. [MagicNumber]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:246:17: This expression contains a magic number. Consider defining it to a well named constant. [MagicNumber]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:250:17: This expression contains a magic number. Consider defining it to a well named constant. [MagicNumber]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:254:17: This expression contains a magic number. Consider defining it to a well named constant. [MagicNumber]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:258:17: This expression contains a magic number. Consider defining it to a well named constant. [MagicNumber]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:262:17: This expression contains a magic number. Consider defining it to a well named constant. [MagicNumber]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:348:38: This expression contains a magic number. Consider defining it to a well named constant. [MagicNumber]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:364:21: This expression contains a magic number. Consider defining it to a well named constant. [MagicNumber]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:407:42: This expression contains a magic number. Consider defining it to a well named constant. [MagicNumber]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:419:21: This expression contains a magic number. Consider defining it to a well named constant. [MagicNumber]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:454:41: This expression contains a magic number. Consider defining it to a well named constant. [MagicNumber]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:464:34: This expression contains a magic number. Consider defining it to a well named constant. [MagicNumber]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:504:50: This expression contains a magic number. Consider defining it to a well named constant. [MagicNumber]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:518:29: This expression contains a magic number. Consider defining it to a well named constant. [MagicNumber]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:527:17: This expression contains a magic number. Consider defining it to a well named constant. [MagicNumber]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:552:17: This expression contains a magic number. Consider defining it to a well named constant. [MagicNumber]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:568:17: This expression contains a magic number. Consider defining it to a well named constant. [MagicNumber]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\servicios\Actividad.kt:59:2: The file C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\servicios\Actividad.kt is not ending with a new line. [NewLineAtEndOfFile]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\servicios\Actividad.kt:8:1: Line detected, which is longer than the defined maximum line length in the code style. [MaxLineLength]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\servicios\ActividadService.kt:10:2: The file C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\servicios\ActividadService.kt is not ending with a new line. [NewLineAtEndOfFile]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\servicios\HistorialRepository.kt:38:2: The file C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\servicios\HistorialRepository.kt is not ending with a new line. [NewLineAtEndOfFile]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\servicios\HistorialRepository.kt:19:1: Line detected, which is longer than the defined maximum line length in the code style. [MaxLineLength]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\servicios\HistorialRepository.kt:21:1: Line detected, which is longer than the defined maximum line length in the code style. [MaxLineLength]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\servicios\HistorialRepository.kt:27:1: Line detected, which is longer than the defined maximum line length in the code style. [MaxLineLength]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\servicios\UsuarioRepository.kt:35:2: The file C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\main\kotlin\servicios\UsuarioRepository.kt is not ending with a new line. [NewLineAtEndOfFile]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\test\kotlin\UsuarioServiceTest.kt:128:3: The file C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\test\kotlin\UsuarioServiceTest.kt is not ending with a new line. [NewLineAtEndOfFile]
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\src\test\kotlin\UsuarioServiceTest.kt:7:1: io.mockk.* is a wildcard import. Replace it with fully qualified imports. [WildcardImport]
+
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':detekt'.
+> Analysis failed with 85 weighted issues.
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 3s
+1 actionable task: 1 executed
+```
+
+### Ktlint
+
+Se encontraron violaciones en el estilo de código:
+
+- Falta de salto de línea al final del archivo.
+- Líneas en blanco innecesarias.
+
+Estas violaciones provocaron fallos en la ejecución de ktlint.
+
+Ajustar el formato es necesario para pasar el control de calidad.
+
+```bash
+PS C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum> ./gradlew ktlintCheck
+
+> Task :ktlintKotlinScriptCheck FAILED
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\build.gradle.kts:1:1 File must end with a newline (\n)
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\build.gradle.kts:14:1 Needless blank line(s)
+C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\settings.gradle.kts:6:1 Needless blank line(s)
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':ktlintKotlinScriptCheck'.
+> A failure occurred while executing org.jlleitschuh.gradle.ktlint.worker.ConsoleReportWorkAction
+   > KtLint found code style violations. Please see the following reports:
+     - C:\Users\Fran\Documents\ReposGit\Proyecto-Entornos-Scrum\build\reports\ktlint\ktlintKotlinScriptCheck\ktlintKotlinScriptCheck.txt
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 10s
+5 actionable tasks: 5 executed
+```
 
 ---
 
@@ -58,50 +215,436 @@ Desde la terminal del proyecto se han ejecutado los comandos:
 
 Se han detectado los siguientes errores:
 
-### Error 1: Naming Convention
+---
 
-* **Descripción:** Uso de nombres en minúsculas para clases.
-* **Solución:** Cambiar de `class tarea {...}` a `class Tarea {...}`.
-* **Enlaces:**
+### Error 1: Método Demasiado Largo (LongMethod)
 
-  * Antes: \[commit link]
-  * Después: \[commit link]
+**Descripción:**  
+El método `buscarFiltro` tiene 118 líneas, excediendo el límite recomendado de 60.
 
-### Error 2: Long Method
+**Solución:**  
+Dividir el método en funciones más pequeñas y manejables.
 
-* **Descripción:** Método con demasiadas líneas.
-* **Solución:** Extraer funciones auxiliares.
-* **Enlaces:**
+**Ubicación:**  
+`Consola.kt` línea 450
 
-  * Antes: \[commit link]
-  * Después: \[commit link]
+**Código antes**
 
-### Error 3: Unused Import
+```kotlin
+private fun buscarFiltro() {
 
-* **Descripción:** Importaciones no utilizadas.
-* **Solución:** Eliminar las líneas marcadas.
-* **Enlaces:**
+        var filtro = -1
 
-  * Antes: \[commit link]
-  * Después: \[commit link]
+        while(filtro == -1 && filtro != 6) {
+            print("Introduce el filtro deseado: " +
+                    "\n\t1. Tipo" +
+                    "\n\t2. Estado" +
+                    "\n\t3. Etiquetas" +
+                    "\n\t4. Usuario" +
+                    "\n\t5. Fecha" +
+                    "\n\t6. Salir" +
+                    "\n")
 
-### Error 4: Missing KDoc
+            filtro = pedirNum(1, 6)
+            when(filtro) {
+                1 -> {
+                    if (actividades.elementos.isNotEmpty()) {
+                        println("Tipo: " +
+                                "\n\t1. Tarea" +
+                                "\n\t2. Evento")
+                        val tipo = pedirNum(1, 2)
+                        when(tipo) {
+                            1 -> {
+                                if(actividades.elementos.any { it is Tarea }) {
+                                    actividades.elementos.forEach { if(it is Tarea) println(it.obtenerDetalle()) }
+                                } else print("No existen tareas creadas.")
+                            }
 
-* **Descripción:** Falta de documentación en clases públicas.
-* **Solución:** Añadir comentarios de documentación.
-* **Enlaces:**
+                            2 -> {
+                                if(actividades.elementos.any { it is Evento }) {
+                                    actividades.elementos.forEach { if(it is Evento) println(it.obtenerDetalle()) }
+                                } else print("No existen eventos creados.")
+                            }
+                        }
+                    } else salida("Aún no existen actividades.")
+                }
 
-  * Antes: \[commit link]
-  * Después: \[commit link]
+                2 -> {
 
-### Error 5: Magic Numbers
+                    val tareas = mutableListOf<Tarea>()
+                    for(elemento in actividades.elementos) {
+                        if (elemento is Tarea) {
+                            tareas.add(elemento)
+                        }
+                    }
 
-* **Descripción:** Uso de números "mágicos" sin constantes.
-* **Solución:** Declarar constantes con nombre descriptivo.
-* **Enlaces:**
+                    if (actividades.elementos.isNotEmpty()) {
+                        println(
+                            "Estado: " +
+                                    "\n\t1. Abierta" +
+                                    "\n\t2. En progreso" +
+                                    "\n\t3. Finalizada"
+                        )
+                        val estado = pedirNum(1, 3)
+                        when(estado) {
+                            1 -> {
+                                if(tareas.any { it.estado == Estado.ABIERTA }) {
+                                    tareas.forEach { if(it.estado == Estado.ABIERTA) println(it.obtenerDetalle()) }
+                                } else salida("No existen tareas con estado 'abierto'.")
+                            }
 
-  * Antes: \[commit link]
-  * Después: \[commit link]
+                            2 -> {
+                                if(tareas.any { it.estado == Estado.EN_PROGRESO }) {
+                                    tareas.forEach { if(it.estado == Estado.EN_PROGRESO) println(it.obtenerDetalle()) }
+                                } else salida("No existen tareas con estado 'en progreso'.")
+                            }
+
+                            3 -> {
+                                if(tareas.any { it.estado == Estado.FINALIZADA }) {
+                                    tareas.forEach { if(it.estado == Estado.FINALIZADA) println(it.obtenerDetalle()) }
+                                } else salida("No existen tareas con estado 'finalizada'.")
+                            }
+                        }
+                    } else salida("No existen actividades creadas.")
+                }
+
+                3 -> {
+                    val tareas = mutableListOf<Tarea>()
+                    for(elemento in actividades.elementos) {
+                        if (elemento is Tarea) {
+                            tareas.add(elemento)
+                        }
+                    }
+
+                    if (actividades.elementos.any { it is Tarea }) {
+                        print("Introduce la etiqueta: ")
+                        val filtro = readln().lowercase()
+
+                        var encontrada = false
+                        for (elemento in actividades.elementos) {
+                            if (elemento is Tarea && elemento.adquirirEtiquetas().any { it.lowercase() == filtro }) {
+                                salida(elemento.obtenerDetalle())
+                                encontrada = true
+                            }
+                        }
+
+                        if (!encontrada) salida("ERROR: No se encontró ninguna etiqueta.")
+
+                    } else salida("No existen tareas creadas.")
+                }
+
+                4 -> {
+
+                    if (usuarios.obtenerTodos().isNotEmpty()) {
+                        println("Introduce el ID del usuario: ")
+                        val usuariosFiltro = pedirNum(1, usuarios.obtenerTodos().size)
+
+                        for(elemento in usuarios.obtenerTodos()) {
+                            if (elemento.id == usuariosFiltro) {
+                                for (actividad in elemento.listaTareas) {
+                                    salida(actividad.obtenerDetalle())
+                                }
+                            } else salida("ERROR: No se encontró ninguna etiqueta.")
+                        }
+                    } else salida("No existen usuarios aún.")
+                }
+
+                5 -> {
+
+                    val eventos = mutableListOf<Evento>()
+                    for(elemento in actividades.elementos) {
+                        if (elemento is Evento) {
+                            eventos.add(elemento)
+                        }
+                    }
+
+                    if (eventos.isNotEmpty()) {
+                        print("Introduce la fecha: ")
+                        val filtro = readln()
+                        if (eventos.any { it.fecha == filtro }) {
+                            eventos.forEach { evento -> if (evento.fecha == filtro) salida(evento.obtenerDetalle()) }
+                        } else print("ERROR: No se encontró ningún elemento con la fecha indicada")
+                    } else salida("No existen eventos creados.")
+                }
+            }
+        }
+    }
+```
+
+**Código después**
+
+```kotlin
+private fun buscarFiltro() {
+        var filtro = -1
+        while (filtro == -1 && filtro != 6) {
+            filtro = pedirFiltro()
+            when(filtro) {
+                1 -> filtrarPorTipo()
+                2 -> filtrarPorEstado()
+                3 -> filtrarPorEtiqueta()
+                4 -> filtrarPorUsuario()
+                5 -> filtrarPorFecha()
+            }
+        }
+    }
+
+    private fun pedirFiltro(): Int {
+        print("Introduce el filtro deseado: " +
+                "\n\t1. Tipo" +
+                "\n\t2. Estado" +
+                "\n\t3. Etiquetas" +
+                "\n\t4. Usuario" +
+                "\n\t5. Fecha" +
+                "\n\t6. Salir" +
+                "\n")
+        return pedirNum(1, 6)
+    }
+
+    private fun filtrarPorTipo() {
+        if (actividades.elementos.isNotEmpty()) {
+            println("Tipo: \n\t1. Tarea\n\t2. Evento")
+            when(pedirNum(1, 2)) {
+                1 -> mostrarElementosDeTipo<Tarea>("tareas")
+                2 -> mostrarElementosDeTipo<Evento>("eventos")
+            }
+        } else salida("Aún no existen actividades.")
+    }
+
+    private inline fun <reified T : Detallable> mostrarElementosDeTipo(tipoNombre: String) {
+        val elementosTipo = actividades.elementos.filterIsInstance<T>()
+        if (elementosTipo.isNotEmpty()) {
+            elementosTipo.forEach { println(it.obtenerDetalle()) }
+        } else print("No existen $tipoNombre creadas.")
+    }
+
+    private fun filtrarPorEstado() {
+        val tareas = actividades.elementos.filterIsInstance<Tarea>()
+        if (tareas.isNotEmpty()) {
+            println(
+                "Estado: " +
+                        "\n\t1. Abierta" +
+                        "\n\t2. En progreso" +
+                        "\n\t3. Finalizada"
+            )
+            when(pedirNum(1, 3)) {
+                1 -> mostrarTareasPorEstado(tareas, Estado.ABIERTA)
+                2 -> mostrarTareasPorEstado(tareas, Estado.EN_PROGRESO)
+                3 -> mostrarTareasPorEstado(tareas, Estado.FINALIZADA)
+            }
+        } else salida("No existen tareas creadas.")
+    }
+
+    private fun mostrarTareasPorEstado(tareas: List<Tarea>, estado: Estado) {
+        val filtradas = tareas.filter { it.estado == estado }
+        if (filtradas.isNotEmpty()) {
+            filtradas.forEach { println(it.obtenerDetalle()) }
+        } else salida("No existen tareas con estado '${estado.name.lowercase()}'.")
+    }
+
+    private fun filtrarPorEtiqueta() {
+        val tareas = actividades.elementos.filterIsInstance<Tarea>()
+        if (tareas.isNotEmpty()) {
+            print("Introduce la etiqueta: ")
+            val filtro = readln().lowercase()
+            val filtradas = tareas.filter { tarea -> tarea.adquirirEtiquetas().any { it.lowercase() == filtro } }
+            if (filtradas.isNotEmpty()) {
+                filtradas.forEach { salida(it.obtenerDetalle()) }
+            } else salida("ERROR: No se encontró ninguna etiqueta.")
+        } else salida("No existen tareas creadas.")
+    }
+
+    private fun filtrarPorUsuario() {
+        val todosUsuarios = usuarios.obtenerTodos()
+        if (todosUsuarios.isNotEmpty()) {
+            println("Introduce el ID del usuario: ")
+            val idUsuario = pedirNum(1, todosUsuarios.size)
+            val usuario = todosUsuarios.find { it.id == idUsuario }
+            if (usuario != null) {
+                usuario.listaTareas.forEach { salida(it.obtenerDetalle()) }
+            } else salida("ERROR: No se encontró el usuario.")
+        } else salida("No existen usuarios aún.")
+    }
+
+    private fun filtrarPorFecha() {
+        val eventos = actividades.elementos.filterIsInstance<Evento>()
+        if (eventos.isNotEmpty()) {
+            print("Introduce la fecha: ")
+            val filtro = readln()
+            val filtrados = eventos.filter { it.fecha == filtro }
+            if (filtrados.isNotEmpty()) {
+                filtrados.forEach { salida(it.obtenerDetalle()) }
+            } else print("ERROR: No se encontró ningún elemento con la fecha indicada")
+        } else salida("No existen eventos creados.")
+    }
+```
+
+
+**Enlaces:**  
+Antes: [commit link]  
+Después: [commit link]
+
+---
+
+### Error 2: Complejidad Ciclomática Alta en `ejecutarPrograma`
+
+**Descripción:**  
+El método `ejecutarPrograma` tiene una complejidad ciclomática elevada debido al uso de un `when` con muchas ramas dentro de un bucle, lo que dificulta su mantenimiento y legibilidad.
+
+**Solución:**  
+Refactorizar el método separando la lógica de manejo de opciones en una función aparte, y simplificar el bucle principal utilizando un `do-while` para mejorar la claridad y reducir la complejidad.
+
+**Ubicación:**  
+`Consola.kt` línea 208
+
+**Código antes:**
+
+```kotlin
+fun ejecutarPrograma() {
+        var salida = false
+        while (!salida) {
+            val input = menu()
+
+            when (input) {
+                1 -> {
+                    crearActividad(submenu())
+                }
+
+                2 -> {
+                    listarActividades()
+                }
+
+                3 -> {
+                    cambiarEstado()
+                }
+
+                4 -> {
+                    cambiarEstadoSubTarea()
+                }
+
+                5 -> {
+                    aniadirEtiquetasActividad()
+                }
+
+                6 -> {
+                    crearUsuario()
+                }
+
+                7 -> {
+                    listarUsuarios()
+                }
+
+                8 -> {
+                    asignarTarea()
+                }
+
+                9 -> {
+                    mostrarTareasAsignadasUsuario()
+                }
+
+                10 -> {
+                    buscarFiltro()
+                }
+
+                11 -> {
+                    historial.listarHistorial()
+                }
+
+                12 -> {
+                    paneldeControl()
+                }
+
+                13 -> {
+                    salida = true
+                }
+            }
+        }
+    }
+```
+
+**Código después:**
+
+```kotlin
+fun ejecutarPrograma() {
+        var opcion: Int
+        do {
+            opcion = menu()
+            procesarOpcion(opcion)
+        } while (opcion != 13)
+    }
+
+    fun procesarOpcion(opcion: Int) {
+        when (opcion) {
+            1 -> crearActividad(submenu())
+            2 -> listarActividades()
+            3 -> cambiarEstado()
+            4 -> cambiarEstadoSubTarea()
+            5 -> aniadirEtiquetasActividad()
+            6 -> crearUsuario()
+            7 -> listarUsuarios()
+            8 -> asignarTarea()
+            9 -> mostrarTareasAsignadasUsuario()
+            10 -> buscarFiltro()
+            11 -> historial.listarHistorial()
+            12 -> paneldeControl()
+            13 -> println("Saliendo...")
+            else -> println("Opción no válida")
+        }
+    }
+```
+
+**Enlaces:**  
+Antes: [commit link]  
+Después: [commit link]
+
+
+### Error 3: Profundidad de Bloques Anidados Excesiva (NestedBlockDepth)
+
+**Descripción:**  
+El método `buscarFiltro` presenta una profundidad de bloque anidado de 7, sobrepasando el máximo permitido de 4.
+
+**Solución:**  
+Simplificar el código dividiendo la lógica anidada en funciones auxiliares.
+
+**Ubicación:**  
+`Consola.kt` línea 450
+
+**Enlaces:**  
+Antes: [commit link]  
+Después: [commit link]
+
+---
+
+### Error 4: Demasiadas Funciones en la Clase (TooManyFunctions)
+
+**Descripción:**  
+La clase `Consola` tiene 24 funciones, excediendo el límite recomendado de 11.
+
+**Solución:**  
+Modularizar la clase, separando responsabilidades en clases o archivos diferentes.
+
+**Ubicación:**  
+`Consola.kt` línea 9
+
+**Enlaces:**  
+Antes: [commit link]  
+Después: [commit link]
+
+---
+
+### Error 5: Excepciones Capturadas y Silenciadas (SwallowedException)
+
+**Descripción:**  
+Captura de excepción `IllegalArgumentException` sin tratamiento, ocultando errores reales.
+
+**Solución:**  
+Manejar la excepción adecuadamente, añadiendo logging o re-lanzando la excepción.
+
+**Ubicación:**  
+`Consola.kt` línea 100
+
+**Enlaces:**  
+Antes: [commit link]  
+Después: [commit link]
 
 ### Capturas recomendadas:
 
