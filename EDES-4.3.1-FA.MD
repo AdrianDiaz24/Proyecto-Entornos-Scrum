@@ -1,4 +1,14 @@
-# EDES-4.3.1 - Análisis Estático de Código con Detekt y Ktlint
+# EDES-4.3.1
+
+**Actividad:** Analizadores de código estático: Linting.
+
+**Alumno:** Francisco Alba Muñoz
+
+**ID Actividad:** 4.3.1  
+
+**Proyecto:** TaskManager  
+
+**Rama usada:** `4.3.1-FAM`  
 
 ## Descripción de la Actividad
 
