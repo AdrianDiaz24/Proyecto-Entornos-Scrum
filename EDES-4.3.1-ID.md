@@ -131,7 +131,7 @@ interface IHistorialRepository {
 
 Se separa cada parámetro en una línea nueva para mejorar la claridad y cumplir con buena legibilidad.  
 
-
+Commit importante bb84bb1a9dcc919aef2725818a7e64ebeac7cfb4
 
 **2. Tipo de error:** Importación no usada
 
