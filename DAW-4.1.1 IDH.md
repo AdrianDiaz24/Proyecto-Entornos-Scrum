@@ -34,3 +34,34 @@ Sobre el proyecto Kotlin actualmente en desarrollo, debes documentar el código 
 - Redactar un informe con las capturas y pasos seguidos.
 - Incluir en el informe la ruta en la que se encuentra la documentación generada (/doc) de Dokka y comandos empleados.
 
+
+
+## Realización de cada ActividadPropuesta
+
+**2:** Generación con Dokka.
+Captura de la versión y ejecución de Dokka.
+
+![image](https://github.com/user-attachments/assets/606187cd-1bc2-4bff-af1c-5a3fa9738e4c) ![image](https://github.com/user-attachments/assets/de63c869-c106-404a-bbe4-2947307910ed)
+
+**3:** Tomar las capturas del código con los bloques KDco en el IDE
+
+### Capturas de la Clase Tarea
+
+![image](https://github.com/user-attachments/assets/b9915334-e7f7-4f9b-8664-c18cbcd80a06)
+
+![image](https://github.com/user-attachments/assets/07a992ad-5840-4712-918e-4e1d6bcfc037)
+
+
+### Capturas de la Clase Evento
+
+![image](https://github.com/user-attachments/assets/7503b6bd-a84c-4af4-b9a8-d6ff3c4ad548)
+
+![image](https://github.com/user-attachments/assets/12741798-94a8-48ed-85b4-1baf0bc49079)
+
+
+### Caputuras de la Clase Usuario
+
+![image](https://github.com/user-attachments/assets/afb1d17c-ba21-434e-905e-0e6c18a779e7)
+
+![image](https://github.com/user-attachments/assets/48bbb841-e0dd-4db3-98e2-7411eeaeb278)
+
