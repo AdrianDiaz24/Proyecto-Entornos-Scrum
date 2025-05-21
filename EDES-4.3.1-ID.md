@@ -130,3 +130,54 @@ interface IHistorialRepository {
 ```
 
 Se separa cada parámetro en una línea nueva para mejorar la claridad y cumplir con buena legibilidad.  
+
+
+
+**2. Tipo de error:** Importación no usada
+
+* Descripción:
+es.prog2425.taskmanager.dominio.Tarea no se usa en la interfaz, por lo que es innecesario y debe eliminarse para mantener el código limpio y evitar advertencias.
+* Antes y después
+
+### Código antes
+
+```kotlin
+package es.prog2425.taskmanager.datos
+
+import es.prog2425.taskmanager.Modelo.Actividad
+import es.prog2425.taskmanager.dominio.Tarea
+import es.prog2425.taskmanager.dominio.Usuario
+
+interface IUsuarioRepository {
+    fun crearUsuario(nombre: String): Boolean
+    fun eliminarUsuarioPorNombre(nombre: String): Boolean
+    fun obtenerTodos() : List<Usuario>
+    fun asignarTarea(usuario: Usuario, tarea: Actividad): Boolean
+}
+
+```
+
+### Código después
+
+```kotlin
+package es.prog2425.taskmanager.datos
+
+import es.prog2425.taskmanager.Modelo.Actividad
+import es.prog2425.taskmanager.dominio.Usuario
+
+interface IUsuarioRepository {
+
+    fun crearUsuario(nombre: String): Boolean
+
+    fun eliminarUsuarioPorNombre(nombre: String): Boolean
+
+    fun obtenerTodos(): List<Usuario>
+
+    fun asignarTarea(
+        usuario: Usuario,
+        tarea: Actividad
+    ): Boolean
+
+}
+
+```
