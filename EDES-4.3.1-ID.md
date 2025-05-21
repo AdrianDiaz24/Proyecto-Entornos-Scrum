@@ -221,4 +221,4 @@ enum class Estado(val descripcion: String) {
     }
 }
 ```
-Commit importante
+Commit importante https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/commit/83697546572f0fd52be8a5c19c73ac6ec32c5220
