@@ -248,4 +248,23 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 ```
-Commit importante 
+Commit importante https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/commit/5bc73314fff019ee83cdfdf37f8ab9674d91fff0
+
+**5. Tipo de error** Línea en blanco al inicio de una clase
+* Descripción
+No debe haber una línea en blanco justo al comenzar el cuerpo de la clase.
+* Antes y despúes
+
+### Código antes
+```kotlin
+class UsuarioService(private val usuarios: IUsuarioRepository) {
+
+
+    fun crearUsuario(nombre: String): Boolean { ...
+```
+
+### Código después
+```kotlin
+class UsuarioService(private val usuarios: IUsuarioRepository) {
+    fun crearUsuario(nombre: String): Boolean { ...
+```
