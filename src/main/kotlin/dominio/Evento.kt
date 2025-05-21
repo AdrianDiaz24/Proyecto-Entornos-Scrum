@@ -26,7 +26,6 @@ class Evento(descripcion: String, val fecha: String, val ubicacion: String): Act
          * @param fecha Fecha de cuando trascurre el evento
          * @param ubicacion Ubiaccion donded trascurre el evento
          */
-
         fun creaEvento(descripcion: String, fecha: String, ubicacion: String, etiquetas: String = ""): Evento {
             val evento = Evento(descripcion, fecha, ubicacion)
             if (etiquetas.isNotBlank()) {

@@ -10,11 +10,11 @@ import es.prog2425.taskmanager.Modelo.Actividad
  * @property estado Estado actual de la tarea, por defecto ABIERTA.
  * @property listaSubtareas Lista mutable de subtareas asociadas.
  */
-class Tarea(descripcion: String, var estado: Estado = Estado.ABIERTA): Actividad(descripcion), Detallable {
+class Tarea(descripcion: String, var estado: Estado = Estado.ABIERTA) : Actividad(descripcion), Detallable {
 
     val listaSubtareas = mutableListOf<Tarea>()
 
-    companion object{
+    companion object {
 
         /**
          * Crea una nueva instancia de Tarea, opcionalmente con estado y etiquetas.
@@ -24,7 +24,7 @@ class Tarea(descripcion: String, var estado: Estado = Estado.ABIERTA): Actividad
          * @param etiquetas Etiquetas opcionales para la tarea.
          * @return Nueva instancia de Tarea creada.
          */
-        fun creaTarea(descripcion: String, estado: Estado = Estado.ABIERTA,etiquetas: String = ""): Tarea {
+        fun creaTarea(descripcion: String, estado: Estado = Estado.ABIERTA, etiquetas: String = ""): Tarea {
             val tarea = Tarea(descripcion, estado)
             if (etiquetas.isNotBlank()) {
                 tarea.aniadirEtiquetas(etiquetas)
@@ -49,8 +49,7 @@ class Tarea(descripcion: String, var estado: Estado = Estado.ABIERTA): Actividad
      *
      * @param tarea Subtarea a añadir.
      */
-    fun aniadirSubtarea(tarea : Tarea){
+    fun aniadirSubtarea(tarea: Tarea) {
         listaSubtareas.add(tarea)
     }
-
 }
