@@ -1,6 +1,8 @@
 package es.prog2425.taskmanager.dominio
 
 import es.prog2425.taskmanager.Modelo.Actividad
+import es.prog2425.taskmanager.dominio.Estado
+
 
 class Tarea(descripcion: String, var estado: Estado = Estado.ABIERTA): Actividad(descripcion) {
 

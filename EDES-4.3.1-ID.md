@@ -1,0 +1,344 @@
+# Actividad: Analizadores de código estático: Linting (RA4.cd)  
+**ID actividad:** 4.3.1.
+
+---
+
+## Agrupamiento de la actividad  
+Individual
+
+---
+
+## Descripción  
+La actividad consiste en instalar y usar un analizador de código estático (Detekt o Ktlint) en el proyecto que vienes desarrollando, capturar evidencias gráficas, detectar y clasificar errores, aplicar soluciones y explorar las posibilidades de configuración de la herramienta elegida.
+
+Instala y usa los analizadores de código comentados en clase: Detekt, Ktlint.
+
+---
+
+## Objetivo  
+- Conocer qué es un analizador de código y su propósito.  
+- Familiarizarse con herramientas Detekt o Ktlint.  
+- Usar las herramientas y estudiar y aplicar configuraciones de la herramienta seleccionada.
+
+---
+
+## Trabajo a realizar  
+
+Haciendo uso de las herramientas descritas en el punto 4.3 Analizador de código:
+
+1. Instalar la herramienta elegida (Detekt o Ktlint) e incluir capturas de pantalla del proceso.  
+2. Integrar el analizador en el proyecto que se está desarrollando y ejecutar el análisis.  
+3. Identificar al menos 5 tipos de errores detectados.  
+4. Para cada tipo de error, documentar:  
+   - Descripción del error.  
+   - Solución aplicada (antes y después, con enlaces a commits específicos).  
+5. Explorar y modificar al menos una opción de configuración del analizador distinta de la predeterminada; describir cómo afecta al código y por tanto al informe de errores.
+
+---
+
+## Responde a las preguntas
+
+### [1]  
+**1.a** ¿Qué herramienta has usado, y para qué sirve? 
+
+- He usado Ktlint, que es una herramienta para analizar y formatear automáticamente el código Kotlin. Sirve para asegurarte de que todo tu código siga una misma estética y unas reglas comunes de estilo.
+
+**1.b** ¿Cuáles son sus características principales?  
+
+- Sus características principales son:
+   - Detecta errores de estilo y formato.
+
+   - Puede corregir automáticamente algunos errores.
+
+   - Se integra fácil con editores como IntelliJ o Android Studio.
+
+   - Usa reglas oficiales y se puede configurar para usar unas personalizadas.
+  
+**1.c** ¿Qué beneficios obtengo al utilizar dicha herramienta?
+
+- Los beneficios son:
+
+   - El código se ve más limpio y ordenado.
+
+   - Ahorra tiempo al corregir cosas automáticamente.
+
+   - Hace que trabajar en equipo sea más fácil, porque todos siguen el mismo formato.
+
+   - Ayuda a evitar pequeños errores que a veces ni te das cuenta.
+
+
+### [2]  
+**2.a** De los errores/problemas que la herramienta ha detectado y te ha ayudado a solucionar, ¿cuál es el que te ha parecido que ha mejorado más tu código?  
+
+- El error que más ha mejorado mi código fue cuando Ktlint me avisó de que los parámetros en una función eran muy largos y que debía poner cada uno en una línea nueva. Al hacerlo, el código se entendía mucho mejor.
+
+**2.b** ¿La solución que se le ha dado al error/problema la has entendido y te ha parecido correcta?  
+
+- Sí, entendí que esa forma mejora la legibilidad de mi código y es más limpio y facil de leer
+
+**2.c** ¿Por qué se ha producido ese error/problema?
+
+- Ese problema se da cuando una función tiene muchos parámetros y están todos en una sola línea, lo que puede dificultar leer o mantener el código.
+
+### [3]  
+**3.a** ¿Qué posibilidades de configuración tiene la herramienta?  
+
+- Ktlint permite configurar:
+
+   - Qué reglas se aplican o se desactivan.
+
+   - Si se permite una coma final en listas o enumeraciones.
+
+   - Cómo manejar los espacios en blanco, líneas en blanco, etc.
+     
+**3.b** De esas posibilidades de configuración, ¿cuál has configurado para que sea distinta a la que viene por defecto?  
+
+Pues cual mejor que el cambio de parametros largos y menos legibles, separando cada uno en varias líneas de código
+
+**3.c** Pon un ejemplo de cómo ha impactado en tu código, enlazando al código anterior al cambio, y al posterior al cambio.
+
+### Código antes 
+
+```kotlin
+interface IHistorialRepository {
+    val historial: MutableList<String>
+    fun añadirModificacionEstado(estado: Estado, tarea: Tarea, contador1: Int, contador2: Int = 0): Boolean
+    fun añadirModificacionAsignacion(usuario: Usuario, tarea: Tarea, contador1: Int): Boolean
+    fun listarHistorial()
+}
+
+```
+
+### Código después
+```kotlin
+interface IHistorialRepository {
+    val historial: MutableList<String>
+    fun añadirModificacionEstado(
+        estado: Estado,
+        tarea: Tarea,
+        contador1: Int,
+        contador2: Int = 0
+    ): Boolean
+
+    fun añadirModificacionAsignacion(
+        usuario: Usuario,
+        tarea: Tarea,
+        contador1: Int
+    ): Boolean
+
+    fun listarHistorial()
+}
+
+```
+
+### [4]  
+**4** ¿Qué conclusiones sacas después del uso de estas herramientas?
+
+
+- Creo que son herramientas útiles pero, haría falta trabajar un poco más con ellas y acostumbrarnos a sus métodos, ya que la práctica ha sido un poco confusa.
+
+
+
+# CAPTURAS DE DESCARGA DE kTLINT
+![image](https://github.com/user-attachments/assets/e835eeaa-e2de-4dc7-94b6-bc5d15131bee)
+
+## **Proceso de analisis de KTLINT**
+
+
+
+
+![image](https://github.com/user-attachments/assets/ca7d13e1-6ab5-4d03-a43d-f00b3457d1d8)
+
+
+
+## **Analisis exitoso y elección de errores a corregir**
+
+
+
+![image](https://github.com/user-attachments/assets/040de8d7-f1bf-435d-b4e1-a8372a583954)
+
+
+
+## Informe de errores de ktlint en Proyecto-Entornos-Scrum
+
+**1. Tipo de error:** Parámetro debe iniciar en una nueva línea en la firma de función
+
+* Descripción:
+La convención estándar pide que en firmas de funciones con varios parámetros, cada parámetro comience en una línea nueva para mejorar la legibilidad.
+* Antes y después
+
+### Código antes 
+
+```kotlin
+interface IHistorialRepository {
+    val historial: MutableList<String>
+    fun añadirModificacionEstado(estado: Estado, tarea: Tarea, contador1: Int, contador2: Int = 0): Boolean
+    fun añadirModificacionAsignacion(usuario: Usuario, tarea: Tarea, contador1: Int): Boolean
+    fun listarHistorial()
+}
+
+```
+
+### Código después
+```kotlin
+interface IHistorialRepository {
+    val historial: MutableList<String>
+    fun añadirModificacionEstado(
+        estado: Estado,
+        tarea: Tarea,
+        contador1: Int,
+        contador2: Int = 0
+    ): Boolean
+
+    fun añadirModificacionAsignacion(
+        usuario: Usuario,
+        tarea: Tarea,
+        contador1: Int
+    ): Boolean
+
+    fun listarHistorial()
+}
+
+```
+
+Se separa cada parámetro en una línea nueva para mejorar la claridad y cumplir con buena legibilidad.  
+
+Commit importante https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/commit/bb84bb1a9dcc919aef2725818a7e64ebeac7cfb4
+
+**2. Tipo de error:** Importación no usada
+
+* Descripción:
+es.prog2425.taskmanager.dominio.Tarea no se usa en la interfaz, por lo que es innecesario y debe eliminarse para mantener el código limpio y evitar advertencias.
+* Antes y después
+
+### Código antes
+
+```kotlin
+package es.prog2425.taskmanager.datos
+
+import es.prog2425.taskmanager.Modelo.Actividad
+import es.prog2425.taskmanager.dominio.Tarea
+import es.prog2425.taskmanager.dominio.Usuario
+
+interface IUsuarioRepository {
+    fun crearUsuario(nombre: String): Boolean
+    fun eliminarUsuarioPorNombre(nombre: String): Boolean
+    fun obtenerTodos() : List<Usuario>
+    fun asignarTarea(usuario: Usuario, tarea: Actividad): Boolean
+}
+
+```
+
+### Código después
+
+```kotlin
+package es.prog2425.taskmanager.datos
+
+import es.prog2425.taskmanager.Modelo.Actividad
+import es.prog2425.taskmanager.dominio.Usuario
+
+interface IUsuarioRepository {
+
+    fun crearUsuario(nombre: String): Boolean
+
+    fun eliminarUsuarioPorNombre(nombre: String): Boolean
+
+    fun obtenerTodos(): List<Usuario>
+
+    fun asignarTarea(
+        usuario: Usuario,
+        tarea: Actividad
+    ): Boolean
+
+}
+
+```
+Commit importante https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/commit/09e9383a90abb7d6d04bfc640ae9d7169f69cdda
+
+**3. Tipo de error:** Falta de coma final en la declaración
+
+* Descripción
+En Kotlin, cuando una enum class declara múltiples constantes en líneas separadas, es buena práctica (y requerido por Ktlint si se configura así) usar una coma final después del último elemento.
+
+   - Facilita modificaciones futuras (agregar nuevos elementos).
+   
+   - Reduce errores de sintaxis.
+   
+   - Mantiene consistencia y legibilidad.
+* Antes y después
+
+### Código antes  
+```kotlin
+enum class Estado(val descripcion: String) {
+    ABIERTA("Abierta"),
+    EN_PROGRESO("En proceso"),
+    FINALIZADA("Finalizada");
+
+    override fun toString(): String {
+        return descripcion
+    }
+}
+```
+### Código después
+```kotlin
+enum class Estado(val descripcion: String) {
+    ABIERTA("Abierta"),
+    EN_PROGRESO("En proceso"),
+    FINALIZADA("Finalizada"),  
+
+    ;
+
+    override fun toString(): String {
+        return descripcion
+    }
+}
+```
+Commit importante https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/commit/83697546572f0fd52be8a5c19c73ac6ec32c5220
+
+**4. Tipo de error:** No usar importaciones con *
+* Descripción
+Kotlin recomienda no usar importaciones comodín (*), ya que reduce la claridad del código.
+* Antes y después
+
+### Código antes
+```kotlin
+import es.prog2425.taskmanager.servicios.*
+import es.prog2425.taskmanager.dominio.*
+
+```
+
+### Código después
+```kotlin
+import es.prog2425.taskmanager.Modelo.Actividad
+import es.prog2425.taskmanager.servicios.ServicioHistorial
+import es.prog2425.taskmanager.servicios.ServicioTarea
+import es.prog2425.taskmanager.servicios.ServicioUsuario
+import es.prog2425.taskmanager.dominio.Estado
+import es.prog2425.taskmanager.dominio.Tarea
+import es.prog2425.taskmanager.dominio.Usuario
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+
+```
+Commit importante https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/commit/5bc73314fff019ee83cdfdf37f8ab9674d91fff0
+
+**5. Tipo de error** Línea en blanco al inicio de una clase
+* Descripción
+No debe haber una línea en blanco justo al comenzar el cuerpo de la clase.
+* Antes y despúes
+
+### Código antes
+```kotlin
+class UsuarioService(private val usuarios: IUsuarioRepository) {
+
+
+    fun crearUsuario(nombre: String): Boolean { ...
+```
+
+### Código después
+```kotlin
+class UsuarioService(private val usuarios: IUsuarioRepository) {
+    fun crearUsuario(nombre: String): Boolean { ...
+```
+
+Commit importante https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/commit/53794712f8f1b6db9eef09f781beb93161f56580
