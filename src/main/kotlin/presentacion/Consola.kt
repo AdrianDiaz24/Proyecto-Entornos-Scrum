@@ -16,7 +16,6 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
      * Funcion que pinta por patalla el mensaje que recibe
      * @param msj String con el mensaje que desea sacar por pantalla
      */
-
     fun salida(msj: String) {
         println(msj)
     }
@@ -24,7 +23,6 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
     /**
      * Muestra el menu principal
      */
-
     fun mostrarMenu() {
         println("\n1.  Crear Actividad")
         println("2.  Listar Actividades")
@@ -44,7 +42,6 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
     /**
      * Muestra el Submenu
      */
-
     fun mostrarSubmenu() {
         println("\n1. Crear Tarea")
         println("2. Crear Evento")
@@ -56,7 +53,6 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
      * Pided la informacion necesaria para crear una tarea
      * @return Devuelve un String con la descripcion de la tarea
      */
-
     fun pedirInfoTarea(msg: String): String {
         print("\n$msg")
         return readln()
@@ -66,7 +62,6 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
      * Muestra el menu y pide que se seleccione una opcion
      * @return Devuelve un Nº con la eleccion seleccionada
      */
-
     fun menu(): Int {
         mostrarMenu()
         return pedirNum(1, 13)
