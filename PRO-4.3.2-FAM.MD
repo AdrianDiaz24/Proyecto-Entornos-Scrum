@@ -1,4 +1,10 @@
-# EDES-P4.3.1 - Análisis de Código con IntelliJ IDEA
+# EDES-P4.3.1
+
+**Actividad:** Analizadores de código estático: Linting.
+**Alumno:** Francisco Alba Muñiz
+**ID Actividad:** 4.3.1  
+**Proyecto:** TaskManager  
+**Rama usada:** `4.3.1-FAM`  
 
 ## Descripción de la Actividad
 
