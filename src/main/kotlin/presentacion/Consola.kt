@@ -6,7 +6,7 @@ import es.prog2425.taskmanager.dominio.*
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
-class Consola(val historial: HistorialRepository = HistorialRepository(), val actividades: ActividadService = ActividadService(), val usuarios: UsuarioService = UsuarioService(UsuarioRepository())) {
+open class Consola(val historial: HistorialRepository = HistorialRepository(), val actividades: ActividadService = ActividadService(), val usuarios: UsuarioService = UsuarioService(UsuarioRepository())) {
 
     /**
      * Funcion que pinta por patalla el mensaje que recibe
@@ -85,7 +85,7 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
      * @return Devuelve el Nº Introducido por el usuario si se encuentra dentro de los parametros
      */
 
-    fun pedirNum(min: Int, max: Int): Int {
+    open fun pedirNum(min: Int, max: Int): Int {
         var valorValido = false
         var input = 0
         while (!valorValido) {
@@ -140,9 +140,9 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
                 println("**ERROR** $e")
             }
             2 -> {
-                val (descripcion, fecha, ubicacion, etiquetas) = pedirInfoEvento()
+                val datosEvento = leerDatosEvento()
                 try {
-                    actividades.agregarElemento(Evento.creaEvento(descripcion, fecha, ubicacion, etiquetas))
+                    actividades.agregarElemento(Evento.creaEvento(datosEvento.descripcion, datosEvento.fecha, datosEvento.ubicacion, datosEvento.etiquetas))
                 } catch (e: IllegalArgumentException) {
                     println("**ERROR** $e")
                 }
@@ -170,11 +170,23 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
         }
     }
 
+    fun leerDatosEvento(): DatosEvento {
+        println("Introduce la descripcion del evento:")
+        val descripcion = readLine() ?: ""
+        println("Introduce la fecha del evento:")
+        val fecha = readLine() ?: ""
+        println("Introduce la ubicacion del evento:")
+        val ubicacion = readLine() ?: ""
+        println("Introduce etiquetas (separadas por ;):")
+        val etiquetas = readLine() ?: ""
+        return DatosEvento(descripcion, fecha, ubicacion, etiquetas)
+    }
+
     /**
      * Lista las actividades almacenadas
      */
 
-    fun listarActividades(): Boolean{
+    open fun listarActividades(): Boolean{
         println("\n")
         return if (actividades.elementos.isNotEmpty()) {
             var contador = 0
@@ -299,49 +311,33 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
         }
     }
 
-    private fun cambiarEstado(){
+    fun cambiarEstado() {
+        if (!listarActividades()) return
 
-        val existenActividades = listarActividades()
+        println("\nElige una tarea")
+        val numActividad = pedirNum(1, actividades.elementos.size) - 1
+        val actividad = actividades.elementos[numActividad] as? Tarea ?: return
 
-        if (existenActividades){
-            println("\nElige una tarea")
-            val numActividad = pedirNum(1, actividades.elementos.size) - 1
+        val estado = pedirEstadoComoInt()
+        val puedeFinalizar = actividad.listaSubtareas.isEmpty() ||
+                actividad.listaSubtareas.all { it.estado == Estado.FINALIZADA }
 
-            println("\n¿Que estado quieres ponerle a la tarea?")
-            println("1. Abierta")
-            println("2. En proceso")
-            println("3. Finalizada")
-
-            val estado = pedirNum(1, 3)
-
-            val actividad = actividades.elementos[numActividad]
-
-            if (actividad is Tarea) {
-                when (estado) {
-                    1 -> {
-                        historial.añadirModificacionEstado(Estado.ABIERTA, actividad, numActividad + 1)
-                        actividad.estado = Estado.ABIERTA
-                    }
-
-                    2 -> {
-                        historial.añadirModificacionEstado(Estado.EN_PROGRESO, actividad, numActividad + 1)
-                        actividad.estado = Estado.EN_PROGRESO
-                    }
-
-                    3 -> {
-                        if (actividad.listaSubtareas.isEmpty()) {
-                            historial.añadirModificacionEstado(Estado.FINALIZADA, actividad, numActividad + 1)
-                            actividad.estado = Estado.FINALIZADA
-                        } else {
-                            if (actividad.listaSubtareas.all { it.estado == Estado.FINALIZADA }) {
-                                historial.añadirModificacionEstado(Estado.FINALIZADA, actividad, numActividad + 1)
-                                actividad.estado = Estado.FINALIZADA
-                            } else println("ERROR: Todas las subtareas tienen que estar marcadas como 'FINALIZADA' antes de finalizar la tarea.")
-                        }
-                    }
+        when (estado) {
+            1 -> cambiarAEstado(actividad, Estado.ABIERTA, numActividad)
+            2 -> cambiarAEstado(actividad, Estado.EN_PROGRESO, numActividad)
+            3 -> {
+                if (puedeFinalizar) {
+                    cambiarAEstado(actividad, Estado.FINALIZADA, numActividad)
+                } else {
+                    println("ERROR: Todas las subtareas tienen que estar marcadas como 'FINALIZADA' antes de finalizar la tarea.")
                 }
             }
         }
+    }
+
+    private fun cambiarAEstado(tarea: Tarea, nuevoEstado: Estado, num: Int) {
+        historial.añadirModificacionEstado(nuevoEstado, tarea, num + 1)
+        tarea.estado = nuevoEstado
     }
 
     private fun cambiarEstadoSubTarea(){
@@ -366,12 +362,7 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
                 println("\nElige una Subtarea")
                 val numSubTarea = pedirNum(1, tarea.listaSubtareas.size) - 1
 
-                println("\n¿Que estado quieres ponerle a la Subtarea?")
-                println("1. Abierta")
-                println("2. En proceso")
-                println("3. Finalizada")
-
-                val estado = pedirNum(1, 3)
+                val estado = pedirEstadoComoInt()
 
                 val actividad = tarea.listaSubtareas[numSubTarea]
                 when (estado) {
@@ -398,6 +389,15 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
                 println("Esta tarea no tiene subtareas.")
             }
         }
+    }
+
+    open fun pedirEstadoComoInt(): Int {
+        println("\n¿Qué estado quieres poner?")
+        println("1. Abierta")
+        println("2. En proceso")
+        println("3. Finalizada")
+
+        return pedirNum(1, 3)
     }
 
     private fun aniadirEtiquetasActividad(){
