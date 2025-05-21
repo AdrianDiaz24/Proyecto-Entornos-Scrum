@@ -1,10 +1,15 @@
 # PRO-4.4.1-FG
 
-**Actividad:** Documentación de Clases con KDoc y Dokka en Kotlin  
-**Alumno:** Francisco Alba Muñiz
+**Actividad:** Documentación de Clases con KDoc y Dokka en Kotlin
+
+**Alumno:** Francisco Alba Muñoz
+
 **ID Actividad:** 4.4.1  
+
 **Proyecto:** TaskManager  
+
 **Rama usada:** `4.4.1-FAM`  
+
 **Ruta documentación generada:** `./build/dokka/html`
 
 ---
