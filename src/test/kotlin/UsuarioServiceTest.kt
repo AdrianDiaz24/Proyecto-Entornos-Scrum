@@ -123,6 +123,12 @@ class UsuarioServiceTest : DescribeSpec({
                 verify { mockRepositorio.asignarTarea(usuario, tarea) }
                 resultado shouldBe false
             }
+
+            class UsuarioServiceTest : DescribeSpec({
+                it("simple test") {
+                    1 + 1 shouldBe 2
+                }
+            })
         }
     }
 })
