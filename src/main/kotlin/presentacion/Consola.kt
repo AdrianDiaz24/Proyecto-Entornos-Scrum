@@ -17,6 +17,8 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
     companion object{
         val numMaxPosibleMenu = 13
         val numMinPosibleMenu = 1
+        val numMaxPosibleSubMenu = 4
+        val numMinPosibleSubMenu = 1
     }
 
     /**
@@ -33,19 +35,22 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
      */
 
     fun mostrarMenu(){
-        println("\n1.  Crear Actividad")
-        println("2.  Listar Actividades")
-        println("3.  Cambiar estado de la Tarea")
-        println("4.  Cambiar estado de la SubTarea")
-        println("5.  Añadir Etiquetas a una Actividad")
-        println("6.  Crear usuario")
-        println("7.  Listar usuarios")
-        println("8.  Asignar tarea a usuario")
-        println("9.  Mostrar tareas asignadas a un usuario")
-        println("10. Buscar con filtro")
-        println("11. Listar historial de cambios")
-        println("12. Panel de Control")
-        println("13. Salir")
+        val menu = arrayOf("\n1.  Crear Actividad",
+        "2.  Listar Actividades",
+        "3.  Cambiar estado de la Tarea",
+        "4.  Cambiar estado de la SubTarea",
+        "5.  Añadir Etiquetas a una Actividad",
+        "6.  Crear usuario",
+        "7.  Listar usuarios",
+        "8.  Asignar tarea a usuario",
+        "9.  Mostrar tareas asignadas a un usuario",
+        "10. Buscar con filtro",
+        "11. Listar historial de cambios",
+        "12. Panel de Control",
+        "13. Salir")
+
+        menu.forEach { println(it) }
+
     }
 
     /**
@@ -53,10 +58,13 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
      */
 
     fun mostrarSubmenu(){
-        println("\n1. Crear Tarea")
-        println("2. Crear Evento")
-        println("3. Crear Subtarea")
-        println("4. Cancelar")
+        val submenu = arrayOf("\n1. Crear Tarea",
+        "2. Crear Evento",
+        "3. Crear Subtarea",
+        "4. Cancelar")
+
+        submenu.forEach { println(it) }
+
     }
 
     /**
@@ -76,7 +84,7 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
 
     fun menu(): Int {
         mostrarMenu()
-        return pedirNum(1, 13)
+        return pedirNum(numMinPosibleMenu, numMaxPosibleMenu)
     }
 
     /**
@@ -87,34 +95,36 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
 
     fun submenu(): Int{
         mostrarSubmenu()
-        return pedirNum(1,4)
+        return pedirNum(numMinPosibleSubMenu, numMaxPosibleSubMenu)
     }
 
     /**
      * Pide que se introduzca un Nº
      * @param min Nº minimo que se permite introducir
      * @param max Nº maximo que se permmite introducir
-     * @return Devuelve el Nº Introducido por el usuario si se encuentra dentro de los parametros
+     * @return Devuelve el Nº Introducido por el usuario si se encuentra dentro de lo.s parametros
      */
 
-    fun pedirNum(min: Int, max: Int): Int{
+    fun pedirNum(min: Int, max: Int): Int {
         var valorValido = false
         var input = 0
-        while (!valorValido){
+
+        while (!valorValido) {
             print(">> ")
-            try {
-                input = readln().toInt()
-                if (input in min..max){
-                    valorValido = true
-                } else {
-                    println("Introduce un Nº entre $min y $max")
-                }
-            } catch (e: IllegalArgumentException){
-                println("**ERROR** $e Introduce un Nº")
+            val entrada = readlnOrNull()
+            val numero = entrada?.toIntOrNull()
+
+            if (numero != null && numero in min..max) {
+                input = numero
+                valorValido = true
+            } else {
+                println("Introduce un Nº válido entre $min y $max")
             }
         }
+
         return input
     }
+
 
     /**
      * Pide la informacion necesaria  para crear un evento
@@ -185,21 +195,27 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
      * Lista las actividades almacenadas
      */
 
-    fun listarActividades(): Boolean{
+    fun listarActividades(): Boolean {
         println("\n")
         return if (actividades.elementos.isNotEmpty()) {
-            var contador = 0
-            for (actividad in actividades.elementos){
-                contador++
-                println(contador.toString() + ". " + actividad.obtenerDetalle())
-                if (actividad is Tarea) {
-                    listarSubTareas(actividad, contador)
-                }
-            }
+            mostrarListadoActividades()
             true
         } else {
             salida("Aún no existen actividades.")
             false
+        }
+    }
+
+    private fun mostrarListadoActividades() {
+        actividades.elementos.forEachIndexed { index, actividad ->
+            mostrarDetalleActividad(actividad, index + 1)
+        }
+    }
+
+    private fun mostrarDetalleActividad(actividad: Actividad, numero: Int) {
+        println("$numero. ${actividad.obtenerDetalle()}")
+        if (actividad is Tarea) {
+            listarSubTareas(actividad, numero)
         }
     }
 
@@ -294,10 +310,10 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
     private fun pedirNombreUsuario(): String {
         var nombre: String = ""
 
-        while (nombre == null || nombre.isBlank()) {
+        while (nombre.isBlank()) {
             print("Introduce el nombre del usuario: ")
             nombre = readln()
-            if (nombre == null || nombre.isBlank()) {
+            if (nombre.isBlank()) {
                 println("ERROR: Introduce un nombre válido.")
             }
         }
