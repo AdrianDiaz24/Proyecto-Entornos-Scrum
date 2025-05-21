@@ -1,4 +1,4 @@
-package es.prog2425.taskmanager.presentacion
+package presentacion
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import es.prog2425.taskmanager.Modelo.Actividad
@@ -11,6 +11,10 @@ import es.prog2425.taskmanager.servicios.UsuarioRepository
 import es.prog2425.taskmanager.servicios.UsuarioService
 
 class Consola(val historial: HistorialRepository = HistorialRepository(), val actividades: ActividadService = ActividadService(), val usuarios: UsuarioService = UsuarioService(UsuarioRepository())) {
+
+    private val minMenu = 1
+    private val maxMenu = 13
+    private val maxSubMenu = 4
 
     /**
      * Funcion que pinta por patalla el mensaje que recibe
@@ -64,7 +68,7 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
      */
     fun menu(): Int {
         mostrarMenu()
-        return pedirNum(1, 13)
+        return pedirNum(minMenu, maxMenu)
     }
 
     /**
@@ -74,7 +78,7 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
 
     fun submenu(): Int {
         mostrarSubmenu()
-        return pedirNum(1, 4)
+        return pedirNum(minMenu, maxSubMenu)
     }
 
     /**
@@ -133,7 +137,10 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
     fun crearActividad(input: Int) {
         when (input) {
             1 -> try {
-                actividades.agregarElemento(Tarea.creaTarea(pedirInfoTarea("Introduce la descripcion de la tarea: "), etiquetas = pedirInfoTarea("Introduce etiquetas (separadas por ;)")))
+                val descripcion = pedirInfoTarea("Introduce la descripción de la tarea: ")
+                val etiquetas = pedirInfoTarea("Introduce etiquetas (separadas por ;)")
+                val nuevaTarea = Tarea.creaTarea(descripcion, etiquetas = etiquetas)
+                actividades.agregarElemento(nuevaTarea)
             } catch (e: IllegalArgumentException) {
                 println("**ERROR** $e")
             }
@@ -154,7 +161,10 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
 
                     if (tarea is Tarea) {
                         try {
-                            tarea.aniadirSubtarea(Tarea.creaTarea(pedirInfoTarea("Introduce la descripcion de la tarea: "), etiquetas = pedirInfoTarea("Introduce etiquetas (separadas por ;)")))
+                            val descripcion = pedirInfoTarea("Introduce la descripcion de la tarea: ")
+                            val etiquetas = pedirInfoTarea("Introduce etiquetas (separadas por ;)")
+                            val nuevaSubtarea = Tarea.creaTarea(descripcion, etiquetas = etiquetas)
+                            tarea.aniadirSubtarea(nuevaSubtarea)
                         } catch (e: IllegalArgumentException) {
                             println("**ERROR** $e")
                         }
@@ -310,7 +320,7 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
             val usuario = usuarios.obtenerTodos()[numUsuario]
 
             usuarios.asignarTarea(usuario, tarea)
-            historial.añadirModificacionAsignacion(usuario, tarea, numActividad + 1)
+            historial.aniadirModificacionAsignacion(usuario, tarea, numActividad + 1)
         }
     }
 
@@ -353,22 +363,22 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
             if (actividad is Tarea) {
                 when (estado) {
                     1 -> {
-                        historial.añadirModificacionEstado(Estado.ABIERTA, actividad, numActividad + 1)
+                        historial.aniadirModificacionEstado(Estado.ABIERTA, actividad, numActividad + 1)
                         actividad.estado = Estado.ABIERTA
                     }
 
                     2 -> {
-                        historial.añadirModificacionEstado(Estado.EN_PROGRESO, actividad, numActividad + 1)
+                        historial.aniadirModificacionEstado(Estado.EN_PROGRESO, actividad, numActividad + 1)
                         actividad.estado = Estado.EN_PROGRESO
                     }
 
                     3 -> {
                         if (actividad.listaSubtareas.isEmpty()) {
-                            historial.añadirModificacionEstado(Estado.FINALIZADA, actividad, numActividad + 1)
+                            historial.aniadirModificacionEstado(Estado.FINALIZADA, actividad, numActividad + 1)
                             actividad.estado = Estado.FINALIZADA
                         } else {
                             if (actividad.listaSubtareas.all { it.estado == Estado.FINALIZADA }) {
-                                historial.añadirModificacionEstado(Estado.FINALIZADA, actividad, numActividad + 1)
+                                historial.aniadirModificacionEstado(Estado.FINALIZADA, actividad, numActividad + 1)
                                 actividad.estado = Estado.FINALIZADA
                             } else {
                                 println("ERROR: Todas las subtareas tienen que estar marcadas como 'FINALIZADA' antes de finalizar la tarea.")
@@ -409,19 +419,19 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
                 val actividad = tarea.listaSubtareas[numSubTarea]
                 when (estado) {
                     1 -> {
-                        historial.añadirModificacionEstado(Estado.ABIERTA, actividad, numActividad + 1, numSubTarea + 1)
+                        historial.aniadirModificacionEstado(Estado.ABIERTA, actividad, numActividad + 1, numSubTarea + 1)
                         actividad.estado = Estado.ABIERTA
                     }
                     2 -> {
-                        historial.añadirModificacionEstado(Estado.EN_PROGRESO, actividad, numActividad + 1, numSubTarea + 1)
+                        historial.aniadirModificacionEstado(Estado.EN_PROGRESO, actividad, numActividad + 1, numSubTarea + 1)
                         actividad.estado = Estado.EN_PROGRESO
                     }
                     3 -> {
-                        historial.añadirModificacionEstado(Estado.FINALIZADA, actividad, numActividad + 1, numSubTarea + 1)
+                        historial.aniadirModificacionEstado(Estado.FINALIZADA, actividad, numActividad + 1, numSubTarea + 1)
                         actividad.estado = Estado.FINALIZADA
 
                         if (actividad.listaSubtareas.all { it.estado == Estado.FINALIZADA }) {
-                            historial.añadirModificacionEstado(Estado.FINALIZADA, tarea, numActividad + 1)
+                            historial.aniadirModificacionEstado(Estado.FINALIZADA, tarea, numActividad + 1)
                             tarea.estado = Estado.FINALIZADA
                         }
                     }

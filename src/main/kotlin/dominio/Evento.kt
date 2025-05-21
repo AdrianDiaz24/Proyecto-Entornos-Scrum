@@ -5,7 +5,7 @@ import es.prog2425.taskmanager.Modelo.Actividad
 class Evento(descripcion: String, val fecha: String, val ubicacion: String) : Actividad(descripcion) {
 
     init {
-        require(fecha.matches(Regex(patronFecha))) { throw IllegalArgumentException("La fecha no cumple el formato DD/MM/AAAA") }
+        require(fecha.matches(Regex(PATRONFECHA))) { throw IllegalArgumentException("La fecha no cumple el formato DD/MM/AAAA") }
         require(ubicacion.isNotBlank()) { throw IllegalArgumentException("La ubicacion no puede estar vacia") }
     }
 
@@ -26,7 +26,7 @@ class Evento(descripcion: String, val fecha: String, val ubicacion: String) : Ac
             return evento
         }
 
-        val patronFecha = "^([0-2][0-9]|3[0-1])(\\/|-)(0[1-9]|1[0-2])\\2(\\d{4})\$"
+        const val PATRONFECHA = "^([0-2][0-9]|3[0-1])([/\\-])(0[1-9]|1[0-2])\\2(\\d{4})$"
     }
 
     /**

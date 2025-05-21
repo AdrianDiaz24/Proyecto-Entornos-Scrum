@@ -13,7 +13,7 @@ class HistorialRepository(override val historial: MutableList<String> = mutableL
         val formato = DateTimeFormatter.ofPattern("dd/MM/yyyy - HH:MM:SS")
     }
 
-    override fun añadirModificacionEstado(estado: Estado, tarea: Tarea, contador1: Int, contador2: Int): Boolean {
+    override fun aniadirModificacionEstado(estado: Estado, tarea: Tarea, contador1: Int, contador2: Int): Boolean {
         if (contador2 != 0) {
             historial.add("${LocalDateTime.now().format(formato)} - $contador1.$contador2. ${tarea.obtenerDetalle()} - Cambiado el estado a '$estado'")
         } else {
@@ -22,7 +22,7 @@ class HistorialRepository(override val historial: MutableList<String> = mutableL
         return true
     }
 
-    override fun añadirModificacionAsignacion(usuario: Usuario, tarea: Tarea, contador1: Int): Boolean {
+    override fun aniadirModificacionAsignacion(usuario: Usuario, tarea: Tarea, contador1: Int): Boolean {
         historial.add("${LocalDateTime.now().format(formato)} - $contador1. ${tarea.obtenerDetalle()} - Tarea asignada a ID: ${usuario.obtenerDetalle()}")
         return true
     }
