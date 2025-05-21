@@ -7,6 +7,7 @@ import es.prog2425.taskmanager.dominio.Usuario
 interface IHistorialRepository {
     val historial: MutableList<String>
 
+    // Nuevos cambios
     fun añadirModificacionEstado(
         estado: Estado,
         tarea: Tarea,
