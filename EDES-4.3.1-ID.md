@@ -39,31 +39,103 @@ Haciendo uso de las herramientas descritas en el punto 4.3 Analizador de código
 ## Responde a las preguntas
 
 ### [1]  
-**1.a** ¿Qué herramienta has usado, y para qué sirve?  
+**1.a** ¿Qué herramienta has usado, y para qué sirve? 
+
+- He usado Ktlint, que es una herramienta para analizar y formatear automáticamente el código Kotlin. Sirve para asegurarte de que todo tu código siga una misma estética y unas reglas comunes de estilo.
+
 **1.b** ¿Cuáles son sus características principales?  
+
+- Sus características principales son:
+   - Detecta errores de estilo y formato.
+
+   - Puede corregir automáticamente algunos errores.
+
+   - Se integra fácil con editores como IntelliJ o Android Studio.
+
+   - Usa reglas oficiales y se puede configurar para usar unas personalizadas.
+  
 **1.c** ¿Qué beneficios obtengo al utilizar dicha herramienta?
+
+- Los beneficios son:
+
+   - El código se ve más limpio y ordenado.
+
+   - Ahorra tiempo al corregir cosas automáticamente.
+
+   - Hace que trabajar en equipo sea más fácil, porque todos siguen el mismo formato.
+
+   - Ayuda a evitar pequeños errores que a veces ni te das cuenta.
+
 
 ### [2]  
 **2.a** De los errores/problemas que la herramienta ha detectado y te ha ayudado a solucionar, ¿cuál es el que te ha parecido que ha mejorado más tu código?  
+
+- El error que más ha mejorado mi código fue cuando Ktlint me avisó de que los parámetros en una función eran muy largos y que debía poner cada uno en una línea nueva. Al hacerlo, el código se entendía mucho mejor.
+
 **2.b** ¿La solución que se le ha dado al error/problema la has entendido y te ha parecido correcta?  
+
+- Sí, entendí que esa forma mejora la legibilidad de mi código y es más limpio y facil de leer
+
 **2.c** ¿Por qué se ha producido ese error/problema?
+
+- Ese problema se da cuando una función tiene muchos parámetros y están todos en una sola línea, lo que puede dificultar leer o mantener el código.
 
 ### [3]  
 **3.a** ¿Qué posibilidades de configuración tiene la herramienta?  
+
+- Ktlint permite configurar:
+
+   - Qué reglas se aplican o se desactivan.
+
+   - Si se permite una coma final en listas o enumeraciones.
+
+   - Cómo manejar los espacios en blanco, líneas en blanco, etc.
+     
 **3.b** De esas posibilidades de configuración, ¿cuál has configurado para que sea distinta a la que viene por defecto?  
+
+Pues cual mejor que el cambio de parametros largos y menos legibles, separando cada uno en varias líneas de código
+
 **3.c** Pon un ejemplo de cómo ha impactado en tu código, enlazando al código anterior al cambio, y al posterior al cambio.
+
+### Código antes 
+
+```kotlin
+interface IHistorialRepository {
+    val historial: MutableList<String>
+    fun añadirModificacionEstado(estado: Estado, tarea: Tarea, contador1: Int, contador2: Int = 0): Boolean
+    fun añadirModificacionAsignacion(usuario: Usuario, tarea: Tarea, contador1: Int): Boolean
+    fun listarHistorial()
+}
+
+```
+
+### Código después
+```kotlin
+interface IHistorialRepository {
+    val historial: MutableList<String>
+    fun añadirModificacionEstado(
+        estado: Estado,
+        tarea: Tarea,
+        contador1: Int,
+        contador2: Int = 0
+    ): Boolean
+
+    fun añadirModificacionAsignacion(
+        usuario: Usuario,
+        tarea: Tarea,
+        contador1: Int
+    ): Boolean
+
+    fun listarHistorial()
+}
+
+```
 
 ### [4]  
 **4** ¿Qué conclusiones sacas después del uso de estas herramientas?
 
 
-
-
-
-
-
-
-
+- Creo que son herramientas útiles pero, haría falta trabajar un poco más con ellas y acostumbrarnos a sus métodos, ya que la práctica ha sido un poco confusa.
 
 
 
