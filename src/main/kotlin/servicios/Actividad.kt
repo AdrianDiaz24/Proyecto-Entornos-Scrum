@@ -2,6 +2,11 @@ package es.prog2425.taskmanager.Modelo
 
 import java.time.LocalDate
 
+/**
+ * Clase abstracta que representa una actividad genérica con descripción, etiquetas e ID único.
+ *
+ * @property descripcion Descripción de la actividad (no puede estar vacía).
+ */
 abstract class Actividad(private val descripcion: String) {
     private val etiquetas: MutableSet<String> = mutableSetOf()
 
@@ -17,7 +22,7 @@ abstract class Actividad(private val descripcion: String) {
         var id = 0
 
         /**
-         * Funcion que incrementa la ID de la Actividad
+         * Incrementa el contador de ID para asignar a nuevas actividades.
          */
         fun generarID(){
             id++
@@ -28,13 +33,18 @@ abstract class Actividad(private val descripcion: String) {
     private val id = fechaCreacion.format("YYYYMMDD").replace("-","") + Companion.id
 
     /**
-     * @return Devuelve un String con la descripcion basica de la actividad ID + Descripcion
+     * Devuelve un detalle básico de la actividad: ID, descripción y etiquetas.
+     * @return String con el detalle de la actividad.
      */
-
     open fun obtenerDetalle(): String{
         return  "$id - $descripcion - Etiquetas: ${obtenerEtiquetas()}"
     }
 
+    /**
+     * Añade etiquetas a la actividad separadas por punto y coma.
+     * Las etiquetas vacías o con espacios no se añaden.
+     * @param etiquetas1 Cadena con etiquetas separadas por ';'.
+     */
     fun aniadirEtiquetas(etiquetas1: String) {
         if (etiquetas1.isNotBlank()) {
             etiquetas1.split(";").forEach {
@@ -46,8 +56,16 @@ abstract class Actividad(private val descripcion: String) {
         }
     }
 
+    /**
+     * Devuelve el conjunto de etiquetas asignadas.
+     * @return Conjunto de etiquetas.
+     */
     fun adquirirEtiquetas() = etiquetas
 
+    /**
+     * Obtiene las etiquetas en formato cadena, o un texto indicativo si no hay etiquetas.
+     * @return String con las etiquetas o mensaje "Ninguna etiqueta asignada".
+     */
     private fun obtenerEtiquetas(): String {
 
         return if (etiquetas.isNotEmpty()) {

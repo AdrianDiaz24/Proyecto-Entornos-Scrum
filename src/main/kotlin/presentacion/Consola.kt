@@ -6,6 +6,14 @@ import es.prog2425.taskmanager.dominio.*
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
+/**
+ * Clase principal de presentación que gestiona la interacción por consola
+ * con el usuario para administrar actividades, usuarios e historial.
+ *
+ * @property historial Repositorio para gestionar el historial de cambios
+ * @property actividades Servicio para manejar actividades (tareas, eventos)
+ * @property usuarios Servicio para gestionar usuarios y sus tareas asignadas
+ */
 open class Consola(val historial: HistorialRepository = HistorialRepository(), val actividades: ActividadService = ActividadService(), val usuarios: UsuarioService = UsuarioService(UsuarioRepository())) {
 
     /**
@@ -18,9 +26,8 @@ open class Consola(val historial: HistorialRepository = HistorialRepository(), v
     }
 
     /**
-     * Muestra el menu principal
+     * Muestra el menú principal con las opciones disponibles para el usuario.
      */
-
     fun mostrarMenu(){
         println("\n1.  Crear Actividad")
         println("2.  Listar Actividades")
@@ -38,9 +45,8 @@ open class Consola(val historial: HistorialRepository = HistorialRepository(), v
     }
 
     /**
-     * Muestra el Submenu
+     * Muestra el submenú para crear actividades específicas.
      */
-
     fun mostrarSubmenu(){
         println("\n1. Crear Tarea")
         println("2. Crear Evento")
@@ -49,40 +55,38 @@ open class Consola(val historial: HistorialRepository = HistorialRepository(), v
     }
 
     /**
-     * Pided la informacion necesaria para crear una tarea
-     * @return Devuelve un String con la descripcion de la tarea
+     * Solicita al usuario la descripción de una tarea.
+     * @param msg Mensaje que se muestra para pedir la descripción
+     * @return Descripción introducida por el usuario
      */
-
     fun pedirInfoTarea(msg: String): String{
         print("\n${msg}")
         return readln()
     }
 
     /**
-     * Muestra el menu y pide que se seleccione una opcion
-     * @return Devuelve un Nº con la eleccion seleccionada
+     * Muestra el menú principal y solicita al usuario seleccionar una opción válida.
+     * @return Número de opción seleccionada (1 a 13)
      */
-
     fun menu(): Int {
         mostrarMenu()
         return pedirNum(1, 13)
     }
 
     /**
-     * Muestra el submenu y pide que se seleccione una opcion
-     * @return Devuelve un Nº con la eleccion seleccionada
+     * Muestra el submenú de creación de actividades y pide una opción válida.
+     * @return Número de opción seleccionada (1 a 4)
      */
-
     fun submenu(): Int{
         mostrarSubmenu()
         return pedirNum(1,4)
     }
 
     /**
-     * Pide que se introduzca un Nº
-     * @param min Nº minimo que se permite introducir
-     * @param max Nº maximo que se permmite introducir
-     * @return Devuelve el Nº Introducido por el usuario si se encuentra dentro de los parametros
+     * Pide un número entero dentro del rango indicado.
+     * @param min Número mínimo permitido
+     * @param max Número máximo permitido
+     * @return Número válido introducido por el usuario
      */
 
     open fun pedirNum(min: Int, max: Int): Int {
@@ -106,10 +110,9 @@ open class Consola(val historial: HistorialRepository = HistorialRepository(), v
     }
 
     /**
-     * Pide la informacion necesaria  para crear un evento
-     * @return Devuelve un triple co los 3 datos propocionados por consola
+     * Solicita la información necesaria para crear un evento.
+     * @return Lista con la descripción, fecha, ubicación y etiquetas
      */
-
     fun pedirInfoEvento(): MutableList<String>{
         var descripcion = ""
         var fecha = ""
@@ -128,10 +131,9 @@ open class Consola(val historial: HistorialRepository = HistorialRepository(), v
     }
 
     /**
-     * Crear uno de los 2 tipos de actividades o vuelve a menu principal
-     * @param input Nº que define que actividad crear 1 -> Tarea, 2 -> Evento
+     * Crea una actividad según la opción seleccionada: tarea, evento o subtarea.
+     * @param input Opción que indica qué actividad crear
      */
-
     fun crearActividad(input: Int){
         when (input){
             1 -> try {
@@ -170,6 +172,10 @@ open class Consola(val historial: HistorialRepository = HistorialRepository(), v
         }
     }
 
+    /**
+     * Lee datos completos para la creación de un evento.
+     * @return DatosEvento con descripción, fecha, ubicación y etiquetas
+     */
     fun leerDatosEvento(): DatosEvento {
         println("Introduce la descripcion del evento:")
         val descripcion = readLine() ?: ""
@@ -183,9 +189,9 @@ open class Consola(val historial: HistorialRepository = HistorialRepository(), v
     }
 
     /**
-     * Lista las actividades almacenadas
+     * Lista todas las actividades con detalle.
+     * @return true si existen actividades, false si no hay ninguna
      */
-
     open fun listarActividades(): Boolean{
         println("\n")
         return if (actividades.elementos.isNotEmpty()) {
@@ -204,6 +210,11 @@ open class Consola(val historial: HistorialRepository = HistorialRepository(), v
         }
     }
 
+    /**
+     * Lista las subtareas de una tarea dada.
+     * @param tarea Tarea de la que se listan las subtareas
+     * @param contador Índice de la tarea principal para mostrar jerarquía
+     */
     fun listarSubTareas(tarea: Tarea, contador: Int){
         if (tarea.listaSubtareas.isNotEmpty()){
             var contador1 = 0
@@ -215,9 +226,8 @@ open class Consola(val historial: HistorialRepository = HistorialRepository(), v
     }
 
     /**
-     * Funcion que realiza la ejecucion general del programa
+     * Bucle principal que mantiene la ejecución del programa hasta que se elige salir.
      */
-
     fun ejecutarPrograma() {
         var opcion: Int
         do {
@@ -226,6 +236,10 @@ open class Consola(val historial: HistorialRepository = HistorialRepository(), v
         } while (opcion != 13)
     }
 
+    /**
+     * Procesa la opción seleccionada en el menú principal ejecutando la acción correspondiente.
+     * @param opcion Número de opción elegida
+     */
     fun procesarOpcion(opcion: Int) {
         when (opcion) {
             1 -> crearActividad(submenu())
@@ -245,12 +259,20 @@ open class Consola(val historial: HistorialRepository = HistorialRepository(), v
         }
     }
 
+    /**
+     * Crea un nuevo usuario pidiendo un nombre válido.
+     * @return true si el usuario se creó correctamente.
+     */
     private fun crearUsuario():  Boolean {
         val nombreUsuario: String = pedirNombreUsuario()
         usuarios.crearUsuario(nombreUsuario)
         return true
     }
 
+    /**
+     * Lista todos los usuarios existentes.
+     * Si no hay usuarios, muestra un mensaje indicándolo.
+     */
     private fun listarUsuarios() {
         println("\n")
         if (usuarios.obtenerTodos().isNotEmpty()) {
@@ -258,6 +280,11 @@ open class Consola(val historial: HistorialRepository = HistorialRepository(), v
         } else salida("Aún no existen usuarios creados")
     }
 
+    /**
+     * Solicita al usuario que introduzca un nombre válido para crear un nuevo usuario.
+     * Repite la petición hasta que el nombre no esté vacío ni sea nulo.
+     * @return El nombre válido introducido.
+     */
     private fun pedirNombreUsuario(): String {
         var nombre: String = ""
 
@@ -271,9 +298,12 @@ open class Consola(val historial: HistorialRepository = HistorialRepository(), v
         return nombre
     }
 
+    /**
+     * Asigna una tarea a un usuario.
+     * Muestra las tareas y usuarios disponibles para seleccionar.
+     * Añade un registro de la asignación en el historial.
+     */
     private fun asignarTarea() {
-
-
         if (actividades.elementos.size == 0) salida("Aún no existen tareas creadas")
         else if (usuarios.obtenerTodos().isEmpty()) salida("Aún no existen usuarios creados")
         else {
@@ -293,6 +323,10 @@ open class Consola(val historial: HistorialRepository = HistorialRepository(), v
         }
     }
 
+    /**
+     * Muestra las tareas asignadas a un usuario seleccionado.
+     * Si el usuario no tiene tareas, muestra un mensaje indicándolo.
+     */
     private fun mostrarTareasAsignadasUsuario() {
 
         if (usuarios.obtenerTodos().isEmpty()) salida("Aún no existen usuarios creados")
@@ -311,6 +345,9 @@ open class Consola(val historial: HistorialRepository = HistorialRepository(), v
         }
     }
 
+    /**
+     * Cambia el estado de una tarea seleccionada por el usuario.
+     */
     fun cambiarEstado() {
         if (!listarActividades()) return
 
@@ -335,11 +372,17 @@ open class Consola(val historial: HistorialRepository = HistorialRepository(), v
         }
     }
 
+    /**
+     * Cambia el estado de una subtarea dentro de una tarea.
+     */
     private fun cambiarAEstado(tarea: Tarea, nuevoEstado: Estado, num: Int) {
         historial.añadirModificacionEstado(nuevoEstado, tarea, num + 1)
         tarea.estado = nuevoEstado
     }
 
+    /**
+     * Cambia el estado de una subtarea dentro de una tarea.
+     */
     private fun cambiarEstadoSubTarea(){
         val existenActividades = listarActividades()
 
@@ -391,6 +434,11 @@ open class Consola(val historial: HistorialRepository = HistorialRepository(), v
         }
     }
 
+    /**
+     * Pide al usuario que seleccione un estado para una tarea.
+     * @return Int correspondiente al estado elegido:
+     * 1 -> Abierta, 2 -> En proceso, 3 -> Finalizada.
+     */
     open fun pedirEstadoComoInt(): Int {
         println("\n¿Qué estado quieres poner?")
         println("1. Abierta")
@@ -400,6 +448,10 @@ open class Consola(val historial: HistorialRepository = HistorialRepository(), v
         return pedirNum(1, 3)
     }
 
+    /**
+     * Añade etiquetas a una actividad seleccionada por el usuario.
+     * Solicita las etiquetas separadas por ';' y las añade a la actividad.
+     */
     private fun aniadirEtiquetasActividad(){
         val hayActividades = listarActividades()
 
@@ -414,6 +466,11 @@ open class Consola(val historial: HistorialRepository = HistorialRepository(), v
         }
     }
 
+    /**
+     * Muestra un menú para que el usuario seleccione un filtro para buscar actividades.
+     * Los filtros disponibles son: Tipo, Estado, Etiquetas, Usuario, Fecha, o salir.
+     * Ejecuta la función correspondiente al filtro seleccionado.
+     */
     private fun buscarFiltro() {
         var filtro = -1
         while (filtro == -1 && filtro != 6) {
@@ -428,6 +485,10 @@ open class Consola(val historial: HistorialRepository = HistorialRepository(), v
         }
     }
 
+    /**
+     * Muestra el menú para pedir al usuario el filtro deseado.
+     * @return Int entre 1 y 6 correspondiente a la opción seleccionada.
+     */
     private fun pedirFiltro(): Int {
         print("Introduce el filtro deseado: " +
                 "\n\t1. Tipo" +
@@ -440,6 +501,10 @@ open class Consola(val historial: HistorialRepository = HistorialRepository(), v
         return pedirNum(1, 6)
     }
 
+    /**
+     * Filtra y muestra actividades según el tipo seleccionado: Tarea o Evento.
+     * Si no hay actividades muestra un mensaje de aviso.
+     */
     private fun filtrarPorTipo() {
         if (actividades.elementos.isNotEmpty()) {
             println("Tipo: \n\t1. Tarea\n\t2. Evento")
@@ -450,6 +515,10 @@ open class Consola(val historial: HistorialRepository = HistorialRepository(), v
         } else salida("Aún no existen actividades.")
     }
 
+    /**
+     * Función genérica para mostrar actividades filtradas por tipo.
+     * @param tipoNombre Nombre en plural del tipo para mensajes (ej: "tareas").
+     */
     private inline fun <reified T : Detallable> mostrarElementosDeTipo(tipoNombre: String) {
         val elementosTipo = actividades.elementos.filterIsInstance<T>()
         if (elementosTipo.isNotEmpty()) {
@@ -457,6 +526,10 @@ open class Consola(val historial: HistorialRepository = HistorialRepository(), v
         } else print("No existen $tipoNombre creadas.")
     }
 
+    /**
+     * Filtra y muestra tareas según el estado seleccionado (Abierta, En progreso, Finalizada).
+     * Muestra mensaje si no hay tareas.
+     */
     private fun filtrarPorEstado() {
         val tareas = actividades.elementos.filterIsInstance<Tarea>()
         if (tareas.isNotEmpty()) {
@@ -474,6 +547,11 @@ open class Consola(val historial: HistorialRepository = HistorialRepository(), v
         } else salida("No existen tareas creadas.")
     }
 
+    /**
+     * Muestra las tareas filtradas por el estado especificado.
+     * @param tareas Lista de tareas a filtrar.
+     * @param estado Estado a filtrar.
+     */
     private fun mostrarTareasPorEstado(tareas: List<Tarea>, estado: Estado) {
         val filtradas = tareas.filter { it.estado == estado }
         if (filtradas.isNotEmpty()) {
@@ -481,6 +559,10 @@ open class Consola(val historial: HistorialRepository = HistorialRepository(), v
         } else salida("No existen tareas con estado '${estado.name.lowercase()}'.")
     }
 
+    /**
+     * Filtra tareas que contengan una etiqueta especificada por el usuario.
+     * Muestra mensaje de error si no se encuentra ninguna tarea con la etiqueta.
+     */
     private fun filtrarPorEtiqueta() {
         val tareas = actividades.elementos.filterIsInstance<Tarea>()
         if (tareas.isNotEmpty()) {
@@ -493,6 +575,10 @@ open class Consola(val historial: HistorialRepository = HistorialRepository(), v
         } else salida("No existen tareas creadas.")
     }
 
+    /**
+     * Filtra y muestra tareas asignadas a un usuario indicado por ID.
+     * Muestra mensajes de error si no existen usuarios o el ID no es válido.
+     */
     private fun filtrarPorUsuario() {
         val todosUsuarios = usuarios.obtenerTodos()
         if (todosUsuarios.isNotEmpty()) {
@@ -505,6 +591,10 @@ open class Consola(val historial: HistorialRepository = HistorialRepository(), v
         } else salida("No existen usuarios aún.")
     }
 
+    /**
+     * Filtra eventos por fecha introducida por el usuario.
+     * Muestra mensaje si no hay eventos o no se encuentra ninguno con la fecha dada.
+     */
     private fun filtrarPorFecha() {
         val eventos = actividades.elementos.filterIsInstance<Evento>()
         if (eventos.isNotEmpty()) {
@@ -517,6 +607,9 @@ open class Consola(val historial: HistorialRepository = HistorialRepository(), v
         } else salida("No existen eventos creados.")
     }
 
+    /**
+     * Muestra un panel de control con estadísticas de tareas y eventos programados.
+     */
     private fun paneldeControl(){
         println("\n--- Panel de Control ---")
 
@@ -526,6 +619,10 @@ open class Consola(val historial: HistorialRepository = HistorialRepository(), v
         println("\n--------------------------")
     }
 
+    /**
+     * Muestra estadísticas generales de las tareas y sus subtareas,
+     * incluyendo el total y distribución por estado.
+     */
     private fun mostrarEstadisticasTareas() {
 
         val listaTareas = mutableListOf<Tarea>()
@@ -570,6 +667,10 @@ open class Consola(val historial: HistorialRepository = HistorialRepository(), v
         }
     }
 
+    /**
+     * Muestra estadísticas de eventos próximos organizados por hoy, mañana,
+     * esta semana y este mes.
+     */
     private fun mostrarEventosProgramados() {
 
         val eventos = mutableListOf<Evento>()

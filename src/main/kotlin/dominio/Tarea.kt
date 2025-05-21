@@ -2,6 +2,14 @@ package es.prog2425.taskmanager.dominio
 
 import es.prog2425.taskmanager.Modelo.Actividad
 
+
+/**
+ * Representa una tarea, que es una actividad con estado y posible lista de subtareas.
+ * Implementa la interfaz Detallable para obtener su descripción completa.
+ *
+ * @property estado Estado actual de la tarea, por defecto ABIERTA.
+ * @property listaSubtareas Lista mutable de subtareas asociadas.
+ */
 class Tarea(descripcion: String, var estado: Estado = Estado.ABIERTA): Actividad(descripcion), Detallable {
 
     val listaSubtareas = mutableListOf<Tarea>()
@@ -9,11 +17,13 @@ class Tarea(descripcion: String, var estado: Estado = Estado.ABIERTA): Actividad
     companion object{
 
         /**
-         * Funcion para instaciar Tareas nuevas
-         * @param descripcion Descripccion de la tarea
-         * @param estado Estado de la Tarea Abierta o Cerrada, Default esta Abierta
+         * Crea una nueva instancia de Tarea, opcionalmente con estado y etiquetas.
+         *
+         * @param descripcion Descripción de la tarea.
+         * @param estado Estado inicial de la tarea, por defecto ABIERTA.
+         * @param etiquetas Etiquetas opcionales para la tarea.
+         * @return Nueva instancia de Tarea creada.
          */
-
         fun creaTarea(descripcion: String, estado: Estado = Estado.ABIERTA,etiquetas: String = ""): Tarea {
             val tarea = Tarea(descripcion, estado)
             if (etiquetas.isNotBlank()) {
@@ -26,13 +36,19 @@ class Tarea(descripcion: String, var estado: Estado = Estado.ABIERTA): Actividad
     // Devuelve un String con la descripcion general de la tarea
 
     /**
-     * @return Devuelve un String con todos los parametros de la Tarea
+     * Devuelve una cadena con los detalles completos de la tarea, incluyendo descripción y estado.
+     *
+     * @return Detalle completo de la tarea.
      */
-
     override fun obtenerDetalle(): String {
         return "Tarea " + super.obtenerDetalle() + " - Estado: $estado"
     }
 
+    /**
+     * Añade una subtarea a la lista de subtareas de esta tarea.
+     *
+     * @param tarea Subtarea a añadir.
+     */
     fun aniadirSubtarea(tarea : Tarea){
         listaSubtareas.add(tarea)
     }

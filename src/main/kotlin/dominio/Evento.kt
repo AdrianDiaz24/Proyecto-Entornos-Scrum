@@ -2,6 +2,15 @@ package es.prog2425.taskmanager.dominio
 
 import es.prog2425.taskmanager.Modelo.Actividad
 
+/**
+ * Representa un evento, que es un tipo de actividad con fecha y ubicación.
+ * Implementa la interfaz Detallable para obtener su descripción completa.
+ *
+ * @property fecha Fecha del evento en formato DD/MM/AAAA o similar.
+ * @property ubicacion Lugar donde se realiza el evento.
+ *
+ * @throws IllegalArgumentException Si la fecha no cumple el formato esperado o la ubicación está vacía.
+ */
 class Evento(descripcion: String, val fecha: String, val ubicacion: String): Actividad(descripcion), Detallable {
 
     init {
@@ -26,6 +35,9 @@ class Evento(descripcion: String, val fecha: String, val ubicacion: String): Act
             return evento
         }
 
+        /**
+         * Patrón Regex para validar la fecha con formato DD/MM/AAAA o DD-MM-AAAA.
+         */
         val patronFecha = "^([0-2][0-9]|3[0-1])(\\/|-)(0[1-9]|1[0-2])\\2(\\d{4})\$"
     }
 
@@ -35,5 +47,4 @@ class Evento(descripcion: String, val fecha: String, val ubicacion: String): Act
     override fun obtenerDetalle(): String {
         return "Evento " + super.obtenerDetalle() + " - Fecha: $fecha - Ubicacion: $ubicacion"
     }
-
 }
