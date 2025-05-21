@@ -256,6 +256,9 @@ D:\Ale\ProgPython\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.k
 D:\Ale\ProgPython\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:426:1: Line detected, which is longer than the defined maximum line length in the code style. [MaxLineLength]
 D:\Ale\ProgPython\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:430:1: Line detected, which is longer than the defined maximum line length in the code style. [MaxLineLength]
 D:\Ale\ProgPython\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:707:1: Line detected, which is longer than the defined maximum line length in the code style. [MaxLineLength]
+D:\Ale\ProgPython\Proyecto-Entornos-Scrum\src\main\kotlin\servicios\HistorialRepository.kt:18:1: Line detected, which is longer than the defined maximum line length in the code style. [MaxLineLength]
+D:\Ale\ProgPython\Proyecto-Entornos-Scrum\src\main\kotlin\servicios\HistorialRepository.kt:20:1: Line detected, which is longer than the defined maximum line length in the code style. [MaxLineLength]
+D:\Ale\ProgPython\Proyecto-Entornos-Scrum\src\main\kotlin\servicios\HistorialRepository.kt:26:1: Line detected, which is longer than the defined maximum line length in the code style. [MaxLineLength]
 ```
 
 Ahora da menos errores de ese mismo tipo:
