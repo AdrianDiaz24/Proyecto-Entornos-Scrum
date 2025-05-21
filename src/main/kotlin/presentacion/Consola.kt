@@ -10,7 +10,7 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
 
     /**
      * Funcion que pinta por patalla el mensaje que recibe
-     * @param msj String con el mensaje que desea sacar por pantalla
+     * @param msj String con el mensaje que desea sacar por pantalla.
      */
 
     fun salida(msj: String){
