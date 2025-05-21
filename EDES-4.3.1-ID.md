@@ -87,3 +87,46 @@ Haciendo uso de las herramientas descritas en el punto 4.3 Analizador de código
 
 
 
+## Informe de errores de ktlint en Proyecto-Entornos-Scrum
+
+**1. Tipo de error:** Parámetro debe iniciar en una nueva línea en la firma de función
+
+* Descripción:
+La convención estándar pide que en firmas de funciones con varios parámetros, cada parámetro comience en una línea nueva para mejorar la legibilidad.
+* Antes y después
+
+### Código antes 
+
+```kotlin
+interface IHistorialRepository {
+    val historial: MutableList<String>
+    fun añadirModificacionEstado(estado: Estado, tarea: Tarea, contador1: Int, contador2: Int = 0): Boolean
+    fun añadirModificacionAsignacion(usuario: Usuario, tarea: Tarea, contador1: Int): Boolean
+    fun listarHistorial()
+}
+
+```
+
+### Código después
+```kotlin
+interface IHistorialRepository {
+    val historial: MutableList<String>
+    fun añadirModificacionEstado(
+        estado: Estado,
+        tarea: Tarea,
+        contador1: Int,
+        contador2: Int = 0
+    ): Boolean
+
+    fun añadirModificacionAsignacion(
+        usuario: Usuario,
+        tarea: Tarea,
+        contador1: Int
+    ): Boolean
+
+    fun listarHistorial()
+}
+
+```
+
+Se separa cada parámetro en una línea nueva para mejorar la claridad y cumplir con buena legibilidad.  
