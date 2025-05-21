@@ -181,3 +181,44 @@ interface IUsuarioRepository {
 }
 
 ```
+Commit importante https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/commit/09e9383a90abb7d6d04bfc640ae9d7169f69cdda
+
+**3. Tipo de error:** Falta de coma final en la declaración
+
+* Descripción
+En Kotlin, cuando una enum class declara múltiples constantes en líneas separadas, es buena práctica (y requerido por Ktlint si se configura así) usar una coma final después del último elemento.
+
+   - Facilita modificaciones futuras (agregar nuevos elementos).
+   
+   - Reduce errores de sintaxis.
+   
+   - Mantiene consistencia y legibilidad.
+* Antes y después
+
+### Código antes  
+```kotlin
+enum class Estado(val descripcion: String) {
+    ABIERTA("Abierta"),
+    EN_PROGRESO("En proceso"),
+    FINALIZADA("Finalizada");
+
+    override fun toString(): String {
+        return descripcion
+    }
+}
+```
+### Código después
+```kotlin
+enum class Estado(val descripcion: String) {
+    ABIERTA("Abierta"),
+    EN_PROGRESO("En proceso"),
+    FINALIZADA("Finalizada"),  
+
+    ;
+
+    override fun toString(): String {
+        return descripcion
+    }
+}
+```
+Commit importante
