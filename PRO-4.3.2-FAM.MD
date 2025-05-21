@@ -1,10 +1,10 @@
-# EDES-P4.3.1
+# EDES-P4.3.2
 
-**Actividad:** Analizadores de código estático: Linting.
+**Actividad:** Aplicación de Code Smells y Patrones de Refactorización en el Código del Task Manager.
 **Alumno:** Francisco Alba Muñiz
-**ID Actividad:** 4.3.1  
+**ID Actividad:** 4.3.2
 **Proyecto:** TaskManager  
-**Rama usada:** `4.3.1-FAM`  
+**Rama usada:** `4.3.2-FAM`  
 
 ## Descripción de la Actividad
 
