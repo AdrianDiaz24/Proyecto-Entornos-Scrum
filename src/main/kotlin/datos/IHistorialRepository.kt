@@ -9,4 +9,7 @@ interface IHistorialRepository {
     fun añadirModificacionEstado(estado: Estado, tarea: Tarea, contador1: Int, contador2: Int = 0): Boolean
     fun añadirModificacionAsignacion(usuario: Usuario, tarea: Tarea, contador1: Int): Boolean
     fun listarHistorial()
+    abstract fun logStateChange(enProgreso: Estado, tarea: Tarea, i: Int, i1: Int)
+    abstract fun logAssignmentChange(usuario: Usuario, tarea: Tarea, i: Int)
+    abstract fun añadirModificationEstado(s: String)
 }

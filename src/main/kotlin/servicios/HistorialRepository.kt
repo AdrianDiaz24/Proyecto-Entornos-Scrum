@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter
 class HistorialRepository(override val historial: MutableList<String> = mutableListOf()) : IHistorialRepository {
 
     companion object{
-        val formato = DateTimeFormatter.ofPattern("dd/MM/yyyy - HH:MM:SS")
+        val formato: DateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy - HH:MM:SS")
     }
 
     override fun añadirModificacionEstado(estado: Estado, tarea: Tarea, contador1: Int, contador2: Int): Boolean {
@@ -34,5 +34,26 @@ class HistorialRepository(override val historial: MutableList<String> = mutableL
             contador++
             println("$contador. $modificacion")
         }
+    }
+
+    private val historialEstados = mutableListOf<String>()
+    private val historialAsignaciones = mutableListOf<String>()
+    private val modificacionesEstado = mutableListOf<String>()
+    
+    override fun logStateChange(enProgreso: Estado, tarea: Tarea, i: Int, i1: Int) {
+        val registro = "Estado cambiado a ${enProgreso.descripcion} para tarea '${tarea.descripcion}' " +
+                "(Prioridad: $i, Dificultad: $i1)"
+        historialEstados.add(registro)
+    }
+
+    override fun logAssignmentChange(usuario: Usuario, tarea: Tarea, i: Int) {
+        val registro = "Tarea '${tarea.descripcion}' asignada a ${usuario.nombre} " +
+                "(Prioridad: $i)"
+        historialAsignaciones.add(registro)
+    }
+
+    override fun añadirModificationEstado(s: String) {
+        val registro = "${LocalDateTime.now()} - $s"
+        modificacionesEstado.add(registro)
     }
 }

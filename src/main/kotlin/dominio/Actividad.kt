@@ -2,7 +2,7 @@ package es.prog2425.taskmanager.dominio
 
 import java.time.LocalDate
 
-abstract class Actividad(private val descripcion: String) {
+abstract class Actividad(val descripcion: String) {
     private val etiquetas: MutableSet<String> = mutableSetOf()
 
     // Al crear una nueva istancia se comprueba que la descripcion no este vacia sino lanza una execpcion y en caso correcta genera un nuevo ID
