@@ -222,3 +222,30 @@ enum class Estado(val descripcion: String) {
 }
 ```
 Commit importante https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/commit/83697546572f0fd52be8a5c19c73ac6ec32c5220
+
+**4. Tipo de error:** No usar importaciones con *
+* Descripción
+Kotlin recomienda no usar importaciones comodín (*), ya que reduce la claridad del código.
+* Antes y después
+
+### Código antes
+```kotlin
+import es.prog2425.taskmanager.servicios.*
+import es.prog2425.taskmanager.dominio.*
+
+```
+
+### Código después
+```kotlin
+import es.prog2425.taskmanager.Modelo.Actividad
+import es.prog2425.taskmanager.servicios.ServicioHistorial
+import es.prog2425.taskmanager.servicios.ServicioTarea
+import es.prog2425.taskmanager.servicios.ServicioUsuario
+import es.prog2425.taskmanager.dominio.Estado
+import es.prog2425.taskmanager.dominio.Tarea
+import es.prog2425.taskmanager.dominio.Usuario
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+
+```
+Commit importante 
