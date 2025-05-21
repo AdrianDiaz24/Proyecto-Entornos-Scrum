@@ -167,6 +167,12 @@ fun cambiarEstadoSubTarea() {
     }
 ```
 
+**Commit anterior:**  
+Puedes consultar el estado del proyecto antes de la refactorización en [este commit específico](https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/tree/9ed398d283572ccb350f58d041806101b908152b).
+
+**Commit nuevo:**  
+Los cambios aplicados tras la refactorización están disponibles en [esta rama de trabajo actualizada](https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/commits/P4.3.2-FAM/).
+
 ---
 
 ### **Refactorización 2: Introducir Objeto Parámetro en `crearActividad` para Eventos**
@@ -277,6 +283,12 @@ Crear un `data class DatosEvento` para agrupar la información y un método `lee
         assertEquals("urgente;personal", resultado.etiquetas)
     }
 ```
+
+**Commit anterior:**  
+Puedes consultar el estado del proyecto antes de la refactorización en [este commit específico](https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/tree/9ed398d283572ccb350f58d041806101b908152b).
+
+**Commit nuevo:**  
+Los cambios aplicados tras la refactorización están disponibles en [esta rama de trabajo actualizada](https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/commits/P4.3.2-FAM/).
 
 ---
 
@@ -396,6 +408,12 @@ class ConsolaTest {
     }
 }
 ```
+
+**Commit anterior:**  
+Puedes consultar el estado del proyecto antes de la refactorización en [este commit específico](https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/tree/9ed398d283572ccb350f58d041806101b908152b).
+
+**Commit nuevo:**  
+Los cambios aplicados tras la refactorización están disponibles en [esta rama de trabajo actualizada](https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/commits/P4.3.2-FAM/).
 
 ---
 
