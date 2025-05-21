@@ -7,7 +7,6 @@ import es.prog2425.taskmanager.dominio.Tarea
 import es.prog2425.taskmanager.dominio.Usuario
 
 class UsuarioService(private val usuarios: IUsuarioRepository) {
-
     fun crearUsuario(nombre: String): Boolean {
         return usuarios.crearUsuario(nombre)
 

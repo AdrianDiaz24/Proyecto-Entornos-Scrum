@@ -1,9 +1,7 @@
 enum class Estado(val descripcion: String) {
     ABIERTA("Abierta"),
     EN_PROGRESO("En proceso"),
-    FINALIZADA("Finalizada"),
-
-    ;
+    FINALIZADA("Finalizada");
 
     override fun toString(): String {
         return descripcion
