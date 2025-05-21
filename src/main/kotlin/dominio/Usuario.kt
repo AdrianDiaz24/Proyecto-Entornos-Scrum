@@ -33,5 +33,4 @@ class Usuario private constructor(val id: Int, val nombre: String) {
     open fun obtenerDetalle(): String{
         return  "$id - $nombre"
     }
-
 }

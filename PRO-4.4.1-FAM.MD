@@ -245,7 +245,7 @@ BUILD SUCCESSFUL in 20s
 ### Capturas
 
 - [ ] Captura 4: Vista del navegador mostrando `index.html`.
-- [ ] Captura 5: Carpeta `build/dokka/html` en el proyecto.
+- [ ] Captura 5: Carpeta `docs/dokka/html` en el proyecto.
 
 ---
 
