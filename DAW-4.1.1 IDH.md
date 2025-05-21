@@ -95,4 +95,4 @@ Captura de la versión y ejecución de Dokka.
 ![image](https://github.com/user-attachments/assets/651b11ae-892d-4919-b502-0b3c1594ccb1)
 
 - **Ruta en la que se encuentra la documentación generada:** https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/tree/4.4.1-IDH/docs/html
-- **En el buscador de google** http://localhost:63342/PRO_2425_u4u5u6_TaskManager/build/dokka/html/index.html?_ijt=ravuvcigfli9b5thomvh8vj5g3&_ij_reload=RELOAD_ON_SAVE
+ 
