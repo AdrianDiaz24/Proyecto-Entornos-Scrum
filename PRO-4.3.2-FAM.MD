@@ -1,9 +1,13 @@
 # EDES-P4.3.2
 
 **Actividad:** Aplicación de Code Smells y Patrones de Refactorización en el Código del Task Manager.
-**Alumno:** Francisco Alba Muñiz
+
+**Alumno:** Francisco Alba Muñoz
+
 **ID Actividad:** 4.3.2
+
 **Proyecto:** TaskManager  
+
 **Rama usada:** `4.3.2-FAM`  
 
 ## Descripción de la Actividad
