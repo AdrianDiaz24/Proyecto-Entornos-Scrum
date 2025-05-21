@@ -13,6 +13,12 @@ import java.time.format.DateTimeFormatter
 
 class Consola(val historial: HistorialRepository = HistorialRepository(), val actividades: ActividadService = ActividadService(), val usuarios: UsuarioService = UsuarioService(UsuarioRepository())) {
 
+
+    companion object{
+        val numMaxPosibleMenu = 13
+        val numMinPosibleMenu = 1
+    }
+
     /**
      * Funcion que pinta por patalla el mensaje que recibe
      * @param msj String con el mensaje que desea sacar por pantalla
@@ -77,6 +83,7 @@ class Consola(val historial: HistorialRepository = HistorialRepository(), val ac
      * Muestra el submenu y pide que se seleccione una opcion
      * @return Devuelve un Nº con la eleccion seleccionada
      */
+
 
     fun submenu(): Int{
         mostrarSubmenu()
