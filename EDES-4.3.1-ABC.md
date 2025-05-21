@@ -131,11 +131,13 @@ Para solucionarlo arreglamos la ubicacion del archivo o el paquete que tiene des
 
 **Antes**
 
-
+https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/blob/e2980238a03eb84c5995e7e56d66a927790be9b8/src/main/kotlin/datos/IUsuarioRepository.kt#L1
+https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/blob/e2980238a03eb84c5995e7e56d66a927790be9b8/src/main/kotlin/presentacion/Consola.kt#L1
 
 **Despues**
 
-
+https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/blob/6fad169a501a377244ca60599362bfc984e9e1d9/src/main/kotlin/datos/IUsuarioRepository.kt#L1
+https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/blob/6fad169a501a377244ca60599362bfc984e9e1d9/src/main/kotlin/presentacion/Consola.kt#L1
 
 ### Segundo Error: `MayBeConst`
 
@@ -143,11 +145,11 @@ Este error indica que hay una variable que podría ser constante ya que no cambi
 
 **Antes**
 
-
+https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/blob/e2980238a03eb84c5995e7e56d66a927790be9b8/src/main/kotlin/dominio/Evento.kt#L29
 
 **Despues**
 
-
+https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/blob/6fad169a501a377244ca60599362bfc984e9e1d9/src/main/kotlin/dominio/Evento.kt#L29
 
 ### Tercer Error: `FunctionNaming`
 
@@ -155,11 +157,13 @@ Este error se debe a que hay una o varias funciones que tienen un nombre que pod
 
 **Antes**
 
-
+https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/blob/e2980238a03eb84c5995e7e56d66a927790be9b8/src/main/kotlin/servicios/HistorialRepository.kt#L16
+https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/blob/e2980238a03eb84c5995e7e56d66a927790be9b8/src/main/kotlin/servicios/HistorialRepository.kt#L25
 
 **Despues**
 
-
+https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/blob/6fad169a501a377244ca60599362bfc984e9e1d9/src/main/kotlin/servicios/HistorialRepository.kt#L16
+https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/blob/6fad169a501a377244ca60599362bfc984e9e1d9/src/main/kotlin/servicios/HistorialRepository.kt#L25
 
 ### Cuarto Error: `MaxLineLength`
 
@@ -167,11 +171,13 @@ Este error indica que hay funciones que superan el maximo que tiene por defecto 
 
 **Antes**
 
-
+https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/blob/e2980238a03eb84c5995e7e56d66a927790be9b8/src/main/kotlin/presentacion/Consola.kt#L136
+https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/blob/e2980238a03eb84c5995e7e56d66a927790be9b8/src/main/kotlin/presentacion/Consola.kt#L157
 
 **Despues**
 
-
+https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/blob/6fad169a501a377244ca60599362bfc984e9e1d9/src/main/kotlin/presentacion/Consola.kt#L140-L143
+https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/blob/6fad169a501a377244ca60599362bfc984e9e1d9/src/main/kotlin/presentacion/Consola.kt#L164-L167
 
 ### Quinto Error: `Magic Number`
 
@@ -179,54 +185,88 @@ Este error indica que hay numeros hardcodeados (escritos directamente en el cód
 
 **Antes**
 
-
+https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/blob/e2980238a03eb84c5995e7e56d66a927790be9b8/src/main/kotlin/presentacion/Consola.kt#L67
+https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/blob/e2980238a03eb84c5995e7e56d66a927790be9b8/src/main/kotlin/presentacion/Consola.kt#L77
 
 **Despues**
 
-
+https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/blob/6fad169a501a377244ca60599362bfc984e9e1d9/src/main/kotlin/presentacion/Consola.kt#L15-L17
+https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/blob/6fad169a501a377244ca60599362bfc984e9e1d9/src/main/kotlin/presentacion/Consola.kt#L71
+https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/blob/6fad169a501a377244ca60599362bfc984e9e1d9/src/main/kotlin/presentacion/Consola.kt#L81
 
 ## Respuestas a las preguntas
 
 **[1]**
 **1.a ¿Que herramienta has usado, y para que sirve?**
 
-
+He usado Detekt que es un analizador de código para Kotlin que ayuda a encontrar errores de estilo, bugs, ayuda a mantener un código limpio y escalable.
+Se integra con Gradle para ejecutarse automáticamente en el build y sirve para asegurar que el código cumpla con estándares de calidad antes de subirlo al repositorio.
 
 **1.b ¿Cuales son sus características principales?**
 
+Entre las características principales de Detekt estan:
 
+- Reglas predefinidas para revisar el código automáticamente.
+
+- Se puede personalizar (por ejemplo, cambiar el límite de caracteres por línea).
+
+- Genera informes bastante fáciles de entender.
+
+- Funciona con Gradle así que se ejecuta al compilar el proyecto.
 
 **1.c ¿Qué beneficios obtengo al utilizar dicha herramienta?**
 
-
+Pues tendrías un codigo que es mas limpio, mas fácil de mantener y que cumple con los estándares de calidad, tendría menos errores y mejores prácticas a la hora de programar.
 
 **[2]**
 **2.a De los errores/problemas que la herramienta ha detectado y te ha ayudado a solucionar, ¿cual es el que te ha parecido que ha mejorado más tu código? **
 
-
+Sería el error de MaxLineLenght ya que hace el codigo poco legible y esto pues lo mejora al tener que dividir en varias líneas el codigo que hacias en una.
 
 **2.b ¿La solución que se le ha dado al error/problema la has entendido y te ha parecido correcta?**
 
-
+Si, ya que asi es mas legible y se entiende mejor lo que se esta haciendo.
 
 **2.c ¿Por qué se ha producido ese error/problema?**
 
-
+Porque la línea tenia más de 80 caracteres (configuración predeterminada) de las que permite la herramienta, entonces salta el problema.
 
 **[3]**
 **3.a ¿Que posibilidades de configuración tiene la herramienta? **
 
-
+La herramienta permite la configuración basica de varios de sus parametros de errores como el explicado antes de MaxLineLenght, tambien permite otros cambios como en TooManyFunctions que permite activar o desactivar el error y aparte te permite poner cual es el limite de funciones en el que tiene saltar el error.
 
 **3.b De esas posibilidades de configuración, ¿cuál has configurado para que sea distinta a la que viene por defecto?**
 
-
+La de MaxLineLength, la he configurado para que saltar en 80 caracteres salte a los 140 caracteres en una misma linea:
+```kotlin
+style:
+  MaxLineLength:
+    active: true
+    maxLineLength: 140
+```
 
 **3.c Pon un ejemplo de como ha impactado en tu código, enlazando al código anterior al cambio, y al posterior al cambio,**
 
+Antes daba estos errores:
+```bash
+D:\Ale\ProgPython\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:13:1: Line detected, which is longer than the defined maximum line length in the code style. [MaxLineLength]
+D:\Ale\ProgPython\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:384:1: Line detected, which is longer than the defined maximum line length in the code style. [MaxLineLength]
+D:\Ale\ProgPython\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:422:1: Line detected, which is longer than the defined maximum line length in the code style. [MaxLineLength]
+D:\Ale\ProgPython\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:426:1: Line detected, which is longer than the defined maximum line length in the code style. [MaxLineLength]
+D:\Ale\ProgPython\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:430:1: Line detected, which is longer than the defined maximum line length in the code style. [MaxLineLength]
+D:\Ale\ProgPython\Proyecto-Entornos-Scrum\src\main\kotlin\presentacion\Consola.kt:707:1: Line detected, which is longer than the defined maximum line length in the code style. [MaxLineLength]
+```
 
+Ahora da menos errores de ese mismo tipo:
+```bash
+D:\Ale\ProgPython\Proyecto-Entornos-Scrum\src\main\kotlin\servicios\HistorialRepository.kt:18:1: Line detected, which is longer than the defined maximum line length in the code style. [MaxLineLength]
+D:\Ale\ProgPython\Proyecto-Entornos-Scrum\src\main\kotlin\servicios\HistorialRepository.kt:20:1: Line detected, which is longer than the defined maximum line length in the code style. [MaxLineLength]
+D:\Ale\ProgPython\Proyecto-Entornos-Scrum\src\main\kotlin\servicios\HistorialRepository.kt:26:1: Line detected, which is longer than the defined maximum line length in the code style. [MaxLineLength]
+```
 
 **[4]**
 **4 ¿Qué conclusiones sacas después del uso de estas herramientas?**
 
-
+Detekt es una herramienta que me ha ayudado a mejorar mi código haciéndolo más ordenado y fácil de entender. Al principio puede parecer un poco molesto porque marca muchos detalles, pero realmente te ayuda y termina siendo muy útil. 
+Lo mejor es que ayuda a que todo el equipo siga las mismas reglas, evitando errores y ahorrando tiempo. Al final, aunque cuesta un poco al empezar, vale la pena porque el código queda mucho más limpio y profesional.
