@@ -1,10 +1,10 @@
 # PRO-4.4.1-FG
 
 **Actividad:** Documentación de Clases con KDoc y Dokka en Kotlin  
-**Alumno:** Fran Alba
+**Alumno:** Francisco Alba Muñiz
 **ID Actividad:** 4.4.1  
 **Proyecto:** TaskManager  
-**Rama usada:** `4.4.1-FG`  
+**Rama usada:** `4.4.1-FAM`  
 **Ruta documentación generada:** `./build/dokka/html`
 
 ---
@@ -234,21 +234,23 @@ BUILD SUCCESSFUL in 20s
 
 ---
 
-## 📂 Documentación generada
+## Documentación generada
 
 - Ruta: `build/dokka/html/index.html`
 - Contenido: Documentación completa del proyecto, generada a partir de los comentarios KDoc.
-- He desplegado un sitio web usando GitHub Pages para poder visualizar de una forma más completa toda la documentación exportada.
 
-- URL: 
+He desplegado un sitio web usando GitHub Pages para poder visualizar de una forma más completa toda la documentación exportada.
+
+Nota: Como el directorio /build está excluido por .gitignore, he copiado todo el contenido de `build/dokka/html/index.html` a el directorio /docs y he seleccionado el punto de partida de la web el index.html de /docs. Como información adicional, cabe destacar que ha sido necesario ponerme en contacto con el autor del repositorio, ya que solo él puede acceder a las opciones de este.
+
+- URL: https://adriandiaz24.github.io/Proyecto-Entornos-Scrum/
 
 ### Capturas
 
-- [ ] Captura 4: Vista del navegador mostrando `index.html`.
-- [ ] Captura 5: Carpeta `docs/dokka/html` en el proyecto.
+En este caso he optado por la opción mencionada en el punto anterior: desplegar la documentación en GitHubPages para tener una vista completa de la documentación en vez de solo una muestra de las capturas.
 
 ---
 
-## ✅ Conclusión
+## Conclusiones
 
 Esta actividad ha permitido documentar el proyecto TaskManager siguiendo buenas prácticas de documentación con KDoc y utilizar herramientas profesionales como Dokka para generar documentación navegable y legible.
