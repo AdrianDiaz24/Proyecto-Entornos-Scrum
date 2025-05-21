@@ -340,3 +340,5 @@ class UsuarioService(private val usuarios: IUsuarioRepository) {
 class UsuarioService(private val usuarios: IUsuarioRepository) {
     fun crearUsuario(nombre: String): Boolean { ...
 ```
+
+Commit importante 
