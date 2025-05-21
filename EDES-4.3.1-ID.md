@@ -341,4 +341,4 @@ class UsuarioService(private val usuarios: IUsuarioRepository) {
     fun crearUsuario(nombre: String): Boolean { ...
 ```
 
-Commit importante 
+Commit importante https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/commit/53794712f8f1b6db9eef09f781beb93161f56580
