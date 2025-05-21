@@ -90,7 +90,6 @@ Captura de la versión y ejecución de Dokka.
 
 ## Caputuras de la Clase Usuario
 
-
 ![image](https://github.com/user-attachments/assets/00528292-1651-4f48-8c44-1d123029d8cd)
 
 ![image](https://github.com/user-attachments/assets/651b11ae-892d-4919-b502-0b3c1594ccb1)
