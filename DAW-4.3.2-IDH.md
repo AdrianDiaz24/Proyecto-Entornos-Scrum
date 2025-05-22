@@ -76,3 +76,13 @@ Esta actividad consiste en mejorar el código de la aplicación que estás desar
 
 ---
 
+
+## 1: Análisis de Code Smells y Patrones de Refactorización en el Código del Task Manager
+
+### Herramienta de Análisis
+
+Se ha utilizado la función “Analyze > Inspect Code…” para realizar un escaneo completo del proyecto.
+
+#### Análisis del Código con “Inspect Code…”
+
+Se ha realizado un análisis completo del proyecto mediante la herramienta **Analyze > Inspect Code…** de IntelliJ IDEA. Este análisis ha permitido identificar advertencias, errores de estilo y problemas potenciales en diferentes partes del código.
