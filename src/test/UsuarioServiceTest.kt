@@ -14,7 +14,7 @@ class UsuarioServiceTest : DescribeSpec({
     describe("UsuarioService") {
 
         describe("crearUsuario") {
-            it("debe llamar al método crearUsuario del repositorio y devolver true") {
+            it("debe llamar al método crearUsuario del repositorio y devolver el resultado real") {
                 every { mockRepositorio.crearUsuario("Paquito") } returns true
 
                 val resultado = servicio.crearUsuario("Paquito")
@@ -22,6 +22,7 @@ class UsuarioServiceTest : DescribeSpec({
                 verify { mockRepositorio.crearUsuario("Paquito") }
                 resultado shouldBe true
             }
+        }
 
             it("debe devolver false si no se puede crear el usuario") {
                 every { mockRepositorio.crearUsuario("Paquito") } returns false

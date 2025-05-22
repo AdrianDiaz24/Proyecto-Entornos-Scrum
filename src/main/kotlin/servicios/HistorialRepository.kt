@@ -23,7 +23,7 @@ class HistorialRepository(override val historial: MutableList<String> = mutableL
         return true
     }
 
-    override fun añadirModificacionAsignacion(usuario: Usuario, tarea: Tarea, contador1: Int): Boolean {
+    override fun aniadirModificacionAsignacion(usuario: Usuario, tarea: Tarea, contador1: Int): Boolean {
         historial.add("${LocalDateTime.now().format(formato)} - $contador1. ${tarea.obtenerDetalle()} - Tarea asignada a ID: ${usuario.obtenerDetalle()}")
         return true
     }

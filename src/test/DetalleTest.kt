@@ -4,9 +4,10 @@ import io.kotest.matchers.string.shouldContain
 
 class DetalleTest : DescribeSpec({
     describe("Formato de Evento") {
-        it("DEBE mostrar fecha fija 20/12/2023") {
-            val evento = Evento("Reunión", "07/05/2025", "Oficina")
-            evento.obtenerDetalle() shouldContain "Fecha: 20/12/2023"
+        it("DEBE incluir la fecha proporcionada") {
+            val fechaTest = "07/05/2025"
+            val evento = Evento("Reunión", fechaTest, "Oficina")
+            evento.obtenerDetalle() shouldContain "Fecha: $fechaTest"
         }
     }
 })
