@@ -10,6 +10,7 @@
   Antes:
 
   https://github.com/AdrianDiaz24/Proyecto-Entornos-Scrum/blob/51a23c6e4d3191f29e85872bc7c5dd1912a7fb33/src/main/kotlin/servicios/HistorialRepository.kt#L26-L29
+  ![image](https://github.com/user-attachments/assets/23ce259b-bac0-4999-934d-ced4cab44f1e)
 
   Despues:
 
@@ -88,20 +89,40 @@ Es en UsuarioServiceTest.kt
 
 ---
 
+
+
 # **2. Proceso para Evitar Regresiones**  
+
+Para garantizar que las refactorizaciones no rompieran la funcionalidad que ya existia, seguí el siguiente proceso:
+
 1. **Ejecutar pruebas antes de refactorizar:**  
    ```bash
-   ./gradlew test  # Verificar estado inicial
+   ./gradlew test
    ```  
-2. **Refactorizar en pasos pequeños** (ej: un smell a la vez).  
-3. **Usar herramientas del IDE:**  
-   - *Rename*: `Shift + F6`.  
-   - *Safe Delete*: `Alt + Delete`.  
-4. **Ejecutar pruebas después de cada cambio:**  
+2. **Refactorización asistida por IDE**:
+   Use las herramientas de refactorización integradas por el IDE como Rename Method o Change Signature, para garantizar cambios seguros en todo el código.
+
+3. **Ejecutar pruebas después de cada cambio:**
+   Por ejemplo:
    ```bash
    ./gradlew test --tests "*HistorialRepositoryTest*"
    ```  
-5. **Commits frecuentes en Git** para reversiones rápidas.  
-
 ---
 
+# 3.a) Funcionalidades del IDE utilizadas
+
+Para las refactorizaciones usé estas herramientas de IntelliJ IDEA (las capturas de las herramientas se encuentra junto a su smell):
+
+1. **Rename Method (Shift + F6)**:
+   - Usado para corregir el nombre `añadirModificacionAsignacion`.
+
+2. **Change Signature (Ctrl+F6)**:
+   - Para modificar la visibilidad de `actividades` a `private`.
+   
+3. **Safe Delete (Alt+Delete)**:
+   - Eliminación segura de la propiedad `tareas` no utilizada.
+   - El IDE mostró una confirmación de que no había usos dependientes.
+
+4. **Extract Method (Ctrl+Alt+M)**:
+   - Para separar la lógica del menú en `buscarFiltro()`.
+     
