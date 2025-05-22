@@ -53,26 +53,57 @@ Esta actividad consiste en mejorar el código de la aplicación que estás desar
 
 ## Preguntas a responder
 
-### [1]
+# Respuestas a las Preguntas
 
-**1.a** ¿Qué *code smell* y patrones de refactorización has aplicado?
+## [1]
 
-**1.b** Teniendo en cuenta aquella funcionalidad que tiene pruebas unitarias, selecciona un patrón de refactorización de los que has aplicado y que están cubiertos por los test unitarios.  
-¿Porque mejora o no mejora tu código?  
-*Asegúrate de poner enlaces a tu código.*
+### 1.a ¿Qué *code smell* y patrones de refactorización has aplicado?
+
+He detectado varios *code smells*, entre ellos:
+
+- **Long Parameter List**: solucionado aplicando el patrón *Introduce Parameter Object* en la creación de eventos.
+- **Duplicated Code / Complex Conditionals**: refactorizado con el patrón *Extract Method* y simplificación de estructuras `when` en funciones como `cambiarEstado`.
+
+![image](https://github.com/user-attachments/assets/e805427b-cee0-44ca-b6a4-e5c840beb17f)
+
+### 1.b Selecciona un patrón de refactorización que esté cubierto por los tests unitarios. ¿Por qué mejora o no mejora tu código? Asegúrate de poner enlaces a tu código.
+
+El patrón **Introduce Parameter Object** aplicado en `leerDatosEvento()` está cubierto por pruebas unitarias. 
+
+Mejora el código al:
+
+- Facilitar la lectura y mantenimiento.
+- Agrupar lógicamente los datos relacionados.
+- Simplificar las llamadas a métodos con muchos parámetros.
 
 ---
 
-### [2]
+## [2]
 
-**2.a** Describe el proceso que sigues para asegurarte que la refactorización no afecta a código que ya tenías desarrollado.
+### 2.a Describe el proceso que sigues para asegurarte que la refactorización no afecta a código que ya tenías desarrollado.
+
+Sigo este proceso:
+
+1. **Ejecuto todos los tests existentes** antes y después de la refactorización.
+2. **Aplico la refactorización paso a paso**, verificando que los cambios no afectan otras partes del sistema.
+3. **Uso control de versiones (Git)** para comparar fácilmente los cambios y revertir si es necesario.
+4. **Compruebo manualmente los flujos críticos** para validar que el comportamiento sigue siendo el esperado.
 
 ---
 
-### [3]
+## [3]
 
-**3.a** ¿Qué funcionalidad del IDE has usado para aplicar la refactorización seleccionada?  
-*Si es necesario, añade capturas de pantalla para identificar la funcionalidad.*
+### 3.a ¿Qué funcionalidad del IDE has usado para aplicar la refactorización seleccionada?
+
+He utilizado las siguientes funcionalidades de IntelliJ IDEA:
+
+- **"Refactor > Introduce Parameter Object…"** para agrupar parámetros relacionados.
+- **"Extract Method"** para simplificar bloques de código complejos.
+- **"Rename" y "Change Signature"** para actualizar nombres y estructuras de métodos de forma segura.
+
+Además, utilicé **"Analyze > Inspect Code"** para detectar automáticamente *code smells* y problemas de estilo.
+
+![image](https://github.com/user-attachments/assets/5fc438bd-be41-4be9-bcc2-3d47e78d1fa7)
 
 ---
 
